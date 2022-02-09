@@ -1,0 +1,30 @@
+import PayoutTable from "../model/settle/PayoutTable"
+
+const defaultPayoutTable:PayoutTable = {
+	banker: {
+		nocommission: {
+			normal: 1,
+			six: .5,
+		},
+		traditional: .95,
+	},
+	player: 1,
+	tie: 8,
+	superSix: {
+		two: 12,
+		three: 20,
+	},
+	pair: {
+		bankerPair: 11,
+		playerPair: 11,
+		eitherPair: 5,
+		perfectPair: {
+			either: 25,
+			both: 250,
+		},
+	},
+	big: .54,
+	small: 1.5,
+}
+
+export default defaultPayoutTable

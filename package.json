@@ -1,0 +1,69 @@
+{
+  "name": "bac-motor",
+  "version": "0.0.3",
+  "type": "commonjs",
+  "description": "a baccarat simulator.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zzzgit/bac-motor.git"
+  },
+  "main": "built/lib/index.js",
+  "types": "built/t/index.d.ts",
+  "scripts": {
+    "test": "npm run lint && jest",
+    "build": "npm run test && npm run clean && npm run rollup",
+    "clean": "rimraf coverage .nyc_output .rts2_cache",
+    "rollup": "cross-env NODE_ENV=production rollup -c",
+    "lint": "eslint './src/**' '-c=.eslintrc.yml'",
+    "jest": "jest 'test/*'"
+  },
+  "bugs": {
+    "url": "https://github.com/zzzgit/bac-motor/issues"
+  },
+  "keywords": [
+    "card",
+    "poker",
+    "baccarat",
+    "blackjack"
+  ],
+  "license": "LGPL-3.0-or-later",
+  "engines": {
+    "npm": ">=6.9.0",
+    "node": ">=10.0"
+  },
+  "author": "jonkee",
+  "dependencies": {
+    "cardation": "^0.1.23",
+    "marga": "^0.2.10",
+    "samael": "^1.0.30",
+    "ts-custom-error": "^3.2.0"
+  },
+  "devDependencies": {
+    "rollup-plugin-replace": "^2.2.0",
+    "@commitlint/cli": "^16.1.0",
+    "@commitlint/config-conventional": "^16.0.0",
+    "@rollup/plugin-replace": "^3.0.1",
+    "@types/jest": "^27.4.0",
+    "@types/node": "^17.0.17",
+    "@typescript-eslint/eslint-plugin": "^5.11.0",
+    "@typescript-eslint/parser": "^5.11.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.8.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-config-janus": "^1.1.22",
+    "eslint-plugin-array-func": "^3.1.7",
+    "eslint-plugin-jest": "^26.1.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-security": "^1.4.0",
+    "eslint-plugin-unicorn": "^40.1.0",
+    "husky": "^7.0.4",
+    "jest": "^27.5.1",
+    "jest-progress-bar-reporter": "^1.0.21",
+    "rollup": "^2.67.2",
+    "rollup-plugin-typescript2": "^0.31.2",
+    "ts-jest": "^27.1.3",
+    "typescript": "^4.5.5"
+  },
+  "homepage": "https://github.com/zzzgit/bac-motor#readme"
+}
