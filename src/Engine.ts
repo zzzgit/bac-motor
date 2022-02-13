@@ -113,9 +113,12 @@ class Engine {
 			const bet: Bet = beforeBet(this.getPreviousBet(), this.getPreviousHandOutcome())
 			const mun = bet.getMun()
 			if (!(mun instanceof Free)) {
+				if (this._prevBet) {
+					bet.setPreviousBet(this._prevBet)
+				}
 				this._prevBet = bet
 			} else {
-				this._prevBet = bet
+				// this._prevBet = bet
 			}
 			houtcome = this.playOneHand()
 			if (this.getShoe().getDuplicatedCardArray().length < 6) {
