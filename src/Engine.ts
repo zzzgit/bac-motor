@@ -18,11 +18,8 @@ import EngineError from "./error/EngineError"
 import Config from "./model/config/Config"
 import Free from "./model/mun/Free"
 import Bet from "./model/bet/Bet"
-import Banker from "./model/mun/Banker"
-import Mun from "./model/mun/Mun"
 
 const samael = require('samael')
-let muuuuuu : Mun
 type BetPretreat = (prevBet: Bet | undefined, prevOutcome: HandOutcome | undefined) => Bet
 type BetAftertreat = (hcome: HandOutcome) => void
 
@@ -115,7 +112,6 @@ class Engine {
 		do {
 			const bet: Bet = beforeBet(this.getPreviousBet(), this.getPreviousHandOutcome())
 			const mun = bet.getMun()
-			muuuuuu = mun
 			if (!(mun instanceof Free)) {
 				this._prevBet = bet
 			} else {
@@ -247,11 +243,6 @@ class Engine {
 		bankerScore_num = banker.getScore()
 		playerScore_num = player.getScore()
 		let winning
-		// /////////////////////////////////////////////////////////////////
-		if (muuuuuu instanceof Banker && bankerScore_num < -1) {
-			bankerScore_num += 3
-		}
-		//
 		if (bankerScore_num - playerScore_num > 0) {
 			winning = HandResult.BankerWins
 		} else if (bankerScore_num - playerScore_num === 0) {
