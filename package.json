@@ -1,6 +1,6 @@
 {
   "name": "bac-motor",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "type": "commonjs",
   "description": "a baccarat simulator.",
   "repository": {
@@ -11,11 +11,12 @@
   "types": "built/t/index.d.ts",
   "scripts": {
     "test": "npm run lint && jest",
-    "build": "npm run test && npm run clean && npm run rollup",
-    "clean": "rimraf coverage .nyc_output .rts2_cache",
+    "build": "npm run test && npm run clean && npm run tsc:only && npm run rollup",
+    "clean": "rimraf coverage .nyc_output .rts2_cache built",
     "rollup": "cross-env NODE_ENV=production rollup -c",
     "lint": "eslint './src/**' '-c=.eslintrc.yml'",
-    "jest": "jest 'test/*'"
+    "jest": "jest 'test/*'",
+    "tsc:only": "tsc --rootDir ./src/"
   },
   "bugs": {
     "url": "https://github.com/zzzgit/bac-motor/issues"
@@ -33,7 +34,7 @@
   },
   "author": "jonkee",
   "dependencies": {
-    "cardation": "^0.1.27",
+    "cardation": "^0.1.32",
     "marga": "^0.2.12",
     "samael": "^1.0.33",
     "ts-custom-error": "^3.2.0"
