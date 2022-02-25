@@ -1,7 +1,7 @@
 {
 	"compilerOptions": {
 		"target": "ESNext",
-		"module": "commonjs", // 運行rollup，只能設置ESNext
+		"module": "commonjs", 
 		"lib": [
 			"esnext"
 		],
@@ -12,7 +12,7 @@
 		"declaration": true,
 		"outDir": "./built/lib/",
 		"declarationDir": "./built/t/",
-		"declarationMap": false,
+		"declarationMap": true,
 		"preserveWatchOutput": true,
 		"alwaysStrict": true,
 		"diagnostics": true,
