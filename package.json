@@ -33,13 +33,13 @@
   },
   "author": "jonkee",
   "dependencies": {
-    "@rollup/plugin-typescript": "^8.3.1",
-    "cardation": "^0.1.26",
-    "marga": "^0.2.11",
-    "samael": "^1.0.32",
+    "cardation": "^0.1.27",
+    "marga": "^0.2.12",
+    "samael": "^1.0.33",
     "ts-custom-error": "^3.2.0"
   },
   "devDependencies": {
+    "@rollup/plugin-typescript": "^8.3.1",
     "@commitlint/cli": "^16.2.1",
     "@commitlint/config-conventional": "^16.2.1",
     "@rollup/plugin-replace": "^4.0.0",
