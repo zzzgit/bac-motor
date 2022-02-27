@@ -23,6 +23,7 @@ test
 src
 test
 *.config.js
+*.config.cjs
 permission.sh
 .eslintrc.yml
 tsconfig.*
