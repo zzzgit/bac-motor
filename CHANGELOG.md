@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.12](https://github.com/zzzgit/bac-motor/compare/v0.0.11...v0.0.12) (2022-02-27)
+
+
+### Bug Fixes
+
+* change import manner of samael ([a507bac](https://github.com/zzzgit/bac-motor/commit/a507bac3cf6e00565b55adb749037a7dee100564))
+
 ### [0.0.11](https://github.com/zzzgit/bac-motor/compare/v0.0.9...v0.0.11) (2022-02-27)
 
 ### [0.0.10](https://github.com/zzzgit/bac-motor/compare/v0.0.9...v0.0.10) (2022-02-27)
