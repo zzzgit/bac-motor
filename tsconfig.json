@@ -1,36 +1,10 @@
 {
+	"extends": "./tsconfig.base.json",
 	"compilerOptions": {
-		"target": "ESNext",
-		"module": "commonjs", 
-		"lib": [
-			"esnext"
-		],
-		"sourceMap": true,
-		"moduleResolution": "Node",
-		"strictNullChecks": true,
-		"removeComments": true,
-		"declaration": true,
-		"outDir": "./built/lib/",
-		"declarationDir": "./built/t/",
-		"declarationMap": true,
-		"preserveWatchOutput": true,
-		"emitDeclarationOnly": true,
-		"alwaysStrict": true,
-		"diagnostics": true,
-		"strict": true,
-		"noImplicitAny": true,
-		"noUnusedParameters": true,
-		"noUnusedLocals": true,
-		"noImplicitThis": true,
-		"listFiles": true,
-		"pretty": false,
-		"noEmitOnError": true,
-		"forceConsistentCasingInFileNames": true,
-		"noImplicitReturns": true,
-		"allowSyntheticDefaultImports": true
 	},
 	"exclude": [
-		"node_modules"
+		"node_modules",
+		"dist"
 	],
 	"include": [
 		"src/**/*",

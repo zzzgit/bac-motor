@@ -12,7 +12,7 @@ module.exports = {
 		format: "es",
 		name: "bac-motor",
 		banner: "/* eslint-disable */",
-		sourcemap: true,
+		// sourcemap: true,
 	},
 	plugins: [
 		// babel({
