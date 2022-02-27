@@ -35,7 +35,7 @@
 	"include": [
 		"src/**/*",
 		"rollup.config.js",
-		"commitlint.config.js",
+		"commitlint.config.cjs",
 		"jest.config.js"
 	]
 }

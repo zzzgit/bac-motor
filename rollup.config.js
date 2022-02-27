@@ -9,7 +9,7 @@ module.exports = {
 	input: path.resolve(__dirname, "./src/index.ts"),
 	output: {
 		file: path.resolve(__dirname, pkg.main),
-		format: "cjs",
+		format: "es",
 		name: "bac-motor",
 		banner: "/* eslint-disable */",
 		sourcemap: true,
