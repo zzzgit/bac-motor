@@ -35,7 +35,7 @@
   "author": "jonkee",
   "dependencies": {
     "cardation": "^0.1.36",
-    "marga": "^0.2.13",
+    "marga": "^0.2.14",
     "samael": "^1.0.37",
     "ts-custom-error": "^3.2.0"
   },
