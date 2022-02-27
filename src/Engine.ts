@@ -18,8 +18,8 @@ import EngineError from "./error/EngineError"
 import Config from "./model/config/Config"
 import Free from "./model/mun/Free"
 import Bet from "./model/bet/Bet"
+import samael from "samael"
 
-const samael = require('samael')
 type BetPretreat = (prevBet: Bet | undefined, prevOutcome: HandOutcome | undefined) => Bet
 type BetAftertreat = (hcome: HandOutcome) => void
 
@@ -211,7 +211,7 @@ class Engine {
 		const shoe = this.getShoe()
 		const cutPlace = samael.randomInt(280, 410)
 		shoe.cut(cutPlace)
-		const blackPlace: number = samael.randomInt(12, 20) as number
+		const blackPlace: number = samael.randomInt(12, 20)
 		shoe.insertBlackCard(blackPlace)
 	}
 

@@ -1,6 +1,5 @@
 import {Hand, Shoe} from "cardation"
-
-const samael = require('samael')
+import samael from "samael"
 
 
 class RecycleShoe extends Shoe {
