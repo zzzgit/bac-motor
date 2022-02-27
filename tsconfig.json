@@ -9,7 +9,7 @@
 	"include": [
 		"src/**/*",
 		"rollup.config.js",
-		"commitlint.config.cjs",
+		"commitlint.config.js",
 		"jest.config.js"
 	]
 }
