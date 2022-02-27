@@ -34,9 +34,9 @@
   },
   "author": "jonkee",
   "dependencies": {
-    "cardation": "^0.1.32",
-    "marga": "^0.2.12",
-    "samael": "^1.0.33",
+    "cardation": "^0.1.36",
+    "marga": "^0.2.13",
+    "samael": "^1.0.37",
     "ts-custom-error": "^3.2.0"
   },
   "devDependencies": {
@@ -49,7 +49,7 @@
     "@typescript-eslint/eslint-plugin": "^5.12.1",
     "@typescript-eslint/parser": "^5.12.1",
     "cross-env": "^7.0.3",
-    "eslint": "^8.9.0",
+    "eslint": "^8.10.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-janus": "^1.1.22",
     "eslint-plugin-array-func": "^3.1.7",
