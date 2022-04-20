@@ -237,7 +237,7 @@ class Engine {
 				this.playerDraw()
 			}
 			const hasPlayerHit = player.getHand().getDuplicatedCardArray().length > 2	// 直接給一個函數，返回長度，為了效率
-			if (this.shouldBankerDraw(hasPlayerHit, bankerScore_num, banker.getLastCard().getCardScore())) {
+			if (this.shouldBankerDraw(hasPlayerHit, bankerScore_num, player.getLastCard().getCardScore())) {
 				this.bankerDraw()
 			}
 		}
