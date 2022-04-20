@@ -8,7 +8,7 @@ const defaultPayoutTable:PayoutTable = {
 		},
 		traditional: .95,
 	},
-	player: 1,
+	punto: 1,
 	tie: 8,
 	superSix: {
 		two: 12,
@@ -16,7 +16,7 @@ const defaultPayoutTable:PayoutTable = {
 	},
 	pair: {
 		BancoPair: 11,
-		playerPair: 11,
+		puntoPair: 11,
 		eitherPair: 5,
 		perfectPair: {
 			either: 25,

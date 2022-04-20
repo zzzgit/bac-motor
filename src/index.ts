@@ -12,12 +12,12 @@ import Config from "./model/config/Config"
 import GameRule from "./model/config/GameRule"
 import BancoGamer from "./model/gamer/BancoGamer"
 import Gamer from "./model/gamer/Gamer"
-import PlayerGamer from "./model/gamer/PlayerGamer"
+import PuntoGamer from "./model/gamer/PuntoGamer"
 import BancoMun from "./model/mun/Banco"
 import FreeMun from "./model/mun/Free"
 import Mun from "./model/mun/Mun"
 import PairMun from "./model/mun/Pair"
-import PlayerMun from "./model/mun/Player"
+import PuntoMun from "./model/mun/Punto"
 import SuperSixMun from "./model/mun/SuperSix"
 import TieMun from "./model/mun/Tie"
 import Dealer from "./model/participant/Dealer"
@@ -30,8 +30,8 @@ import BancoNatural from "./model/result/tag/BancoNatural"
 import BancoPair from "./model/result/tag/BancoPair"
 import Natural from "./model/result/tag/Natural"
 import Pair from "./model/result/tag/Pair"
-import PlayerNatural from "./model/result/tag/PlayerNatural"
-import PlayerPair from "./model/result/tag/PlayerPair"
+import PuntoNatural from "./model/result/tag/PuntoNatural"
+import PuntoPair from "./model/result/tag/PuntoPair"
 import SuperSix from "./model/result/tag/SuperSix"
 import Tag from "./model/result/tag/Tag"
 
@@ -41,10 +41,10 @@ export {EngineError}
 export {Bet}
 export {BaccaratDeck, BaccaratShoe, IBaccaratShoe, RecycleShoe}
 export {Config, GameRule}
-export {BancoGamer as BancoGamer, Gamer, PlayerGamer}
-export {BancoMun as BancoMun, FreeMun, Mun, PairMun, PlayerMun, SuperSixMun, TieMun}
+export {BancoGamer as BancoGamer, Gamer, PuntoGamer as PuntoGamer}
+export {BancoMun as BancoMun, FreeMun, Mun, PairMun, PuntoMun as PuntoMun, SuperSixMun, TieMun}
 export {Dealer, Gambler, Participant}
-export {BancoNatural as BancoNatural, BancoPair as BancoPair, Natural, Pair, PlayerNatural, PlayerPair, SuperSix, Tag}
+export {BancoNatural as BancoNatural, BancoPair as BancoPair, Natural, Pair, PuntoNatural as PuntoNatural, PuntoPair as PuntoPair, SuperSix, Tag}
 export {HandOutcome, HandResult, ShoeOutcome}
 // export {} settler
 export {Engine}

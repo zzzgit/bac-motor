@@ -1,15 +1,15 @@
 import {GreenBeadEntity, BlueBeadEntity, RedBeadEntity, BeadEntity, BeadRoad, BigRoad} from "marga"
 import {Card, Hand, BlackMarkerCard} from "cardation"
 import BancoNatural from "./model/result/tag/BancoNatural"
-import PlayerNatural from "./model/result/tag/PlayerNatural"
+import PuntoNatural from "./model/result/tag/PuntoNatural"
 import BaccaratDeck from "./model/collection/BaccaratDeck"
 import BaccaratShoe from "./model/collection/BaccaratShoe"
 import RecycleShoe from "./model/collection/RecycleShoe"
 import BancoPair from "./model/result/tag/BancoPair"
-import PlayerPair from "./model/result/tag/PlayerPair"
+import PuntoPair from "./model/result/tag/PuntoPair"
 import HandOutcome from "./model/result/HandOutcome"
 import ShoeOutcome from "./model/result/ShoeOutcome"
-import PlayerGamer from "./model/gamer/PlayerGamer"
+import PuntoGamer from "./model/gamer/PuntoGamer"
 import BancoGamer from "./model/gamer/BancoGamer"
 import defaultConfig from "./config/defaultConfig"
 import SuperSix from "./model/result/tag/SuperSix"
@@ -25,7 +25,7 @@ type BetAftertreat = (hcome: HandOutcome) => void
 
 // 抽象一個game，提出一些常用函數
 class Engine {
-	private _player: PlayerGamer = new PlayerGamer()
+	private _punto: PuntoGamer = new PuntoGamer()
 
 	private _banco: BancoGamer = new BancoGamer()
 
@@ -106,7 +106,7 @@ class Engine {
 		let houtcome: HandOutcome
 		let firstcomeout: HandOutcome |undefined
 		let totalBanco = 0
-		let totalPlayer = 0
+		let totalPunto = 0
 		let totalTie = 0
 		const beadRoad = new BeadRoad(this.getShoe().getShoeIndex())
 		do {
@@ -136,8 +136,8 @@ class Engine {
 			houtcome.setPayout(payout)
 			if (houtcome.result === HandResult.BancoWins) {
 				totalBanco++
-			} else if (houtcome.result === HandResult.PlayerWins) {
-				totalPlayer++
+			} else if (houtcome.result === HandResult.PuntoWins) {
+				totalPunto++
 			} else {
 				totalTie++
 			}
@@ -148,7 +148,7 @@ class Engine {
 			afterBet?.(houtcome)
 		} while (!this.isShoeExhausted)
 		const result: ShoeOutcome = new ShoeOutcome(this.getShoe().getShoeIndex(), houtcome, 3)
-		result.setStatisticInfo(totalBanco, totalPlayer, totalTie)
+		result.setStatisticInfo(totalBanco, totalPunto, totalTie)
 		result.setFirstHandOutcome(firstcomeout)
 		if (this._config.shouldGenerateRoad) {
 			result.setBeadRoad(beadRoad)
@@ -163,7 +163,7 @@ class Engine {
 		let bead: BeadEntity
 		if (hcomeout.result === HandResult.BancoWins) {
 			bead = new RedBeadEntity(hcomeout.handIndex)
-		} else if (hcomeout.result === HandResult.PlayerWins) {
+		} else if (hcomeout.result === HandResult.PuntoWins) {
 			bead = new BlueBeadEntity(hcomeout.handIndex)
 		} else {
 			bead = new GreenBeadEntity(hcomeout.handIndex)
@@ -217,7 +217,7 @@ class Engine {
 
 	playOneHand(): HandOutcome {
 		const banco = this.getBanco()
-		const player = this.getPlayer()
+		const punto = this.getPunto()
 		const shoe = this.getShoe()
 		if (this._hasShutdown) {
 			throw new EngineError(`[Engine][playOneHand]: the engine has been shutdown before some further invoking!`)
@@ -226,39 +226,39 @@ class Engine {
 			throw new EngineError(`[Engine][playOneHand]: method playOneHand could not be avoked when shoe is exhausted!`)
 		}
 		this.increaseGameIndex()
-		this.playerDraw()
+		this.puntoDraw()
 		this.bancoDraw()
-		this.playerDraw()
+		this.puntoDraw()
 		this.bancoDraw()
 		let bancoScore_num = banco.getPoint()
-		let playerScore_num = player.getPoint()
-		if (playerScore_num < 8 && bancoScore_num < 8) { // 無天牌
-			if (this.shouldPlayerDraw(playerScore_num)) {
-				this.playerDraw()
+		let puntoScore_num = punto.getPoint()
+		if (puntoScore_num < 8 && bancoScore_num < 8) { // 無天牌
+			if (this.shouldPuntoDraw(puntoScore_num)) {
+				this.puntoDraw()
 			}
-			const hasPlayerHit = player.getHand().getDuplicatedCardArray().length > 2	// 直接給一個函數，返回長度，為了效率
-			if (this.shouldBancoDraw(hasPlayerHit, bancoScore_num, player.getLastCard().getPoint())) {
+			const hasPuntoHit = punto.getHand().getDuplicatedCardArray().length > 2	// 直接給一個函數，返回長度，為了效率
+			if (this.shouldBancoDraw(hasPuntoHit, bancoScore_num, punto.getLastCard().getPoint())) {
 				this.bancoDraw()
 			}
 		}
 		const bancoHand = banco.getHand()
-		const playerHand = player.getHand()
+		const puntoHand = punto.getHand()
 		bancoScore_num = banco.getPoint()
-		playerScore_num = player.getPoint()
+		puntoScore_num = punto.getPoint()
 		let winning
-		if (bancoScore_num - playerScore_num > 0) {
+		if (bancoScore_num - puntoScore_num > 0) {
 			winning = HandResult.BancoWins
-		} else if (bancoScore_num - playerScore_num === 0) {
+		} else if (bancoScore_num - puntoScore_num === 0) {
 			winning = HandResult.Tie
 		} else {
-			winning = HandResult.PlayerWins
+			winning = HandResult.PuntoWins
 		}
 		const outcome = new HandOutcome(winning, 0, 0, bancoHand.getDuplicatedCardArray(),
-			playerHand.getDuplicatedCardArray(), shoe.getShoeIndex(),
+			puntoHand.getDuplicatedCardArray(), shoe.getShoeIndex(),
 			this.getGameIndex())
 		this._parseTage(outcome)
 		this.getRecycleShoe().collect(banco.getHand(), this._config.shouldShuffleWhileCollectBancoHand)
-		this.getRecycleShoe().collect(player.getHand(), false)
+		this.getRecycleShoe().collect(punto.getHand(), false)
 		if (this._prevHandOutcome && outcome.getShoeIndex() === this._prevHandOutcome.getShoeIndex()) {
 			outcome.setPreviousHandOutcome(this._prevHandOutcome)
 		}
@@ -268,20 +268,20 @@ class Engine {
 
 	private _parseTage(outcome: HandOutcome) :void {
 		const {bancoHand} = outcome
-		const {playerHand} = outcome
+		const {puntoHand} = outcome
 		const bancoArray = bancoHand.getDuplicatedCardArray()
-		const playerArray = playerHand.getDuplicatedCardArray()
+		const puntoArray = puntoHand.getDuplicatedCardArray()
 		if (bancoArray[0].equals(bancoArray[1])) {
 			outcome.addTag(new BancoPair(bancoArray[0].getPoint(), bancoArray[0].getCardId()))
 		}
-		if (playerArray[0].equals(playerArray[1])) {
-			outcome.addTag(new PlayerPair(playerArray[0].getPoint(), playerArray[0].getCardId()))
+		if (puntoArray[0].equals(puntoArray[1])) {
+			outcome.addTag(new PuntoPair(puntoArray[0].getPoint(), puntoArray[0].getCardId()))
 		}
 		if (bancoHand.getPoint() > 7) {
 			outcome.addTag(new BancoNatural(bancoHand.getPoint()))
 		}
-		if (playerHand.getPoint() > 7) {
-			outcome.addTag(new PlayerNatural(playerHand.getPoint()))
+		if (puntoHand.getPoint() > 7) {
+			outcome.addTag(new PuntoNatural(puntoHand.getPoint()))
 		}
 		if (outcome.result == HandResult.BancoWins) {
 			if (bancoHand.getPoint() === 6) {
@@ -295,13 +295,13 @@ class Engine {
 	}
 
 	// 黑卡不用理會，黑卡是跟BaccaratShoe綁定的，在class中定義
-	playerDraw(): void {
+	puntoDraw(): void {
 		let [card] = this.getShoe().deal()
 		if (card instanceof BlackMarkerCard) {
 			this.isShoeExhausted = true
 			;[card] = this.getShoe().deal()
 		}
-		this.getPlayer().acceptCard(card)
+		this.getPunto().acceptCard(card)
 	}
 
 	bancoDraw(): void {
@@ -321,23 +321,23 @@ class Engine {
 		return this._prevHandOutcome
 	}
 
-	getPlayer(): PlayerGamer {
-		return this._player
+	getPunto(): PuntoGamer {
+		return this._punto
 	}
 
 	getBanco(): BancoGamer {
 		return this._banco
 	}
 
-	shouldPlayerDraw(currentScore: number): boolean {
+	shouldPuntoDraw(currentScore: number): boolean {
 		if (currentScore < 6) {
 			return true
 		}
 		return false
 	}
 
-	shouldBancoDraw(playerHit:boolean, bancoPoint: number, playerLastScore: number): boolean {
-		if (!playerHit) {
+	shouldBancoDraw(puntoHit:boolean, bancoPoint: number, puntoLastScore: number): boolean {
+		if (!puntoHit) {
 			if (bancoPoint < 6) {
 				return true
 			}
@@ -350,25 +350,25 @@ class Engine {
 			return true
 		}
 		if (bancoPoint === 3) {
-			if (playerLastScore === 8) {
+			if (puntoLastScore === 8) {
 				return false
 			}
 			return true
 		}
 		if (bancoPoint === 4) {
-			if (playerLastScore < 2 || playerLastScore > 7) {
+			if (puntoLastScore < 2 || puntoLastScore > 7) {
 				return false
 			}
 			return true
 		}
 		if (bancoPoint === 5) {
-			if (playerLastScore < 4 || playerLastScore > 7) {
+			if (puntoLastScore < 4 || puntoLastScore > 7) {
 				return false
 			}
 			return true
 		}
 		if (bancoPoint === 6) {
-			if (playerLastScore < 6 || playerLastScore > 7) {
+			if (puntoLastScore < 6 || puntoLastScore > 7) {
 				return false
 			}
 			return true

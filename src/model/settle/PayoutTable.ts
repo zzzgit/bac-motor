@@ -7,7 +7,7 @@ type PayoutTable ={
 		}
 		traditional: number
 	}
-	player: number
+	punto: number
 	tie: number
 	superSix: {
 		two: number
@@ -15,7 +15,7 @@ type PayoutTable ={
 	}
 	pair: {
 		BancoPair: number
-		playerPair: number
+		puntoPair: number
 		eitherPair: number
 		perfectPair: {
 			either: number

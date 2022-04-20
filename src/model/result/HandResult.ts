@@ -1,6 +1,6 @@
 enum Result {
 	BancoWins = "_BankerWins",
-	PlayerWins = "_PlayerWins",
+	PuntoWins = "_PlayerWins",
 	Tie = "_Tie",
 }
 
@@ -8,7 +8,7 @@ enum Result {
 class HandResult {
 	static BancoWins = new HandResult(1)
 
-	static PlayerWins = new HandResult(-1)
+	static PuntoWins = new HandResult(-1)
 
 	static Tie = new HandResult(0)
 
@@ -24,9 +24,9 @@ class HandResult {
 
 	static getOpposite(foo: HandResult):HandResult {
 		if (foo._result == Result.BancoWins) {
-			return HandResult.PlayerWins
+			return HandResult.PuntoWins
 		}
-		if (foo._result == Result.PlayerWins) {
+		if (foo._result == Result.PuntoWins) {
 			return HandResult.BancoWins
 		}
 		return foo
@@ -34,14 +34,14 @@ class HandResult {
 
 	private _result: Result
 
-	// 0 tie， 1 banco wins， -1 player wins
+	// 0 tie， 1 banco wins， -1 punto wins
 	constructor(code:number) {
 		if (code === 0) {
 			this._result = Result.Tie
 		} else if (code === 1) {
 			this._result = Result.BancoWins
 		} else {
-			this._result = Result.PlayerWins
+			this._result = Result.PuntoWins
 		}
 	}
 }

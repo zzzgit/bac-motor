@@ -4,7 +4,7 @@ import SuperSix from "../mun/SuperSix"
 import HandResult from "./HandResult"
 import Config from "../config/Config"
 import Banco from "../mun/Banco"
-import Player from "../mun/Player"
+import Punto from "../mun/Punto"
 import Free from "../mun/Free"
 import Bet from "../bet/Bet"
 import Mun from "../mun/Mun"
@@ -32,13 +32,13 @@ class HandOutcome {
 				} else {
 					return wager + wager * payoutTable.banco.nocommission.normal
 				}
-			} else if (outcome.result === HandResult.PlayerWins) {
+			} else if (outcome.result === HandResult.PuntoWins) {
 				return 0
 			}
 			return wager
-		} else if (mun instanceof Player) {
-			if (outcome.result === HandResult.PlayerWins) {
-				return wager + wager * payoutTable.player
+		} else if (mun instanceof Punto) {
+			if (outcome.result === HandResult.PuntoWins) {
+				return wager + wager * payoutTable.punto
 			} else if (outcome.result === HandResult.BancoWins) {
 				return 0
 			}
@@ -74,7 +74,7 @@ class HandOutcome {
 
 	tagArray: Tag[] = []
 
-	playerHand: Hand
+	puntoHand: Hand
 
 	bancoHand: Hand
 
@@ -84,7 +84,7 @@ class HandOutcome {
 		this._wager = wager
 		this._payout = payout
 		this.bancoHand = new Hand(bCardArray)
-		this.playerHand = new Hand(pCardArray)
+		this.puntoHand = new Hand(pCardArray)
 		this._shoeIndex = shoeIndex
 		this.handIndex = hindex
 	}

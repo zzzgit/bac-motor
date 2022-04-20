@@ -2,7 +2,7 @@ import HandOutcome from "../result/HandOutcome"
 import Mun from "../mun/Mun"
 import Banco from "../mun/Banco"
 import HandResult from "../result/HandResult"
-import Player from "../mun/Player"
+import Punto from "../mun/Punto"
 import EngineError from "../../error/EngineError"
 
 
@@ -43,12 +43,12 @@ class Bet {
 			result = "B	"
 			if (houtcome.result === HandResult.BancoWins) {
 				sign = 1
-			} else if (houtcome.result === HandResult.PlayerWins) {
+			} else if (houtcome.result === HandResult.PuntoWins) {
 				sign = -1
 			}
-		} else if (mun instanceof Player) {
+		} else if (mun instanceof Punto) {
 			result = "P	"
-			if (houtcome.result === HandResult.PlayerWins) {
+			if (houtcome.result === HandResult.PuntoWins) {
 				sign = 1
 			} else if (houtcome.result === HandResult.BancoWins) {
 				sign = -1
@@ -85,11 +85,11 @@ class Bet {
 		if (mun instanceof Banco) {
 			if (hcomeout.result === HandResult.BancoWins) {
 				result = true
-			} else if (hcomeout.result === HandResult.PlayerWins) {
+			} else if (hcomeout.result === HandResult.PuntoWins) {
 				result = false
 			}
-		} else if (mun instanceof Player) {
-			if (hcomeout.result === HandResult.PlayerWins) {
+		} else if (mun instanceof Punto) {
+			if (hcomeout.result === HandResult.PuntoWins) {
 				result = true
 			} else if (hcomeout.result === HandResult.BancoWins) {
 				result = false

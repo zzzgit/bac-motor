@@ -5,7 +5,7 @@ import HandOutcome from "./HandOutcome"
 // eslint-disable-next-line @typescript-eslint/no-type-alias
 type StatisticInfo = {
 	banco: number
-	player: number
+	punto: number
 	tie: number
 }
 
@@ -28,7 +28,7 @@ class ShoeOutcome {
 
 	private _statistics: StatisticInfo = {
 		banco: 0,
-		player: 0,
+		punto: 0,
 		tie: 0,
 	}
 
@@ -68,10 +68,10 @@ class ShoeOutcome {
 		return this._gameComeoutMap
 	}
 
-	setStatisticInfo(banco:number, player: number, tie: number) : void {
+	setStatisticInfo(banco:number, punto: number, tie: number) : void {
 		this._statistics = {
 			banco: banco,
-			player: player,
+			punto: punto,
 			tie: tie,
 		}
 	}
