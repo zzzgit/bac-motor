@@ -27,7 +27,7 @@ class HandOutcome {
 				if (!gameRules.isNoCommision) {
 					return wager + wager * payoutTable.banker.traditional
 				}
-				if (outcome.bankerHand.getScore() === 6) {
+				if (outcome.bankerHand.getPoint() === 6) {
 					return wager + wager * payoutTable.banker.nocommission.six
 				} else {
 					return wager + wager * payoutTable.banker.nocommission.normal
@@ -50,7 +50,7 @@ class HandOutcome {
 				return 0
 			}
 		} else if (mun instanceof SuperSix) {
-			if (outcome.result === HandResult.BankerWins && outcome.bankerHand.getScore() === 6) {
+			if (outcome.result === HandResult.BankerWins && outcome.bankerHand.getPoint() === 6) {
 				return wager + wager * payoutTable.superSix.two
 			}
 			return 0

@@ -230,21 +230,21 @@ class Engine {
 		this.bankerDraw()
 		this.playerDraw()
 		this.bankerDraw()
-		let bankerScore_num = banker.getScore()
-		let playerScore_num = player.getScore()
+		let bankerScore_num = banker.getPoint()
+		let playerScore_num = player.getPoint()
 		if (playerScore_num < 8 && bankerScore_num < 8) { // 無天牌
 			if (this.shouldPlayerDraw(playerScore_num)) {
 				this.playerDraw()
 			}
 			const hasPlayerHit = player.getHand().getDuplicatedCardArray().length > 2	// 直接給一個函數，返回長度，為了效率
-			if (this.shouldBankerDraw(hasPlayerHit, bankerScore_num, player.getLastCard().getCardScore())) {
+			if (this.shouldBankerDraw(hasPlayerHit, bankerScore_num, player.getLastCard().getPoint())) {
 				this.bankerDraw()
 			}
 		}
 		const bankerHand = banker.getHand()
 		const playerHand = player.getHand()
-		bankerScore_num = banker.getScore()
-		playerScore_num = player.getScore()
+		bankerScore_num = banker.getPoint()
+		playerScore_num = player.getPoint()
 		let winning
 		if (bankerScore_num - playerScore_num > 0) {
 			winning = HandResult.BankerWins
@@ -272,19 +272,19 @@ class Engine {
 		const bankerArray = bankerHand.getDuplicatedCardArray()
 		const playerArray = playerHand.getDuplicatedCardArray()
 		if (bankerArray[0].equals(bankerArray[1])) {
-			outcome.addTag(new BankerPair(bankerArray[0].getCardScore(), bankerArray[0].getCardId()))
+			outcome.addTag(new BankerPair(bankerArray[0].getPoint(), bankerArray[0].getCardId()))
 		}
 		if (playerArray[0].equals(playerArray[1])) {
-			outcome.addTag(new PlayerPair(playerArray[0].getCardScore(), playerArray[0].getCardId()))
+			outcome.addTag(new PlayerPair(playerArray[0].getPoint(), playerArray[0].getCardId()))
 		}
-		if (bankerHand.getScore() > 7) {
-			outcome.addTag(new BankerNatural(bankerHand.getScore()))
+		if (bankerHand.getPoint() > 7) {
+			outcome.addTag(new BankerNatural(bankerHand.getPoint()))
 		}
-		if (playerHand.getScore() > 7) {
-			outcome.addTag(new PlayerNatural(playerHand.getScore()))
+		if (playerHand.getPoint() > 7) {
+			outcome.addTag(new PlayerNatural(playerHand.getPoint()))
 		}
 		if (outcome.result == HandResult.BankerWins) {
-			if (bankerHand.getScore() === 6) {
+			if (bankerHand.getPoint() === 6) {
 				outcome.addTag(new SuperSix(bankerArray.length))
 			}
 		}

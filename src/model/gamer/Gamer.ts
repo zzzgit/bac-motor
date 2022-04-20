@@ -6,8 +6,8 @@ class Gamer {
 	private _hand: Hand = new Hand()
 
 
-	getScore():number {
-		return this.getHand().getScore()
+	getPoint():number {
+		return this.getHand().getPoint()
 	}
 
 	getHand():Hand {

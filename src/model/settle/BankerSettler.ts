@@ -6,7 +6,7 @@ class BankerSettler extends Settler {
 		// if (!this.getConfig().isHalfCommission) {
 		// 	return wager * 0.95
 		// }
-		if (outcome.bankerHand.getScore() === 6) {
+		if (outcome.bankerHand.getPoint() === 6) {
 			return wager / 2
 		}
 		return wager
