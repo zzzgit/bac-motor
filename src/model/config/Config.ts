@@ -11,7 +11,7 @@ type Config = {
 	shouldCutShoe?: boolean
 	shouldUseBlackCard?: boolean
 	shouldBurnCard?: boolean
-	shouldShuffleWhileCollectBankerHand?: boolean
+	shouldShuffleWhileCollectBancoHand?: boolean
 	shouldShuffle?: boolean
 	shouldGenerateRoad?: boolean
 	shouldGenerateSmallRoad?: boolean

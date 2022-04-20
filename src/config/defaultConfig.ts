@@ -14,7 +14,7 @@ const defaultConfig:Config = {
 	shouldGenerateRoad: true,
 	shouldGenerateSmallRoad: false,
 	shouldGenerateOtherRoad: false,
-	shouldShuffleWhileCollectBankerHand: true,
+	shouldShuffleWhileCollectBancoHand: true,
 }
 
 export default defaultConfig

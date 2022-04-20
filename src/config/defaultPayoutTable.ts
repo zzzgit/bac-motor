@@ -1,7 +1,7 @@
 import PayoutTable from "../model/settle/PayoutTable"
 
 const defaultPayoutTable:PayoutTable = {
-	banker: {
+	banco: {
 		nocommission: {
 			normal: 1,
 			six: .5,
@@ -15,7 +15,7 @@ const defaultPayoutTable:PayoutTable = {
 		three: 20,
 	},
 	pair: {
-		bankerPair: 11,
+		BancoPair: 11,
 		playerPair: 11,
 		eitherPair: 5,
 		perfectPair: {

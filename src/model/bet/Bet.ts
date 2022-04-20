@@ -1,6 +1,6 @@
 import HandOutcome from "../result/HandOutcome"
 import Mun from "../mun/Mun"
-import Banker from "../mun/Banker"
+import Banco from "../mun/Banco"
 import HandResult from "../result/HandResult"
 import Player from "../mun/Player"
 import EngineError from "../../error/EngineError"
@@ -39,9 +39,9 @@ class Bet {
 		const houtcome: HandOutcome = this.getOutcome() as HandOutcome
 		let result = ''
 		let sign = 0
-		if (mun instanceof Banker) {
+		if (mun instanceof Banco) {
 			result = "B	"
-			if (houtcome.result === HandResult.BankerWins) {
+			if (houtcome.result === HandResult.BancoWins) {
 				sign = 1
 			} else if (houtcome.result === HandResult.PlayerWins) {
 				sign = -1
@@ -50,7 +50,7 @@ class Bet {
 			result = "P	"
 			if (houtcome.result === HandResult.PlayerWins) {
 				sign = 1
-			} else if (houtcome.result === HandResult.BankerWins) {
+			} else if (houtcome.result === HandResult.BancoWins) {
 				sign = -1
 			}
 		}
@@ -82,8 +82,8 @@ class Bet {
 		}
 		let result = false
 		const mun: Mun = this.getMun()
-		if (mun instanceof Banker) {
-			if (hcomeout.result === HandResult.BankerWins) {
+		if (mun instanceof Banco) {
+			if (hcomeout.result === HandResult.BancoWins) {
 				result = true
 			} else if (hcomeout.result === HandResult.PlayerWins) {
 				result = false
@@ -91,7 +91,7 @@ class Bet {
 		} else if (mun instanceof Player) {
 			if (hcomeout.result === HandResult.PlayerWins) {
 				result = true
-			} else if (hcomeout.result === HandResult.BankerWins) {
+			} else if (hcomeout.result === HandResult.BancoWins) {
 				result = false
 			}
 		}

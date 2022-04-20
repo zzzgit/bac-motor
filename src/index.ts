@@ -10,10 +10,10 @@ import IBaccaratShoe from "./model/collection/IBaccaratShoe"
 import RecycleShoe from "./model/collection/RecycleShoe"
 import Config from "./model/config/Config"
 import GameRule from "./model/config/GameRule"
-import BankerGamer from "./model/gamer/BankerGamer"
+import BancoGamer from "./model/gamer/BancoGamer"
 import Gamer from "./model/gamer/Gamer"
 import PlayerGamer from "./model/gamer/PlayerGamer"
-import BankerMun from "./model/mun/Banker"
+import BancoMun from "./model/mun/Banco"
 import FreeMun from "./model/mun/Free"
 import Mun from "./model/mun/Mun"
 import PairMun from "./model/mun/Pair"
@@ -26,8 +26,8 @@ import Participant from "./model/participant/Participant"
 import HandOutcome from "./model/result/HandOutcome"
 import HandResult from "./model/result/HandResult"
 import ShoeOutcome from "./model/result/ShoeOutcome"
-import BankerNatural from "./model/result/tag/BankerNatural"
-import BankerPair from "./model/result/tag/BankerPair"
+import BancoNatural from "./model/result/tag/BancoNatural"
+import BancoPair from "./model/result/tag/BancoPair"
 import Natural from "./model/result/tag/Natural"
 import Pair from "./model/result/tag/Pair"
 import PlayerNatural from "./model/result/tag/PlayerNatural"
@@ -41,10 +41,10 @@ export {EngineError}
 export {Bet}
 export {BaccaratDeck, BaccaratShoe, IBaccaratShoe, RecycleShoe}
 export {Config, GameRule}
-export {BankerGamer, Gamer, PlayerGamer}
-export {BankerMun, FreeMun, Mun, PairMun, PlayerMun, SuperSixMun, TieMun}
+export {BancoGamer as BancoGamer, Gamer, PlayerGamer}
+export {BancoMun as BancoMun, FreeMun, Mun, PairMun, PlayerMun, SuperSixMun, TieMun}
 export {Dealer, Gambler, Participant}
-export {BankerNatural, BankerPair, Natural, Pair, PlayerNatural, PlayerPair, SuperSix, Tag}
+export {BancoNatural as BancoNatural, BancoPair as BancoPair, Natural, Pair, PlayerNatural, PlayerPair, SuperSix, Tag}
 export {HandOutcome, HandResult, ShoeOutcome}
 // export {} settler
 export {Engine}

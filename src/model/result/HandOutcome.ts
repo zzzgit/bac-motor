@@ -3,7 +3,7 @@ import EngineError from "../../error/EngineError"
 import SuperSix from "../mun/SuperSix"
 import HandResult from "./HandResult"
 import Config from "../config/Config"
-import Banker from "../mun/Banker"
+import Banco from "../mun/Banco"
 import Player from "../mun/Player"
 import Free from "../mun/Free"
 import Bet from "../bet/Bet"
@@ -22,15 +22,15 @@ class HandOutcome {
 		const wager = bet.getWager()
 		if (mun instanceof Free) {
 			return 0
-		} else if (mun instanceof Banker) {
-			if (outcome.result === HandResult.BankerWins) {
+		} else if (mun instanceof Banco) {
+			if (outcome.result === HandResult.BancoWins) {
 				if (!gameRules.isNoCommision) {
-					return wager + wager * payoutTable.banker.traditional
+					return wager + wager * payoutTable.banco.traditional
 				}
-				if (outcome.bankerHand.getPoint() === 6) {
-					return wager + wager * payoutTable.banker.nocommission.six
+				if (outcome.bancoHand.getPoint() === 6) {
+					return wager + wager * payoutTable.banco.nocommission.six
 				} else {
-					return wager + wager * payoutTable.banker.nocommission.normal
+					return wager + wager * payoutTable.banco.nocommission.normal
 				}
 			} else if (outcome.result === HandResult.PlayerWins) {
 				return 0
@@ -39,7 +39,7 @@ class HandOutcome {
 		} else if (mun instanceof Player) {
 			if (outcome.result === HandResult.PlayerWins) {
 				return wager + wager * payoutTable.player
-			} else if (outcome.result === HandResult.BankerWins) {
+			} else if (outcome.result === HandResult.BancoWins) {
 				return 0
 			}
 			return wager
@@ -50,7 +50,7 @@ class HandOutcome {
 				return 0
 			}
 		} else if (mun instanceof SuperSix) {
-			if (outcome.result === HandResult.BankerWins && outcome.bankerHand.getPoint() === 6) {
+			if (outcome.result === HandResult.BancoWins && outcome.bancoHand.getPoint() === 6) {
 				return wager + wager * payoutTable.superSix.two
 			}
 			return 0
@@ -76,14 +76,14 @@ class HandOutcome {
 
 	playerHand: Hand
 
-	bankerHand: Hand
+	bancoHand: Hand
 
 
 	constructor(result: HandResult, wager: number, payout: number, bCardArray: Card[], pCardArray: Card[], shoeIndex: number, hindex:number) {
 		this.result = result
 		this._wager = wager
 		this._payout = payout
-		this.bankerHand = new Hand(bCardArray)
+		this.bancoHand = new Hand(bCardArray)
 		this.playerHand = new Hand(pCardArray)
 		this._shoeIndex = shoeIndex
 		this.handIndex = hindex

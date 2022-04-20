@@ -1,6 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/no-type-alias
 type PayoutTable ={
-	banker: {
+	banco: {
 		nocommission: {
 			normal: number
 			six: number
@@ -14,7 +14,7 @@ type PayoutTable ={
 		three: number
 	}
 	pair: {
-		bankerPair: number
+		BancoPair: number
 		playerPair: number
 		eitherPair: number
 		perfectPair: {

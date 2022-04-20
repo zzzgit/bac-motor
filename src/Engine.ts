@@ -1,16 +1,16 @@
 import {GreenBeadEntity, BlueBeadEntity, RedBeadEntity, BeadEntity, BeadRoad, BigRoad} from "marga"
 import {Card, Hand, BlackMarkerCard} from "cardation"
-import BankerNatural from "./model/result/tag/BankerNatural"
+import BancoNatural from "./model/result/tag/BancoNatural"
 import PlayerNatural from "./model/result/tag/PlayerNatural"
 import BaccaratDeck from "./model/collection/BaccaratDeck"
 import BaccaratShoe from "./model/collection/BaccaratShoe"
 import RecycleShoe from "./model/collection/RecycleShoe"
-import BankerPair from "./model/result/tag/BankerPair"
+import BancoPair from "./model/result/tag/BancoPair"
 import PlayerPair from "./model/result/tag/PlayerPair"
 import HandOutcome from "./model/result/HandOutcome"
 import ShoeOutcome from "./model/result/ShoeOutcome"
 import PlayerGamer from "./model/gamer/PlayerGamer"
-import BankerGamer from "./model/gamer/BankerGamer"
+import BancoGamer from "./model/gamer/BancoGamer"
 import defaultConfig from "./config/defaultConfig"
 import SuperSix from "./model/result/tag/SuperSix"
 import HandResult from "./model/result/HandResult"
@@ -27,7 +27,7 @@ type BetAftertreat = (hcome: HandOutcome) => void
 class Engine {
 	private _player: PlayerGamer = new PlayerGamer()
 
-	private _banker: BankerGamer = new BankerGamer()
+	private _banco: BancoGamer = new BancoGamer()
 
 	private _totalGames : number = 0
 
@@ -105,7 +105,7 @@ class Engine {
 		const hcomeoutMap = new Map<string|number, HandOutcome>()
 		let houtcome: HandOutcome
 		let firstcomeout: HandOutcome |undefined
-		let totalBankker = 0
+		let totalBanco = 0
 		let totalPlayer = 0
 		let totalTie = 0
 		const beadRoad = new BeadRoad(this.getShoe().getShoeIndex())
@@ -134,8 +134,8 @@ class Engine {
 			const payout = HandOutcome.getPayout(bet, houtcome, this._config)
 			houtcome.setWager(bet.getWager())
 			houtcome.setPayout(payout)
-			if (houtcome.result === HandResult.BankerWins) {
-				totalBankker++
+			if (houtcome.result === HandResult.BancoWins) {
+				totalBanco++
 			} else if (houtcome.result === HandResult.PlayerWins) {
 				totalPlayer++
 			} else {
@@ -148,7 +148,7 @@ class Engine {
 			afterBet?.(houtcome)
 		} while (!this.isShoeExhausted)
 		const result: ShoeOutcome = new ShoeOutcome(this.getShoe().getShoeIndex(), houtcome, 3)
-		result.setStatisticInfo(totalBankker, totalPlayer, totalTie)
+		result.setStatisticInfo(totalBanco, totalPlayer, totalTie)
 		result.setFirstHandOutcome(firstcomeout)
 		if (this._config.shouldGenerateRoad) {
 			result.setBeadRoad(beadRoad)
@@ -161,7 +161,7 @@ class Engine {
 
 	private _parseComeout2BeadEntity(hcomeout: HandOutcome): BeadEntity {
 		let bead: BeadEntity
-		if (hcomeout.result === HandResult.BankerWins) {
+		if (hcomeout.result === HandResult.BancoWins) {
 			bead = new RedBeadEntity(hcomeout.handIndex)
 		} else if (hcomeout.result === HandResult.PlayerWins) {
 			bead = new BlueBeadEntity(hcomeout.handIndex)
@@ -216,7 +216,7 @@ class Engine {
 	}
 
 	playOneHand(): HandOutcome {
-		const banker = this.getBanker()
+		const banco = this.getBanco()
 		const player = this.getPlayer()
 		const shoe = this.getShoe()
 		if (this._hasShutdown) {
@@ -227,37 +227,37 @@ class Engine {
 		}
 		this.increaseGameIndex()
 		this.playerDraw()
-		this.bankerDraw()
+		this.bancoDraw()
 		this.playerDraw()
-		this.bankerDraw()
-		let bankerScore_num = banker.getPoint()
+		this.bancoDraw()
+		let bancoScore_num = banco.getPoint()
 		let playerScore_num = player.getPoint()
-		if (playerScore_num < 8 && bankerScore_num < 8) { // 無天牌
+		if (playerScore_num < 8 && bancoScore_num < 8) { // 無天牌
 			if (this.shouldPlayerDraw(playerScore_num)) {
 				this.playerDraw()
 			}
 			const hasPlayerHit = player.getHand().getDuplicatedCardArray().length > 2	// 直接給一個函數，返回長度，為了效率
-			if (this.shouldBankerDraw(hasPlayerHit, bankerScore_num, player.getLastCard().getPoint())) {
-				this.bankerDraw()
+			if (this.shouldBancoDraw(hasPlayerHit, bancoScore_num, player.getLastCard().getPoint())) {
+				this.bancoDraw()
 			}
 		}
-		const bankerHand = banker.getHand()
+		const bancoHand = banco.getHand()
 		const playerHand = player.getHand()
-		bankerScore_num = banker.getPoint()
+		bancoScore_num = banco.getPoint()
 		playerScore_num = player.getPoint()
 		let winning
-		if (bankerScore_num - playerScore_num > 0) {
-			winning = HandResult.BankerWins
-		} else if (bankerScore_num - playerScore_num === 0) {
+		if (bancoScore_num - playerScore_num > 0) {
+			winning = HandResult.BancoWins
+		} else if (bancoScore_num - playerScore_num === 0) {
 			winning = HandResult.Tie
 		} else {
 			winning = HandResult.PlayerWins
 		}
-		const outcome = new HandOutcome(winning, 0, 0, bankerHand.getDuplicatedCardArray(),
+		const outcome = new HandOutcome(winning, 0, 0, bancoHand.getDuplicatedCardArray(),
 			playerHand.getDuplicatedCardArray(), shoe.getShoeIndex(),
 			this.getGameIndex())
 		this._parseTage(outcome)
-		this.getRecycleShoe().collect(banker.getHand(), this._config.shouldShuffleWhileCollectBankerHand)
+		this.getRecycleShoe().collect(banco.getHand(), this._config.shouldShuffleWhileCollectBancoHand)
 		this.getRecycleShoe().collect(player.getHand(), false)
 		if (this._prevHandOutcome && outcome.getShoeIndex() === this._prevHandOutcome.getShoeIndex()) {
 			outcome.setPreviousHandOutcome(this._prevHandOutcome)
@@ -267,25 +267,25 @@ class Engine {
 	}
 
 	private _parseTage(outcome: HandOutcome) :void {
-		const {bankerHand} = outcome
+		const {bancoHand} = outcome
 		const {playerHand} = outcome
-		const bankerArray = bankerHand.getDuplicatedCardArray()
+		const bancoArray = bancoHand.getDuplicatedCardArray()
 		const playerArray = playerHand.getDuplicatedCardArray()
-		if (bankerArray[0].equals(bankerArray[1])) {
-			outcome.addTag(new BankerPair(bankerArray[0].getPoint(), bankerArray[0].getCardId()))
+		if (bancoArray[0].equals(bancoArray[1])) {
+			outcome.addTag(new BancoPair(bancoArray[0].getPoint(), bancoArray[0].getCardId()))
 		}
 		if (playerArray[0].equals(playerArray[1])) {
 			outcome.addTag(new PlayerPair(playerArray[0].getPoint(), playerArray[0].getCardId()))
 		}
-		if (bankerHand.getPoint() > 7) {
-			outcome.addTag(new BankerNatural(bankerHand.getPoint()))
+		if (bancoHand.getPoint() > 7) {
+			outcome.addTag(new BancoNatural(bancoHand.getPoint()))
 		}
 		if (playerHand.getPoint() > 7) {
 			outcome.addTag(new PlayerNatural(playerHand.getPoint()))
 		}
-		if (outcome.result == HandResult.BankerWins) {
-			if (bankerHand.getPoint() === 6) {
-				outcome.addTag(new SuperSix(bankerArray.length))
+		if (outcome.result == HandResult.BancoWins) {
+			if (bancoHand.getPoint() === 6) {
+				outcome.addTag(new SuperSix(bancoArray.length))
 			}
 		}
 	}
@@ -304,13 +304,13 @@ class Engine {
 		this.getPlayer().acceptCard(card)
 	}
 
-	bankerDraw(): void {
+	bancoDraw(): void {
 		let [card] = this.getShoe().deal()
 		if (card instanceof BlackMarkerCard) {
 			this.isShoeExhausted = true
 			;[card] = this.getShoe().deal()
 		}
-		this.getBanker().acceptCard(card)
+		this.getBanco().acceptCard(card)
 	}
 
 	getShoe(): BaccaratShoe {
@@ -325,8 +325,8 @@ class Engine {
 		return this._player
 	}
 
-	getBanker(): BankerGamer {
-		return this._banker
+	getBanco(): BancoGamer {
+		return this._banco
 	}
 
 	shouldPlayerDraw(currentScore: number): boolean {
@@ -336,38 +336,38 @@ class Engine {
 		return false
 	}
 
-	shouldBankerDraw(playerHit:boolean, bankerScore: number, playerLastScore: number): boolean {
+	shouldBancoDraw(playerHit:boolean, bancoPoint: number, playerLastScore: number): boolean {
 		if (!playerHit) {
-			if (bankerScore < 6) {
+			if (bancoPoint < 6) {
 				return true
 			}
 			return false
 		}
-		if (bankerScore > 6) {
+		if (bancoPoint > 6) {
 			return false
 		}
-		if (bankerScore < 3) {
+		if (bancoPoint < 3) {
 			return true
 		}
-		if (bankerScore === 3) {
+		if (bancoPoint === 3) {
 			if (playerLastScore === 8) {
 				return false
 			}
 			return true
 		}
-		if (bankerScore === 4) {
+		if (bancoPoint === 4) {
 			if (playerLastScore < 2 || playerLastScore > 7) {
 				return false
 			}
 			return true
 		}
-		if (bankerScore === 5) {
+		if (bancoPoint === 5) {
 			if (playerLastScore < 4 || playerLastScore > 7) {
 				return false
 			}
 			return true
 		}
-		if (bankerScore === 6) {
+		if (bancoPoint === 6) {
 			if (playerLastScore < 6 || playerLastScore > 7) {
 				return false
 			}
