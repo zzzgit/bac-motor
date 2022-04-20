@@ -25,6 +25,7 @@ class BaccaratDeck extends Deck {
 		}
 		this._isInitialized = true
 		const deckArray = this.getDuplicatedCardArray()
+		// 什麼情況下會走這裡？測試用例中的自定義deck?
 		if (deckArray.length) {
 			return [...deckArray]
 		}

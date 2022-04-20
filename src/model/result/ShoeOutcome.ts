@@ -76,11 +76,11 @@ class ShoeOutcome {
 		}
 	}
 
-	setFirstHandComeout(firstcomeout: HandOutcome) :void {
+	setFirstHandOutcome(firstcomeout: HandOutcome) :void {
 		this._firstHandOutcome = firstcomeout
 	}
 
-	getFirstHandComeout(): HandOutcome | undefined {
+	getFirstHandOutcome(): HandOutcome | undefined {
 		return this._firstHandOutcome
 	}
 
