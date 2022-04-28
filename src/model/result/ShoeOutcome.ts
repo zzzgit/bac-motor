@@ -7,6 +7,7 @@ type StatisticInfo = {
 	banco: number
 	punto: number
 	tie: number
+	total: number
 }
 
 class ShoeOutcome {
@@ -30,6 +31,7 @@ class ShoeOutcome {
 		banco: 0,
 		punto: 0,
 		tie: 0,
+		total: 0,
 	}
 
 	constructor(shoeIndex: number, lastHandComeout: HandOutcome, handAmount: number) {
@@ -73,6 +75,7 @@ class ShoeOutcome {
 			banco: banco,
 			punto: punto,
 			tie: tie,
+			total: banco + punto + tie,
 		}
 	}
 
