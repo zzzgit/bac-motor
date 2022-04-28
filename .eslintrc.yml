@@ -2,5 +2,5 @@ parserOptions:
     ecmaVersion: "latest"
     sourceType: "module"
     project: "./tsconfig.json"
-extends: ["janus/unicorn", "janus/ts", "janus/node", "janus/promise", "janus/security", "janus/array"]
+extends: ["janus/ts", "janus/security"]
 ignorePatterns: [ "built/**/*" ]
