@@ -1,5 +1,5 @@
 import {GreenBeadEntity, BlueBeadEntity, RedBeadEntity, BeadEntity, BeadRoad, BigRoad} from "marga"
-import {Card, Hand, BlackMarkerCard} from "cardation"
+import {Card, Hand, BlackMarkerCard, AceCard, Heart} from "cardation"
 import BancoNatural from "./model/result/tag/BancoNatural"
 import PuntoNatural from "./model/result/tag/PuntoNatural"
 import BaccaratDeck from "./model/collection/BaccaratDeck"
@@ -198,10 +198,13 @@ class Engine {
 		if (this._config.shouldUseBlackCard) {
 			this.insertBlackCard()
 		}
-		const burntCards: Card[] = shoe.burn()
+		let burntCards: Card[] = []
+		if (this._config.shouldBurnCard) {
+			burntCards = shoe.burn()
+		}
 		this.getRecycleShoe().collect(new Hand(burntCards), false)
 		this.isShoeExhausted = false
-		return burntCards[0]
+		return burntCards[0] || new AceCard(new Heart())
 	}
 
 	resetGameIndex():void {
