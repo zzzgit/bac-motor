@@ -196,10 +196,8 @@ class Engine {
 		if (this._config.shouldUseBlackCard) {
 			this.insertBlackCard()
 		}
-		if (this._config.shouldUseBlackCard) {
-			const burntCards: Card[] = shoe.burn()
-			this.getRecycleShoe().collect(new Hand(burntCards), false)
-		}
+		const burntCards: Card[] = shoe.burn()
+		this.getRecycleShoe().collect(new Hand(burntCards), false)
 		this.isShoeExhausted = false
 	}
 
