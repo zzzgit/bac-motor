@@ -28,7 +28,7 @@ class BaccaratShoe extends Shoe implements IBaccaratShoe {
 		}
 		this._isBurnt = true
 		const [firstCard] = this.deal()
-		const score = firstCard.getPoint() | 10
+		const score = firstCard.getPoint() || 10
 		const burntCards = this.deal(score)
 		burntCards.unshift(firstCard)
 		return burntCards

@@ -18,7 +18,7 @@ class BaccaratDeck extends Deck {
 		this.getOrCreatArray()
 	}
 
-	// 直接在此處洗牌，如何？ 為了避免數組中的對象遭到污染，每次都重新生成？w
+	// 直接在此處洗牌，如何？ 為了避免數組中的對象遭到污染，每次都重新生成？
 	getOrCreatArray(): Card[] {
 		if (this._isInitialized) {
 			return this.getDuplicatedCardArray()
