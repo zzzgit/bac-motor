@@ -26,6 +26,15 @@ class BaccaratShoe extends Shoe implements IBaccaratShoe {
 		if (this._isBurnt) {
 			// throw new EngineError(`[BaccaratShoe][burn]: a shoe could not burn more than once!`)
 		}
+		// ///新加的
+		// const array = this.getCardArray()
+		// const index = array.findIndex((card)=>{
+		// 	return card.getPoint() === 1
+		// })
+		// const Ace = array[index]
+		// array[index] = array[array.length - 1]
+		// array[array.length - 1] = Ace
+		// ////
 		this._isBurnt = true
 		const [firstCard] = this.deal()
 		const score = firstCard.getPoint() || 10

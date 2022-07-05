@@ -22,6 +22,7 @@ import samael from "samael"
 
 type BetPretreat = (prevBet: Bet | undefined, prevOutcome: HandOutcome | undefined) => Bet
 type BetAftertreat = (hcome: HandOutcome) => void
+type ShoePretreat = (card: Card) => void
 
 // 抽象一個game，提出一些常用函數
 class Engine {
@@ -91,7 +92,7 @@ class Engine {
 		}
 	}
 
-	playOneShoe(beforeBet: BetPretreat = ()=>{return new Bet(new Free(), 0)}, afterBet: BetAftertreat = ()=>{}):ShoeOutcome {
+	playOneShoe(beforeBet: BetPretreat = () => {return new Bet(new Free(), 0)}, afterBet: BetAftertreat = () => { }, beforeShoe: ShoePretreat = () => { }):ShoeOutcome {
 		if (this._hasShutdown) {
 			throw new EngineError(`[Engine][playOneShoe]: the engine has been shutdown before some further invoking!`)
 		}
@@ -101,7 +102,8 @@ class Engine {
 		if (this._config.isTryrun) {
 			// ////
 		}
-		this.prepareShoe()
+		const firstCard = this.prepareShoe()
+		beforeShoe(firstCard)
 		const hcomeoutMap = new Map<string|number, HandOutcome>()
 		let houtcome: HandOutcome
 		let firstcomeout: HandOutcome |undefined
@@ -180,7 +182,7 @@ class Engine {
 		this.getRecycleShoe().clear()
 	}
 
-	private prepareShoe():void {
+	private prepareShoe():Card {
 		const shoe = this.getShoe()
 		this.resetGameIndex()
 		this._prevHandOutcome = undefined
@@ -199,6 +201,7 @@ class Engine {
 		const burntCards: Card[] = shoe.burn()
 		this.getRecycleShoe().collect(new Hand(burntCards), false)
 		this.isShoeExhausted = false
+		return burntCards[0]
 	}
 
 	resetGameIndex():void {
