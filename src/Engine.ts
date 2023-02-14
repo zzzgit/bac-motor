@@ -271,8 +271,7 @@ class Engine {
 	}
 
 	private _parseTage(outcome: HandOutcome) :void {
-		const {bancoHand} = outcome
-		const {puntoHand} = outcome
+		const {bancoHand, puntoHand} = outcome
 		const bancoArray = bancoHand.getDuplicatedCardArray()
 		const puntoArray = puntoHand.getDuplicatedCardArray()
 		if (bancoArray[0].equals(bancoArray[1])) {
@@ -281,10 +280,10 @@ class Engine {
 		if (puntoArray[0].equals(puntoArray[1])) {
 			outcome.addTag(new PuntoPair(puntoArray[0].getPoint(), puntoArray[0].getCardId()))
 		}
-		if (bancoHand.getPoint() > 7) {
+		if (bancoArray.length === 2 && bancoHand.getPoint() > 7) {
 			outcome.addTag(new BancoNatural(bancoHand.getPoint()))
 		}
-		if (puntoHand.getPoint() > 7) {
+		if (puntoArray.length === 2 && puntoHand.getPoint() > 7) {
 			outcome.addTag(new PuntoNatural(puntoHand.getPoint()))
 		}
 		if (outcome.result == HandResult.BancoWins) {
