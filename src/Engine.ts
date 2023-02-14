@@ -260,7 +260,7 @@ class Engine {
 		const outcome = new HandOutcome(winning, 0, 0, bancoHand.getDuplicatedCardArray(),
 			puntoHand.getDuplicatedCardArray(), shoe.getShoeIndex(),
 			this.getGameIndex())
-		this._parseTage(outcome)
+		this._addTags(outcome)
 		this.getRecycleShoe().collect(banco.getHand(), this._config.shouldShuffleWhileCollectBancoHand)
 		this.getRecycleShoe().collect(punto.getHand(), false)
 		if (this._prevHandOutcome && outcome.getShoeIndex() === this._prevHandOutcome.getShoeIndex()) {
@@ -270,7 +270,7 @@ class Engine {
 		return outcome
 	}
 
-	private _parseTage(outcome: HandOutcome) :void {
+	private _addTags(outcome: HandOutcome) :void {
 		const {bancoHand, puntoHand} = outcome
 		const bancoArray = bancoHand.getDuplicatedCardArray()
 		const puntoArray = puntoHand.getDuplicatedCardArray()
