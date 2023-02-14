@@ -25,28 +25,19 @@ class BaccaratDeck extends Deck {
 		}
 		this._isInitialized = true
 		const deckArray = this.getDuplicatedCardArray()
-		// 什麼情況下會走這裡？測試用例中的自定義deck?
+		// 什麼情況下會走這裡？測試用例中的自定義deck? (此處邏輯需要優化，如果直接push自定義deck，需要另外調用一個函數，而且先要檢查，是否已經初始化過，如果已經初始化，拒絕自定義邏輯，兩種邏輯相互排斥)
 		if (deckArray.length) {
 			return [...deckArray]
 		}
-		this._addCard(CardFactory.createAceCard(heart, 1))
-		this._addCard(CardFactory.createAceCard(diamond, 1))
-		this._addCard(CardFactory.createAceCard(spade, 1))
-		this._addCard(CardFactory.createAceCard(club, 1))
-		for (let i = 2; i < 11; i++) {
-			// if (i < 6 || i > 6) {
-			const score = i % 10
-			this._addCard(CardFactory.createNumberCard(heart, i, score))
-			this._addCard(CardFactory.createNumberCard(diamond, i, score))
-			this._addCard(CardFactory.createNumberCard(spade, i, score))
-			this._addCard(CardFactory.createNumberCard(club, i, score))
-			// }
-		}
-		for (let i = 11; i < 14; i++) {
-			this._addCard(CardFactory.createFaceCard(heart, i, 0))
-			this._addCard(CardFactory.createFaceCard(diamond, i, 0))
-			this._addCard(CardFactory.createFaceCard(spade, i, 0))
-			this._addCard(CardFactory.createFaceCard(club, i, 0))
+		for (const suit of [heart, diamond, spade, club]) {
+			this._addCard(CardFactory.createAceCard(suit, 1))
+			for (let i = 2; i < 10; i++) {
+				this._addCard(CardFactory.createNumberCard(suit, i, i))
+			}
+			this._addCard(CardFactory.createNumberCard(suit, 10, 0))
+			for (let i = 11; i < 14; i++) {
+				this._addCard(CardFactory.createFaceCard(suit, i, 0))
+			}
 		}
 		return this.getDuplicatedCardArray()
 	}
