@@ -9,7 +9,7 @@ class RecycleShoe extends Shoe {
 			const action = fristcard.getRank() % 4
 			// this.insertCard(0, ...hand.getDuplicatedCardArray())
 			if (action === 1) {
-				const randomPlace = samael.randomInt(0, this.getDuplicatedCardArray().length - 1)
+				const randomPlace = samael.range(0, this.getDuplicatedCardArray().length - 1)
 				this.insertCard(randomPlace, ...hand.getDuplicatedCardArray())
 			} else {
 				this.pushCard(...hand.getDuplicatedCardArray())

@@ -193,7 +193,7 @@ class Engine {
 			shoe.detect()
 		}
 		if (this._config.shouldCutShoe) {
-			shoe.cut(samael.randomInt(270))
+			shoe.cut(samael.random(270))
 		}
 		if (this._config.shouldUseBlackCard) {
 			this.insertBlackCard()
@@ -213,9 +213,9 @@ class Engine {
 
 	insertBlackCard():void {
 		const shoe = this.getShoe()
-		const cutPlace = samael.randomInt(280, 410)
+		const cutPlace = samael.range(280, 410)
 		shoe.cut(cutPlace)
-		const blackPlace: number = samael.randomInt(12, 20)
+		const blackPlace: number = samael.range(12, 20)
 		shoe.insertBlackCard(blackPlace)
 	}
 
