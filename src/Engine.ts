@@ -1,5 +1,5 @@
 import {GreenBeadEntity, BlueBeadEntity, RedBeadEntity, BeadEntity, BeadRoad, BigRoad} from "marga"
-import {Card, Hand, BlackMarkerCard, AceCard, Heart} from "cardation"
+import {Card, Hand, BlackMarkerCard} from "cardation"
 import BancoNatural from "./model/result/tag/BancoNatural"
 import PuntoNatural from "./model/result/tag/PuntoNatural"
 import BaccaratDeck from "./model/collection/BaccaratDeck"
@@ -22,7 +22,7 @@ import samael from "samael"
 
 type BetPretreat = (prevBet: Bet | undefined, prevOutcome: HandOutcome | undefined) => Bet
 type BetAftertreat = (hcome: HandOutcome) => void
-type ShoePretreat = (card: Card) => void
+type ShoePretreat = (card: Card | undefined) => void
 
 /**
  * Synchronous engine.
@@ -205,7 +205,7 @@ class Engine {
 	 * Reset, shuffle, cut, detect, burn, insert black card. These actions must be done to start a new shoe.
 	 * @return {Card} The first card of the shoe.
 	 */
-	private prepareShoe():Card {
+	private prepareShoe():Card | undefined {
 		const shoe = this.getShoe()
 		shoe.reBorn()
 		this.resetGameIndex()
@@ -228,7 +228,7 @@ class Engine {
 		}
 		this.getRecycleShoe().collect(new Hand(burntCards), false)
 		this.isShoeExhausted = false
-		return burntCards[0] || new AceCard(new Heart())
+		return burntCards[0]
 	}
 
 	resetGameIndex():void {
