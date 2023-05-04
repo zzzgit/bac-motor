@@ -7,7 +7,7 @@ import EngineError from "../../error/EngineError"
 
 
 /**
- * Bet class.
+ * Bet class. Currently not in use
  * @todo Add index, otherwise only can set outcome once(disposable).
  */
 class Bet {

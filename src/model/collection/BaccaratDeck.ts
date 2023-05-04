@@ -61,7 +61,7 @@ class BaccaratDeck extends Deck {
 	 * @return {boolean} true if the deck is a Baccarat deck
 	 */
 	detect(): boolean {
-		let result = this.getDuplicatedCardArray.length === 52
+		let result = this.getDuplicatedCardArray().length === 52
 		result = result && this.includes(CardFactory.createAceCard(heart, 1)) &&
 			this.includes(CardFactory.createAceCard(diamond, 1)) &&
 			this.includes(CardFactory.createAceCard(spade, 1)) &&
