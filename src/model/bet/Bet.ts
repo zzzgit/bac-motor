@@ -6,7 +6,10 @@ import Punto from "../mun/Punto"
 import EngineError from "../../error/EngineError"
 
 
-// 添加index，以免重複使用，或者只能設置一次outcome
+/**
+ * Bet class.
+ * @todo Add index, otherwise only can set outcome once(disposable).
+ */
 class Bet {
 	private readonly _amount: number
 
@@ -33,7 +36,10 @@ class Bet {
 		return this._outcome
 	}
 
-	// 僅用於測試
+	/**
+	 * Get string representation of this bet. Inner use only.
+	 * @return {string} string representation of this bet
+	 */
 	getStr():string {
 		const mun: Mun = this.getMun()
 		const houtcome: HandOutcome = this.getOutcome() as HandOutcome
@@ -75,6 +81,10 @@ class Bet {
 	}
 
 	// 僅用於測試
+	/**
+	 * Whether got won. Inner use only.
+	 * @return {boolean} true if got won, otherwise false
+	 */
 	gotWon(): boolean {
 		const hcomeout: HandOutcome = this.getOutcome() as HandOutcome
 		if (!hcomeout) {
@@ -98,7 +108,10 @@ class Bet {
 		return result
 	}
 
-	// 僅用於測試
+	/**
+	 * Whether got tie. Inner use only.
+	 * @return {boolean} true if got tie, otherwise false
+	 */
 	gotTie(): boolean {
 		if (this.getOutcome()?.result === HandResult.Tie) {
 			return true

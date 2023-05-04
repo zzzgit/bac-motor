@@ -1,5 +1,8 @@
 import PayoutTable from "../model/settle/PayoutTable"
 
+/**
+ * Default payout table.
+ */
 const defaultPayoutTable:PayoutTable = {
 	banco: {
 		nocommission: {

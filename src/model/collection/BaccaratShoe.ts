@@ -1,11 +1,12 @@
 import {BlackMarkerCard, Card, Shoe} from "cardation"
 import IBaccaratShoe from "./IBaccaratShoe"
+import EngineError from "../../error/EngineError"
 
 
 /**
- * 同一時間，只能有一局牌一手牌，可以調用shoe
- * 這個shoe，生成牌，洗牌，檢測牌，三個功能合一，而且牌可以重複利用，只用生成一次而已，每次只需要重新洗牌
- * shoe 只維持自己的index，不維護遊戲的index，因為shoe不知道遊戲規則
+ * Baccarat shoe.
+ * @todo single thread
+ * @todo initialization of the shoe currently is not in this class
  */
 class BaccaratShoe extends Shoe implements IBaccaratShoe {
 	private _isBurnt: boolean = false
@@ -16,25 +17,23 @@ class BaccaratShoe extends Shoe implements IBaccaratShoe {
 		this._index++
 	}
 
-	// 未實現
+	/**
+	 * Detect if the shoe is a Baccarat shoe.
+	 * @todo need to implement this method
+	 * @return {boolean} true if the shoe is burnt.
+	 */
 	detect(): boolean {
 		return true
 	}
 
+	/**
+	 * Burn a shoe.
+	 * @return {Card[]} the burnt cards
+	 */
 	burn(): Card[] {
-		// 同一輪，只能burn一次
 		if (this._isBurnt) {
-			// throw new EngineError(`[BaccaratShoe][burn]: a shoe could not burn more than once!`)
+			throw new EngineError(`[BaccaratShoe][burn]: a shoe could not burn more than once!`)
 		}
-		// ///新加的
-		// const array = this.getCardArray()
-		// const index = array.findIndex((card)=>{
-		// 	return card.getPoint() === 1
-		// })
-		// const Ace = array[index]
-		// array[index] = array[array.length - 1]
-		// array[array.length - 1] = Ace
-		// ////
 		this._isBurnt = true
 		const [firstCard] = this.deal()
 		const score = firstCard.getPoint() || 10
@@ -43,6 +42,10 @@ class BaccaratShoe extends Shoe implements IBaccaratShoe {
 		return burntCards
 	}
 
+	/**
+	 * Insert a black card to the shoe.
+	 * @param {number} place the index from where to insert the black card.
+	 */
 	insertBlackCard(place:number):void {
 		this.insertCard(place, blackCard)
 	}
@@ -58,8 +61,14 @@ class BaccaratShoe extends Shoe implements IBaccaratShoe {
 
 	shuffle():void {
 		super.shuffle()
-		// 這一行，或者放在detect下面
+	}
+
+	/**
+	 * increase GameIndex and reset state
+	 */
+	reBorn():void {
 		this.increaseShoeIndex()
+		this._isBurnt = false
 	}
 }
 

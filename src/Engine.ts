@@ -24,7 +24,9 @@ type BetPretreat = (prevBet: Bet | undefined, prevOutcome: HandOutcome | undefin
 type BetAftertreat = (hcome: HandOutcome) => void
 type ShoePretreat = (card: Card) => void
 
-// 抽象一個game，提出一些常用函數
+/**
+ * Synchronous engine.
+ */
 class Engine {
 	private _punto: PuntoGamer = new PuntoGamer()
 
@@ -59,12 +61,19 @@ class Engine {
 		this._isExhausted = value
 	}
 
+	/**
+	 * Shut down the engine.
+	 */
 	shutdown(): void {
 		console.log(`[baccarat-engine]: ${this._totalGames} games within ${this.getShoe().getShoeIndex() + 1} shoes have been played.`)
 		this.isShoeExhausted = true
 		this._hasShutdown = true
 	}
 
+	/**
+	 * Power on the engine with a config, or use the default config.
+	 * @param {Config} config
+	 */
 	powerOn(config: Config = defaultConfig): void {
 		this.config(config)
 		// console.log("引擎啟動：", config)
@@ -77,6 +86,9 @@ class Engine {
 		this._config = mixin
 	}
 
+	/**
+	 * Initialize the shoe with 8 decks, or with a customized shoe. This method only be invoked once in the engine's life cycle.
+	 */
 	initializeDecks():void {
 		this._shoe.clear()
 		if (this._config.customizedShoe) {
@@ -92,6 +104,13 @@ class Engine {
 		}
 	}
 
+	/**
+	 * Play one shoe.
+	 * @param {Function} beforeBet
+	 * @param {Function} afterBet
+	 * @param {Function} beforeShoe
+	 * @return {ShoeOutcome}
+	 */
 	playOneShoe(beforeBet: BetPretreat = () => {return new Bet(new Free(), 0)}, afterBet: BetAftertreat = () => { }, beforeShoe: ShoePretreat = () => { }):ShoeOutcome {
 		if (this._hasShutdown) {
 			throw new EngineError(`[Engine][playOneShoe]: the engine has been shutdown before some further invoking!`)
@@ -174,7 +193,7 @@ class Engine {
 	}
 
 	/**
-	 * 由收集箱放入shoe
+	 * 由收集箱放入 baccarat shoe
 	 */
 	private recycleCardToShoe():void {
 		// this.getRecycleShoe().pushCard(...this.getShoe().getDuplicatedCardArray())
@@ -182,8 +201,13 @@ class Engine {
 		this.getRecycleShoe().clear()
 	}
 
+	/**
+	 * Reset, shuffle, cut, detect, burn, insert black card. These actions must be done to start a new shoe.
+	 * @return {Card} The first card of the shoe.
+	 */
 	private prepareShoe():Card {
 		const shoe = this.getShoe()
+		shoe.reBorn()
 		this.resetGameIndex()
 		this._prevHandOutcome = undefined
 		if (this._config.shouldShuffle) {
@@ -193,7 +217,7 @@ class Engine {
 			shoe.detect()
 		}
 		if (this._config.shouldCutShoe) {
-			shoe.cut(samael.random(270))
+			shoe.cut(samael.range(280, 410))
 		}
 		if (this._config.shouldUseBlackCard) {
 			this.insertBlackCard()
@@ -211,10 +235,11 @@ class Engine {
 		this._handIndex = -1
 	}
 
+	/**
+	 * Insert a black card into the shoe by dealer.
+	 */
 	insertBlackCard():void {
 		const shoe = this.getShoe()
-		const cutPlace = samael.range(280, 410)
-		shoe.cut(cutPlace)
 		const blackPlace: number = samael.range(12, 20)
 		shoe.insertBlackCard(blackPlace)
 	}
@@ -240,7 +265,8 @@ class Engine {
 			if (this.shouldPuntoDraw(puntoScore_num)) {
 				this.puntoDraw()
 			}
-			const hasPuntoHit = punto.getHand().getDuplicatedCardArray().length > 2	// 直接給一個函數，返回長度，為了效率
+			// @todo 直接給一個函數，返回數組長度，以便提高效率
+			const hasPuntoHit = punto.getHand().getDuplicatedCardArray().length > 2
 			if (this.shouldBancoDraw(hasPuntoHit, bancoScore_num, punto.getLastCard().getPoint())) {
 				this.bancoDraw()
 			}
@@ -274,18 +300,21 @@ class Engine {
 		const {bancoHand, puntoHand} = outcome
 		const bancoArray = bancoHand.getDuplicatedCardArray()
 		const puntoArray = puntoHand.getDuplicatedCardArray()
+		// pair
 		if (bancoArray[0].equals(bancoArray[1])) {
 			outcome.addTag(new BancoPair(bancoArray[0].getPoint(), bancoArray[0].getCardId()))
 		}
 		if (puntoArray[0].equals(puntoArray[1])) {
 			outcome.addTag(new PuntoPair(puntoArray[0].getPoint(), puntoArray[0].getCardId()))
 		}
+		// natural
 		if (bancoArray.length === 2 && bancoHand.getPoint() > 7) {
 			outcome.addTag(new BancoNatural(bancoHand.getPoint()))
 		}
 		if (puntoArray.length === 2 && puntoHand.getPoint() > 7) {
 			outcome.addTag(new PuntoNatural(puntoHand.getPoint()))
 		}
+		// super six
 		if (outcome.result == HandResult.BancoWins) {
 			if (bancoHand.getPoint() === 6) {
 				outcome.addTag(new SuperSix(bancoArray.length))
@@ -297,7 +326,9 @@ class Engine {
 		return this._recycleShoe
 	}
 
-	// 黑卡不用理會，黑卡是跟BaccaratShoe綁定的，在class中定義
+	/**
+	 * Draw a card for punto.
+	 */
 	puntoDraw(): void {
 		let [card] = this.getShoe().deal()
 		if (card instanceof BlackMarkerCard) {
@@ -307,6 +338,9 @@ class Engine {
 		this.getPunto().acceptCard(card)
 	}
 
+	/**
+	 * Draw a card for banco.
+	 */
 	bancoDraw(): void {
 		let [card] = this.getShoe().deal()
 		if (card instanceof BlackMarkerCard) {
@@ -332,6 +366,11 @@ class Engine {
 		return this._banco
 	}
 
+	/**
+	 * Whether punto should draw a card.
+	 * @param {number} currentScore the current points of the punto hand
+	 * @return {boolean} whether punto should draw a card
+	 */
 	shouldPuntoDraw(currentScore: number): boolean {
 		if (currentScore < 6) {
 			return true
@@ -339,6 +378,13 @@ class Engine {
 		return false
 	}
 
+	/**
+	 * Whether banco should draw a card.
+	 * @param {boolean} puntoHit did punto hit
+	 * @param {number} bancoPoint banco point
+	 * @param {number} puntoLastScore the point of the last card of punto
+	 * @return {boolean} whether banco should draw a card
+	 */
 	shouldBancoDraw(puntoHit:boolean, bancoPoint: number, puntoLastScore: number): boolean {
 		if (!puntoHit) {
 			if (bancoPoint < 6) {
@@ -379,16 +425,28 @@ class Engine {
 		return false
 	}
 
+	/**
+	 * The game ID inside the shoe.
+	 * @return {number} the game index
+	 */
 	getGameIndex():number {
 		return this._handIndex
 	}
 
+	/**
+	 * Increase the game index by 1. And return the new game index.
+	 * @return {number} the new game index
+	 */
 	increaseGameIndex():number {
 		this._handIndex++
 		this._totalGames++
 		return this._handIndex
 	}
 
+	/**
+	 * The prev bet.
+	 * @return {Bet} the previous bet
+	 */
 	getPreviousBet(): Bet | undefined {
 		return this._prevBet
 	}

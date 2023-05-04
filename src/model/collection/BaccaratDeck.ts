@@ -5,9 +5,17 @@ const diamond = new Diamond()
 const spade = new Spade()
 const club = new Club()
 
+/**
+ * Baccarat Deck.
+ */
 class BaccaratDeck extends Deck {
 	private _isInitialized = false
 
+	/**
+	 * Add card to the deck. The card will be frozen.
+	 * @todo confider add this method in Deck class
+	 * @param {Card} card
+	 */
 	private _addCard(card: Card): void {
 		const protectModel = Object.freeze || Object.seal // 前者不能修改，後者可以
 		this.pushCard(protectModel(card))
@@ -18,14 +26,19 @@ class BaccaratDeck extends Deck {
 		this.getOrCreatArray()
 	}
 
-	// 直接在此處洗牌，如何？ 為了避免數組中的對象遭到污染，每次都重新生成？
+	/**
+	 * The Array of cards in the deck. If the deck is not initialized, it will be initialized.
+	 * @todo confider shuffle here
+	 * @return {Card[]} The Array of cards in the deck.
+	 */
 	getOrCreatArray(): Card[] {
 		if (this._isInitialized) {
 			return this.getDuplicatedCardArray()
 		}
 		this._isInitialized = true
 		const deckArray = this.getDuplicatedCardArray()
-		// 什麼情況下會走這裡？測試用例中的自定義deck? (此處邏輯需要優化，如果直接push自定義deck，需要另外調用一個函數，而且先要檢查，是否已經初始化過，如果已經初始化，拒絕自定義邏輯，兩種邏輯相互排斥)
+		// for cumstomised deck
+		// @todo cumstomised deck 另外調用一個函數（不用push），而且先要檢查，是否已經初始化過（_isInitialized），如果已經初始化，拒絕自定義邏輯，
 		if (deckArray.length) {
 			return [...deckArray]
 		}
@@ -42,7 +55,11 @@ class BaccaratDeck extends Deck {
 		return this.getDuplicatedCardArray()
 	}
 
-	// 改成拋異常
+	/**
+	 * Detect if the deck is a Baccarat deck(52 cards, no joker). Currently not in use.
+	 * @todo confider throw error here if the test is failed
+	 * @return {boolean} true if the deck is a Baccarat deck
+	 */
 	detect(): boolean {
 		let result = this.getDuplicatedCardArray.length === 52
 		result = result && this.includes(CardFactory.createAceCard(heart, 1)) &&

@@ -2,6 +2,9 @@ import {Card} from "cardation"
 import PayoutTable from "../settle/PayoutTable"
 import GameRule from "./GameRule"
 
+/**
+ * Config for BaccaratEngine
+ */
 // eslint-disable-next-line @typescript-eslint/no-type-alias
 type Config = {
 	gameRules?: GameRule

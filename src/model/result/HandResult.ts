@@ -4,7 +4,9 @@ enum Result {
 	Tie = "_Tie",
 }
 
-
+/**
+ * Static class to represent the result of a hand
+ */
 class HandResult {
 	static BancoWins = new HandResult(1)
 
@@ -34,7 +36,10 @@ class HandResult {
 
 	private _result: Result
 
-	// 0 tie， 1 banco wins， -1 punto wins
+	/**
+	 *
+	 * @param {number} code 0 tie， 1 banco wins， -1 punto wins
+	 */
 	constructor(code:number) {
 		if (code === 0) {
 			this._result = Result.Tie

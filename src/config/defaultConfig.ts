@@ -2,6 +2,9 @@ import Config from "../model/config/Config"
 import defaultGameRules from "./defaultGameRules"
 import defaultPayoutTable from "./defaultPayoutTable"
 
+/**
+ * Default config.
+ */
 const defaultConfig:Config = {
 	gameRules: defaultGameRules,
 	payoutTable: defaultPayoutTable,

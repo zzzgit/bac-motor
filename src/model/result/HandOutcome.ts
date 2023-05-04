@@ -13,6 +13,13 @@ import Tag from "./tag/Tag"
 
 
 class HandOutcome {
+	/**
+	 * Figure out the payout of the game.
+	 * @param {Bet} bet
+	 * @param {HandOutcome} outcome
+	 * @param {Config} config
+	 * @return {number} payout
+	 */
 	static getPayout(bet: Bet, outcome: HandOutcome, config: Config): number {
 		const {gameRules, payoutTable} = config
 		if (!gameRules || !payoutTable) {

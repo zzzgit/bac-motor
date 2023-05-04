@@ -1,9 +1,9 @@
+import Engine from "./Engine"
+import Bet from "./model/bet/Bet"
+import EngineError from "./error/EngineError"
 import defaultConfig from "./config/defaultConfig"
 import defaultGameRules from "./config/defaultGameRules"
 import defaultPayoutTable from "./config/defaultPayoutTable"
-import Engine from "./Engine"
-import EngineError from "./error/EngineError"
-import Bet from "./model/bet/Bet"
 import BaccaratDeck from "./model/collection/BaccaratDeck"
 import BaccaratShoe from "./model/collection/BaccaratShoe"
 import IBaccaratShoe from "./model/collection/IBaccaratShoe"
@@ -50,4 +50,3 @@ export {HandOutcome, HandResult, ShoeOutcome}
 export {Engine}
 export default Engine
 
-// 命名衝突  mun tag pattern

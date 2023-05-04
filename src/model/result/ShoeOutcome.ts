@@ -10,6 +10,9 @@ type StatisticInfo = {
 	total: number
 }
 
+/**
+ * ShoeOutcome is the outcome of a shoe.
+ */
 class ShoeOutcome {
 	private _shoeIndex: number
 

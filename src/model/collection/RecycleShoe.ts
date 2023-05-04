@@ -1,8 +1,15 @@
 import {Hand, Shoe} from "cardation"
 import samael from "samael"
 
-
+/**
+ * A recycable shoe is a shoe that can be recycled.
+ */
 class RecycleShoe extends Shoe {
+	/**
+	 * Collect the cards from the dealt hand and put them back to the shoe.
+	 * @param {Hand} hand the hand to collect
+	 * @param {boolean} shouldShuffle whether to shuffle while collection
+	 */
 	collect(hand: Hand, shouldShuffle: boolean = false): void {
 		const fristcard = hand.getFirstCard()
 		if (shouldShuffle && fristcard && this.getDuplicatedCardArray().length > 20) {
