@@ -18,7 +18,7 @@ import EngineError from "./error/EngineError"
 import Config from "./model/config/Config"
 import Free from "./model/mun/Free"
 import Bet from "./model/bet/Bet"
-import samael from "samael"
+import * as samael from "samael"
 
 type BetPretreat = (prevBet: Bet | undefined, prevOutcome: HandOutcome | undefined) => Bet
 type BetAftertreat = (hcome: HandOutcome) => void

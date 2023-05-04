@@ -1,5 +1,5 @@
 import {Hand, Shoe} from "cardation"
-import samael from "samael"
+import * as samael from "samael"
 
 /**
  * A recycable shoe is a shoe that can be recycled.
