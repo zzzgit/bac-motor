@@ -301,10 +301,10 @@ class Engine {
 		const bancoArray = bancoHand.getDuplicatedCardArray()
 		const puntoArray = puntoHand.getDuplicatedCardArray()
 		// pair
-		if (bancoArray[0].equals(bancoArray[1])) {
+		if (bancoArray[0].getRank() == bancoArray[1].getRank()) {
 			outcome.addTag(new BancoPair(bancoArray[0].getPoint(), bancoArray[0].getCardId()))
 		}
-		if (puntoArray[0].equals(puntoArray[1])) {
+		if (puntoArray[0].getRank() == puntoArray[1].getRank()) {
 			outcome.addTag(new PuntoPair(puntoArray[0].getPoint(), puntoArray[0].getCardId()))
 		}
 		// natural
