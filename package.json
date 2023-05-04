@@ -35,7 +35,7 @@
   "dependencies": {
     "cardation": "^0.1.50",
     "marga": "^0.2.27",
-    "samael": "^3.0.2",
+    "samael": "^3.0.3",
     "ts-custom-error": "^3.3.1",
     "webpack": "^5.82.0",
     "webpack-cli": "^5.0.2"
