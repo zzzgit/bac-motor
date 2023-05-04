@@ -5,16 +5,16 @@
 		"lib": [
 			"esnext"
 		],
-		"sourceMap": true,
+		"sourceMap": false,
 		"moduleResolution": "Node",
 		"strictNullChecks": true,
-		"removeComments": true,
+		"removeComments": false,
 		"declaration": true,
 		"outDir": "./built/lib/",
 		"declarationDir": "./built/t/",
-		"declarationMap": true,
+		"declarationMap": false,
 		"preserveWatchOutput": true,
-		"emitDeclarationOnly": true,
+		"emitDeclarationOnly": false,
 		"alwaysStrict": true,
 		"diagnostics": true,
 		"strict": true,
@@ -26,6 +26,7 @@
 		"pretty": false,
 		"noEmitOnError": true,
 		"forceConsistentCasingInFileNames": true,
+		//"rootDir": "./src", 禁用，否则会导致tsc編譯的文件夾結構不正確：/built/lib/src/...
 		"noImplicitReturns": true,
 		"allowSyntheticDefaultImports": true
 	}, 
