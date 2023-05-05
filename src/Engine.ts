@@ -240,7 +240,7 @@ class Engine {
 	 */
 	insertBlackCard():void {
 		const shoe = this.getShoe()
-		const blackPlace: number = samael.range(12, 20)
+		const blackPlace: number = samael.range(22, 40)
 		shoe.insertBlackCard(blackPlace)
 	}
 
