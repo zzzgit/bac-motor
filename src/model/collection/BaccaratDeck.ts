@@ -5,8 +5,10 @@ const diamond = new Diamond()
 const spade = new Spade()
 const club = new Club()
 
+const protectModel = Object.freeze || Object.seal // 前者不能修改，後者可以
+
 /**
- * Baccarat Deck.
+ * Baccarat Deck. I will be initialised, right after construction, with 52 cards, no joker.
  */
 class BaccaratDeck extends Deck {
 	private _isInitialized = false
@@ -17,7 +19,6 @@ class BaccaratDeck extends Deck {
 	 * @param {Card} card
 	 */
 	private _addCard(card: Card): void {
-		const protectModel = Object.freeze || Object.seal // 前者不能修改，後者可以
 		this.pushCard(protectModel(card))
 	}
 
@@ -36,12 +37,6 @@ class BaccaratDeck extends Deck {
 			return this.getDuplicatedCardArray()
 		}
 		this._isInitialized = true
-		const deckArray = this.getDuplicatedCardArray()
-		// for cumstomised deck
-		// @todo cumstomised deck 另外調用一個函數（不用push），而且先要檢查，是否已經初始化過（_isInitialized），如果已經初始化，拒絕自定義邏輯，
-		if (deckArray.length) {
-			return [...deckArray]
-		}
 		for (const suit of [heart, diamond, spade, club]) {
 			this._addCard(CardFactory.createAceCard(suit, 1))
 			for (let i = 2; i < 10; i++) {
@@ -52,6 +47,7 @@ class BaccaratDeck extends Deck {
 				this._addCard(CardFactory.createFaceCard(suit, i, 0))
 			}
 		}
+		protectModel(this.getCardArray())
 		return this.getDuplicatedCardArray()
 	}
 
