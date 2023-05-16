@@ -11,18 +11,18 @@ class RecycleShoe extends Shoe {
 	 * @param {boolean} shouldShuffle whether to shuffle while collection
 	 */
 	collect(hand: Hand, shouldShuffle: boolean = false): void {
+		const cardArray = hand.getDuplicatedCardArray()
 		const fristcard = hand.getFirstCard()
 		if (shouldShuffle && fristcard && this.getDuplicatedCardArray().length > 20) {
 			const action = fristcard.getRank() % 4
-			// this.insertCard(0, ...hand.getDuplicatedCardArray())
 			if (action === 1) {
 				const randomPlace = samael.range(0, this.getDuplicatedCardArray().length - 1)
-				this.insertCard(randomPlace, ...hand.getDuplicatedCardArray())
+				this.insertCard(randomPlace, ...cardArray)
 			} else {
-				this.pushCard(...hand.getDuplicatedCardArray())
+				this.pushCard(...cardArray)
 			}
 		} else {
-			this.pushCard(...hand.getDuplicatedCardArray())
+			this.pushCard(...cardArray)
 		}
 		hand.clear()
 	}
