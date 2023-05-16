@@ -283,12 +283,14 @@ class Engine {
 		} else {
 			winning = HandResult.PuntoWins
 		}
+		// bancoHand.getDuplicatedCardArray() 傳出
 		const outcome = new HandOutcome(winning, 0, 0, bancoHand.getDuplicatedCardArray(),
 			puntoHand.getDuplicatedCardArray(), shoe.getShoeIndex(),
 			this.getGameIndex())
 		this._addTags(outcome)
-		this.getRecycleShoe().collect(banco.getHand(), this._config.shouldShuffleWhileCollectBancoHand)
-		this.getRecycleShoe().collect(punto.getHand(), false)
+		// bancoHand會被銷毀
+		this.getRecycleShoe().collect(bancoHand, this._config.shouldShuffleWhileCollectBancoHand)
+		this.getRecycleShoe().collect(puntoHand, false)
 		if (this._prevHandOutcome && outcome.getShoeIndex() === this._prevHandOutcome.getShoeIndex()) {
 			outcome.setPreviousHandOutcome(this._prevHandOutcome)
 		}
