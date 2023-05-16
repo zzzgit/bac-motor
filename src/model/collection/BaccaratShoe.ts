@@ -18,7 +18,7 @@ class BaccaratShoe extends Shoe implements IBaccaratShoe {
 	}
 
 	/**
-	 * Detect if the shoe is a Baccarat shoe.
+	 * Detect if the shoe is a Baccarat shoe. Currently alway return true.
 	 * @todo need to implement this method
 	 * @return {boolean} true if the shoe is burnt.
 	 */
@@ -40,6 +40,14 @@ class BaccaratShoe extends Shoe implements IBaccaratShoe {
 		const burntCards = this.deal(score)
 		burntCards.unshift(firstCard)
 		return burntCards
+	}
+
+	/**
+	 * Push customised cards to the shoe, rather than a normal deck(s).
+	 * @param {Card[]} cards the cards to be pushed
+	 */
+	pushCustomised(...cards: Card[]): void {
+		this.pushCard(...cards)
 	}
 
 	/**

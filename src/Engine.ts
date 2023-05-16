@@ -93,7 +93,7 @@ class Engine {
 		this._shoe.clear()
 		if (this._config.customizedShoe) {
 			if (!this._hasShoeCustomised) {
-				this.getShoe().pushCard(...this._config.customizedShoe)
+				this.getShoe().pushCustomised(...this._config.customizedShoe)
 				this._hasShoeCustomised = true
 			}
 		} else {
