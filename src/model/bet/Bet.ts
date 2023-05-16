@@ -46,14 +46,14 @@ class Bet {
 		let result = ''
 		let sign = 0
 		if (mun instanceof Banco) {
-			result = "B	"
+			result = "B"
 			if (houtcome.result === HandResult.BancoWins) {
 				sign = 1
 			} else if (houtcome.result === HandResult.PuntoWins) {
 				sign = -1
 			}
 		} else if (mun instanceof Punto) {
-			result = "P	"
+			result = "P"
 			if (houtcome.result === HandResult.PuntoWins) {
 				sign = 1
 			} else if (houtcome.result === HandResult.BancoWins) {

@@ -1,7 +1,10 @@
 import {Hand, Card} from "cardation"
 import EngineError from "../../error/EngineError"
 
-
+/**
+ * The Gamer class represents the competitor in the game. It could be either the Punto or the Banco.
+ * It is the base class for PuntoGamer and BancoGamer.
+ */
 class Gamer {
 	private _hand: Hand = new Hand()
 
