@@ -207,8 +207,8 @@ class Engine {
 	 */
 	private prepareShoe():Card | undefined {
 		const shoe = this.getShoe()
-		shoe.reBorn()
 		this.resetGameIndex()
+		shoe.reBorn()
 		this._prevHandOutcome = undefined
 		if (this._config.shouldShuffle) {
 			shoe.shuffle()
