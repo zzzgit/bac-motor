@@ -16,7 +16,13 @@ class HandResult {
 
 
 	static isOpposite(foo: HandResult, bar: HandResult):boolean {
-		return foo._result != bar._result
+		if (foo == HandResult.BancoWins && bar == HandResult.PuntoWins) {
+			return true
+		}
+		if (bar == HandResult.BancoWins && foo == HandResult.PuntoWins) {
+			return true
+		}
+		return false
 	}
 
 	static isIdentical(foo: HandResult, bar: HandResult):boolean {
