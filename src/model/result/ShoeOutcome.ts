@@ -28,7 +28,6 @@ class ShoeOutcome {
 
 	private _gameComeoutMap: Map<string | number, HandOutcome> = new Map < string | number, HandOutcome>()
 
-	_handAmount: number
 
 	private _statistics: StatisticInfo = {
 		banco: 0,
@@ -37,10 +36,9 @@ class ShoeOutcome {
 		total: 0,
 	}
 
-	constructor(shoeIndex: number, lastHandComeout: HandOutcome, handAmount: number) {
+	constructor(shoeIndex: number, lastHandComeout: HandOutcome) {
 		this._shoeIndex = shoeIndex
 		this._lastHandOutcome = lastHandComeout
-		this._handAmount = handAmount
 		this._beadRoad = new BeadRoad(shoeIndex)
 		this._bigRoad = new BigRoad(shoeIndex)
 	}
