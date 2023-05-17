@@ -1,18 +1,13 @@
 import {GreenBeadEntity, BlueBeadEntity, RedBeadEntity, BeadEntity, BeadRoad, BigRoad} from "marga"
 import {Card, Hand, BlackMarkerCard} from "cardation"
-import BancoNatural from "./model/result/tag/BancoNatural"
-import PuntoNatural from "./model/result/tag/PuntoNatural"
 import BaccaratDeck from "./model/collection/BaccaratDeck"
 import BaccaratShoe from "./model/collection/BaccaratShoe"
 import RecycleShoe from "./model/collection/RecycleShoe"
-import BancoPair from "./model/result/tag/BancoPair"
-import PuntoPair from "./model/result/tag/PuntoPair"
 import HandOutcome from "./model/result/HandOutcome"
 import ShoeOutcome from "./model/result/ShoeOutcome"
 import PuntoGamer from "./model/gamer/PuntoGamer"
 import BancoGamer from "./model/gamer/BancoGamer"
 import defaultConfig from "./config/defaultConfig"
-import SuperSix from "./model/result/tag/SuperSix"
 import HandResult from "./model/result/HandResult"
 import EngineError from "./error/EngineError"
 import Config from "./model/config/Config"
@@ -61,6 +56,10 @@ class Engine {
 		this._isExhausted = value
 	}
 
+	get isWorking(): boolean {
+		return !this._hasShutdown
+	}
+
 	/**
 	 * Shut down the engine.
 	 */
@@ -75,6 +74,9 @@ class Engine {
 	 * @param {Config} config
 	 */
 	powerOn(config: Config = defaultConfig): void {
+		if (!this._hasShutdown) {
+			throw new EngineError(`[Engine][powerOn]: the engine has already been powered on!`)
+		}
 		this._configEngine(config)
 		// console.log("引擎啟動：", config)
 		this._hasShutdown = false
@@ -287,7 +289,6 @@ class Engine {
 		const outcome = new HandOutcome(winning, 0, 0, bancoHand.getDuplicatedCardArray(),
 			puntoHand.getDuplicatedCardArray(), shoe.getShoeIndex(),
 			this.getGameIndex())
-		this._addTags(outcome)
 		// bancoHand 會被銷毀
 		this.getRecycleShoe().collect(bancoHand, this._config.shouldShuffleWhileCollectBancoHand)
 		this.getRecycleShoe().collect(puntoHand, false)
@@ -296,32 +297,6 @@ class Engine {
 		}
 		this._prevHandOutcome = outcome
 		return outcome
-	}
-
-	private _addTags(outcome: HandOutcome) :void {
-		const {bancoHand, puntoHand} = outcome
-		const bancoArray = bancoHand.getDuplicatedCardArray()
-		const puntoArray = puntoHand.getDuplicatedCardArray()
-		// pair
-		if (bancoArray[0].getRank() == bancoArray[1].getRank()) {
-			outcome.addTag(new BancoPair(bancoArray[0].getPoint(), bancoArray[0].getCardId()))
-		}
-		if (puntoArray[0].getRank() == puntoArray[1].getRank()) {
-			outcome.addTag(new PuntoPair(puntoArray[0].getPoint(), puntoArray[0].getCardId()))
-		}
-		// natural
-		if (bancoArray.length === 2 && bancoHand.getPoint() > 7) {
-			outcome.addTag(new BancoNatural(bancoHand.getPoint()))
-		}
-		if (puntoArray.length === 2 && puntoHand.getPoint() > 7) {
-			outcome.addTag(new PuntoNatural(puntoHand.getPoint()))
-		}
-		// super six
-		if (outcome.result == HandResult.BancoWins) {
-			if (bancoHand.getPoint() === 6) {
-				outcome.addTag(new SuperSix(bancoArray.length))
-			}
-		}
 	}
 
 	private getRecycleShoe(): RecycleShoe {

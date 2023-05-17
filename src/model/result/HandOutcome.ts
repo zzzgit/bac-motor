@@ -10,6 +10,11 @@ import Bet from "../bet/Bet"
 import Mun from "../mun/Mun"
 import Tie from "../mun/Tie"
 import Tag from "./tag/Tag"
+import BancoPair_tag from "./tag/BancoPair"
+import PuntoPair_tag from "./tag/PuntoPair"
+import BancoNatural_tag from "./tag/BancoNatural"
+import PuntoNatural_tag from "./tag/PuntoNatural"
+import SuperSix_tag from "./tag/SuperSix"
 
 /**
  * HandOutcome is the result of a hand.
@@ -96,6 +101,33 @@ class HandOutcome {
 		this.puntoHand = new Hand(pCardArray)
 		this._shoeIndex = shoeIndex
 		this.handIndex = hindex
+		this._addTags()
+	}
+
+	private _addTags():void {
+		const {bancoHand, puntoHand} = this
+		const bancoArray = bancoHand.getDuplicatedCardArray()
+		const puntoArray = puntoHand.getDuplicatedCardArray()
+		// pair
+		if (bancoArray[0].getRank() == bancoArray[1].getRank()) {
+			this._addTag(new BancoPair_tag(bancoArray[0].getPoint(), bancoArray[0].getCardId()))
+		}
+		if (puntoArray[0].getRank() == puntoArray[1].getRank()) {
+			this._addTag(new PuntoPair_tag(puntoArray[0].getPoint(), puntoArray[0].getCardId()))
+		}
+		// natural
+		if (bancoArray.length === 2 && bancoHand.getPoint() > 7) {
+			this._addTag(new BancoNatural_tag(bancoHand.getPoint()))
+		}
+		if (puntoArray.length === 2 && puntoHand.getPoint() > 7) {
+			this._addTag(new PuntoNatural_tag(puntoHand.getPoint()))
+		}
+		// super six
+		if (this.result == HandResult.BancoWins) {
+			if (bancoHand.getPoint() === 6) {
+				this._addTag(new SuperSix_tag(bancoArray.length))
+			}
+		}
 	}
 
 	setPreviousHandOutcome(handcomeout: HandOutcome):void {
@@ -131,7 +163,7 @@ class HandOutcome {
 		return this._wager
 	}
 
-	addTag(tag: Tag):void {
+	private _addTag(tag: Tag):void {
 		this.tagArray.push(tag)
 	}
 
