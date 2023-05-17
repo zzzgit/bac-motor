@@ -43,7 +43,7 @@ class Engine {
 
 	private _isExhausted: boolean = false
 
-	private _hasShutdown: boolean = false
+	private _hasShutdown: boolean = true
 
 	private _hasShoeCustomised: boolean = false
 
@@ -109,9 +109,9 @@ class Engine {
 
 	/**
 	 * Play one shoe.
-	 * @param {Function} beforeBet - A function to pretreat the bet.
-	 * @param {Function} afterBet - A function to aftertreat the bet.
-	 * @param {Function} beforeShoe - A function to pretreat the shoe.
+	 * @param {BetPretreat} beforeBet - (prevBet: Bet | undefined, prevOutcome: HandOutcome | undefined) => Bet
+	 * @param {BetAftertreat} afterBet - (hcome: HandOutcome) => void
+	 * @param {ShoePretreat} beforeShoe - (card: Card | undefined) => void
 	 * @return {ShoeOutcome}
 	 */
 	playOneShoe(beforeBet: BetPretreat = () => {return new Bet(new Free(), 0)}, afterBet: BetAftertreat = () => { }, beforeShoe: ShoePretreat = () => { }):ShoeOutcome {
