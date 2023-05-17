@@ -175,7 +175,7 @@ class Engine {
 			result.setBeadRoad(beadRoad)
 			result.setBigRoad(BigRoad.from(beadRoad))
 		}
-		result.setComeoutMap(hcomeoutMap)
+		result.setOutcomeMap(hcomeoutMap)
 		this.recycleCardToShoe()
 		return result
 	}

@@ -65,7 +65,7 @@ class ShoeOutcome {
 		return this._statistics
 	}
 
-	setComeoutMap(hcomeoutMap: Map<string | number, HandOutcome>):void {
+	setOutcomeMap(hcomeoutMap: Map<string | number, HandOutcome>):void {
 		this._gameComeoutMap = hcomeoutMap
 	}
 
