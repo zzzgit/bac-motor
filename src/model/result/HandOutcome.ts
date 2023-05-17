@@ -11,10 +11,12 @@ import Mun from "../mun/Mun"
 import Tie from "../mun/Tie"
 import Tag from "./tag/Tag"
 
-
+/**
+ * HandOutcome is the result of a hand.
+ */
 class HandOutcome {
 	/**
-	 * Figure out the payout of the game.
+	 * Figure out the payout of the game. This static method is invoked by the engine to calculate the payout of a bet, and then assign the result to the outcome object.
 	 * @param {Bet} bet
 	 * @param {HandOutcome} outcome
 	 * @param {Config} config
