@@ -46,7 +46,7 @@ export {BancoMun as BancoMun, FreeMun, Mun, PairMun, PuntoMun as PuntoMun, Super
 export {Dealer, Gambler, Participant}
 export {BancoNatural as BancoNatural, BancoPair as BancoPair, Natural, Pair, PuntoNatural as PuntoNatural, PuntoPair as PuntoPair, SuperSix, Tag}
 export {HandOutcome, HandResult, ShoeOutcome}
-// export {} settler
+// export {} settler    // not in use
 export {Engine}
 export default Engine
 
