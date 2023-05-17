@@ -62,7 +62,9 @@ class BaccaratShoe extends Shoe implements IBaccaratShoe {
 		return this._index
 	}
 
-
+	/**
+	 * Reset the shoe index to -1. Currently there's no need to reset the shoe index.
+	 */
 	resetShoeIndex():void {
 		this._index = -1
 	}
