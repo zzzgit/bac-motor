@@ -13,10 +13,10 @@ class RecycleShoe extends Shoe {
 	collect(hand: Hand, shouldShuffle: boolean = false): void {
 		const cardArray = hand.getDuplicatedCardArray()
 		const fristcard = hand.getFirstCard()
-		if (shouldShuffle && fristcard && this.getDuplicatedCardArray().length > 20) {
+		if (shouldShuffle && fristcard && this.getLength() > 20) {
 			const action = fristcard.getRank() % 4
 			if (action === 1) {
-				const randomPlace = samael.range(0, this.getDuplicatedCardArray().length - 1)
+				const randomPlace = samael.range(0, this.getLength() - 1)
 				this.insertCard(randomPlace, ...cardArray)
 			} else {
 				this.pushCard(...cardArray)

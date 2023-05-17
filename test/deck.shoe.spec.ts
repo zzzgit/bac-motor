@@ -53,7 +53,7 @@ describe("baccaratShow.ts", () => {
 		shoe.shuffle()
 		const result = shoe.burn()
 		const {length} = result
-		expect(length + shoe.getDuplicatedCardArray().length).toBe(52)
+		expect(length + shoe.getLength()).toBe(52)
 	})
 	test("burn.firstcard", () => {
 		const shoe = new BaccaratShoe()
@@ -99,7 +99,7 @@ describe("baccaratShow.ts", () => {
 		const secondBurnt = shoe.burn()
 		// const result = shoe.getShoeIndex()
 		const burnt = firstBurnt.length + secondBurnt.length
-		expect(burnt + shoe.getDuplicatedCardArray().length).toBe(52)
+		expect(burnt + shoe.getLength()).toBe(52)
 	})
 })
 

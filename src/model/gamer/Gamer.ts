@@ -18,7 +18,7 @@ class Gamer {
 	}
 
 	getLastCard():Card {
-		if (!this.getHand().getDuplicatedCardArray().length) {
+		if (!this.getHand().getLength()) {
 			throw new EngineError(`[Role][getLastCard]: there's no last card because the hand is empty!`)
 		}
 		return this.getHand().getLastCard() as Card

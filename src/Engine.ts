@@ -116,7 +116,7 @@ class Engine {
 		if (this._hasShutdown) {
 			throw new EngineError(`[Engine][playOneShoe]: the engine has been shutdown before some further invoking!`)
 		}
-		if (this._shoe.getDuplicatedCardArray().length < 6) {
+		if (this._shoe.getLength() < 6) {
 			throw new EngineError(`[Engine][playOneShoe]: card left in the shoe should not be less than 6!`)
 		}
 		if (this._config.isTryrun) {
@@ -144,7 +144,7 @@ class Engine {
 				// this._prevBet = bet
 			}
 			houtcome = this.playOneHand()
-			if (this.getShoe().getDuplicatedCardArray().length < 6) {
+			if (this.getShoe().getLength() < 6) {
 				this.isShoeExhausted = true
 			}
 			hcomeoutMap.set(houtcome.handIndex, houtcome)
@@ -266,7 +266,7 @@ class Engine {
 			if (this.shouldPuntoDraw(puntoScore_num)) {
 				this.puntoDraw()
 			}
-			const hasPuntoHit = punto.getHand().getDuplicatedCardArray().length > 2
+			const hasPuntoHit = punto.getHand().getLength() > 2
 			if (this.shouldBancoDraw(hasPuntoHit, bancoScore_num, punto.getLastCard().getPoint())) {
 				this.bancoDraw()
 			}
