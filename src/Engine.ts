@@ -135,7 +135,9 @@ class Engine {
 		beforeBet: BetPretreat = () => {
 			return new Bet(new Free(), 0)
 		},
+		// eslint-disable-next-line @typescript-eslint/no-empty-function
 		afterBet: BetAftertreat = () => {},
+		// eslint-disable-next-line @typescript-eslint/no-empty-function
 		beforeShoe: ShoePretreat = () => {}
 	): ShoeOutcome {
 		if (this._hasShutdown) {
