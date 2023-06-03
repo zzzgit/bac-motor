@@ -14,8 +14,7 @@ class HandResult {
 
 	static Tie = new HandResult(0)
 
-
-	static isOpposite(foo: HandResult, bar: HandResult):boolean {
+	static isOpposite(foo: HandResult, bar: HandResult): boolean {
 		if (foo == HandResult.BancoWins && bar == HandResult.PuntoWins) {
 			return true
 		}
@@ -25,12 +24,11 @@ class HandResult {
 		return false
 	}
 
-	static isIdentical(foo: HandResult, bar: HandResult):boolean {
+	static isIdentical(foo: HandResult, bar: HandResult): boolean {
 		return foo._result == bar._result
 	}
 
-
-	static getOpposite(foo: HandResult):HandResult {
+	static getOpposite(foo: HandResult): HandResult {
 		if (foo._result == Result.BancoWins) {
 			return HandResult.PuntoWins
 		}
@@ -46,7 +44,7 @@ class HandResult {
 	 *
 	 * @param {number} code 0 tie， 1 banco wins， -1 punto wins
 	 */
-	constructor(code:number) {
+	constructor(code: number) {
 		if (code === 0) {
 			this._result = Result.Tie
 		} else if (code === 1) {

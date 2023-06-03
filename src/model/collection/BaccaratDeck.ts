@@ -58,7 +58,9 @@ class BaccaratDeck extends Deck {
 	 */
 	detect(): boolean {
 		let result = this.getLength() === 52
-		result = result && this.includes(CardFactory.createAceCard(heart, 1)) &&
+		result =
+			result &&
+			this.includes(CardFactory.createAceCard(heart, 1)) &&
 			this.includes(CardFactory.createAceCard(diamond, 1)) &&
 			this.includes(CardFactory.createAceCard(spade, 1)) &&
 			this.includes(CardFactory.createAceCard(club, 1))
@@ -66,7 +68,9 @@ class BaccaratDeck extends Deck {
 			return result
 		}
 		for (let i = 11; i < 14; i++) {
-			result = result && this.includes(CardFactory.createFaceCard(heart, i, 0)) &&
+			result =
+				result &&
+				this.includes(CardFactory.createFaceCard(heart, i, 0)) &&
 				this.includes(CardFactory.createFaceCard(diamond, i, 0)) &&
 				this.includes(CardFactory.createFaceCard(spade, i, 0)) &&
 				this.includes(CardFactory.createFaceCard(club, i, 0))
@@ -75,7 +79,9 @@ class BaccaratDeck extends Deck {
 			return result
 		}
 		for (let i = 11; i < 14; i++) {
-			result = result && this.includes(CardFactory.createFaceCard(heart, i, 0)) &&
+			result =
+				result &&
+				this.includes(CardFactory.createFaceCard(heart, i, 0)) &&
 				this.includes(CardFactory.createFaceCard(diamond, i, 0)) &&
 				this.includes(CardFactory.createFaceCard(spade, i, 0)) &&
 				this.includes(CardFactory.createFaceCard(club, i, 0))

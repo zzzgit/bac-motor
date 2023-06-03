@@ -5,12 +5,19 @@ import Tie from "../src/model/mun/Tie"
 
 const freeBet = new Bet(new Free(), 100)
 const bankerBet = new Bet(new Banco(), 100)
-const handOutcome_b = new HandOutcome(HandResult.BancoWins, 20, 100, [], [], 20, 0)
+const handOutcome_b = new HandOutcome(
+	HandResult.BancoWins,
+	20,
+	100,
+	[],
+	[],
+	20,
+	0
+)
 bankerBet.setOutcome(handOutcome_b)
 const tieBet = new Bet(new Tie(), 100)
 const handOutcome_tie = new HandOutcome(HandResult.Tie, 20, 100, [], [], 20, 0)
 tieBet.setOutcome(handOutcome_tie)
-
 
 describe("bet.ts", () => {
 	test("getStr.free", () => {

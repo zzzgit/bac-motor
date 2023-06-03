@@ -1,5 +1,15 @@
 import {FaceCard, Heart, NumberCard} from "cardation"
-import {Bet, BancoMun, HandOutcome, HandResult, defaultConfig, FreeMun, TieMun, SuperSixMun, PuntoMun} from "../src"
+import {
+	Bet,
+	BancoMun,
+	HandOutcome,
+	HandResult,
+	defaultConfig,
+	FreeMun,
+	TieMun,
+	SuperSixMun,
+	PuntoMun,
+} from "../src"
 
 const bet = new Bet(new BancoMun(), 100)
 const outcome = new HandOutcome(HandResult.BancoWins, 20, 30, [], [], 0, 3)
@@ -33,7 +43,15 @@ describe("handoutcome.ts", () => {
 	})
 	test("getPayout.banker.6", () => {
 		const bhand = [new NumberCard(heart, 6, 6), new FaceCard(heart, 11, 0)]
-		const outcome = new HandOutcome(HandResult.BancoWins, 20, 30, bhand, [], 0, 3)
+		const outcome = new HandOutcome(
+			HandResult.BancoWins,
+			20,
+			30,
+			bhand,
+			[],
+			0,
+			3
+		)
 		const payout = HandOutcome.getPayout(bet, outcome, config)
 		expect(payout).toBe(150)
 	})
@@ -70,14 +88,30 @@ describe("handoutcome.ts", () => {
 	test("getPayout.SuperSix", () => {
 		const bet = new Bet(new SuperSixMun(), 100)
 		const bhand = [new NumberCard(heart, 6, 6), new FaceCard(heart, 11, 0)]
-		const outcome = new HandOutcome(HandResult.BancoWins, 20, 30, bhand, [], 0, 3)
+		const outcome = new HandOutcome(
+			HandResult.BancoWins,
+			20,
+			30,
+			bhand,
+			[],
+			0,
+			3
+		)
 		const payout = HandOutcome.getPayout(bet, outcome, config)
 		expect(payout).toBe(1300)
 	})
 	test("getPayout.SuperSix.lose", () => {
 		const bet = new Bet(new SuperSixMun(), 100)
 		const bhand = [new NumberCard(heart, 5, 5), new FaceCard(heart, 11, 0)]
-		const outcome = new HandOutcome(HandResult.BancoWins, 20, 30, bhand, [], 0, 3)
+		const outcome = new HandOutcome(
+			HandResult.BancoWins,
+			20,
+			30,
+			bhand,
+			[],
+			0,
+			3
+		)
 		const payout = HandOutcome.getPayout(bet, outcome, config)
 		expect(payout).toBe(0)
 	})

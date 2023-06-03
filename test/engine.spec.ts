@@ -1,8 +1,10 @@
 import Engine, {BancoMun, Bet} from "../src"
 
-
 const engine = new Engine()
-const config = Object.assign({}, {shouldGenerateRoad: true, shouldCutShoe: true})
+const config = Object.assign(
+	{},
+	{shouldGenerateRoad: true, shouldCutShoe: true}
+)
 engine.powerOn(config)
 
 describe("engine.ts", () => {
@@ -23,7 +25,10 @@ describe("engine.ts", () => {
 		expect(engine.isWorking).toBe(false)
 	})
 	test("poweron.twice", () => {
-		const func = ():void => {engine.powerOn(config); engine.powerOn(config)}
+		const func = (): void => {
+			engine.powerOn(config)
+			engine.powerOn(config)
+		}
 		expect(func).toThrow("the engine has already been powered")
 	})
 	test("poweron.isWorking", () => {
@@ -34,7 +39,9 @@ describe("engine.ts", () => {
 	})
 	test("playonehand.shutdown", () => {
 		engine.shutdown()
-		const func = ():void => {engine.playOneHand()}
+		const func = (): void => {
+			engine.playOneHand()
+		}
 		expect(func).toThrow("the engine has been shutdown")
 	})
 	test("playonehand.getRecycleShoe", () => {
@@ -54,7 +61,9 @@ describe("engine.ts", () => {
 	})
 	test("playoneshoe.shutdown", () => {
 		engine.shutdown()
-		const func = ():void => {engine.playOneShoe()}
+		const func = (): void => {
+			engine.playOneShoe()
+		}
 		expect(func).toThrow("the engine has been shutdown")
 	})
 	test("playoneshoe.isWorking", () => {
@@ -80,7 +89,7 @@ describe("engine.ts", () => {
 		if (!engine.isWorking) {
 			engine.powerOn(config)
 		}
-		const func = ():Bet => new Bet(new BancoMun(), 20)
+		const func = (): Bet => new Bet(new BancoMun(), 20)
 		const shoeOutcome = engine.playOneShoe(func)
 		expect(shoeOutcome.getStatisticInfo().total).toBeGreaterThan(50)
 	})

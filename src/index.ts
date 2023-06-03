@@ -35,18 +35,33 @@ import PuntoPair from "./model/result/tag/PuntoPair"
 import SuperSix from "./model/result/tag/SuperSix"
 import Tag from "./model/result/tag/Tag"
 
-
 export {defaultConfig, defaultGameRules, defaultPayoutTable}
 export {EngineError}
 export {Bet}
 export {BaccaratDeck, BaccaratShoe, IBaccaratShoe, RecycleShoe}
 export {Config, GameRule}
 export {BancoGamer as BancoGamer, Gamer, PuntoGamer as PuntoGamer}
-export {BancoMun as BancoMun, FreeMun, Mun, PairMun, PuntoMun as PuntoMun, SuperSixMun, TieMun}
+export {
+	BancoMun as BancoMun,
+	FreeMun,
+	Mun,
+	PairMun,
+	PuntoMun as PuntoMun,
+	SuperSixMun,
+	TieMun,
+}
 export {Dealer, Gambler, Participant}
-export {BancoNatural as BancoNatural, BancoPair as BancoPair, Natural, Pair, PuntoNatural as PuntoNatural, PuntoPair as PuntoPair, SuperSix, Tag}
+export {
+	BancoNatural as BancoNatural,
+	BancoPair as BancoPair,
+	Natural,
+	Pair,
+	PuntoNatural as PuntoNatural,
+	PuntoPair as PuntoPair,
+	SuperSix,
+	Tag,
+}
 export {HandOutcome, HandResult, ShoeOutcome}
 // export {} settler    // not in use
 export {Engine}
 export default Engine
-

@@ -27,7 +27,7 @@ describe("baccaratDeck.ts", () => {
 		// eslint-disable-next-line prefer-destructuring
 		const jack = result[10]
 		// const id = jack.getCardId() // heart 11 jack
-		const func = ():void => {
+		const func = (): void => {
 			Object.assign(jack, {rank: 9, value: 9})
 		}
 		expect(func).toThrow()
@@ -35,7 +35,7 @@ describe("baccaratDeck.ts", () => {
 	test("freeze.array", () => {
 		// deck.getOrCreatArray()
 		const result = deck.getCardArray()
-		const func = ():void => {
+		const func = (): void => {
 			result.pop()
 		}
 		expect(func).toThrow()
@@ -137,7 +137,7 @@ describe("recycleShoe.ts", () => {
 		const newHand = new Hand([
 			CardFactory.createNumberCard(diamond, 5), // 必須是5
 			CardFactory.createFaceCard(club, 11),
-			CardFactory.createFaceCard(spade, 12),	// s12.12, 這是最後一張，驗證他可以知道是否有排序
+			CardFactory.createFaceCard(spade, 12), // s12.12, 這是最後一張，驗證他可以知道是否有排序
 		])
 		shoe.collect(newHand, true)
 		const result = shoe.getDuplicatedCardArray()

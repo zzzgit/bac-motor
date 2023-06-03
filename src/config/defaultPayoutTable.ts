@@ -3,13 +3,13 @@ import PayoutTable from "../model/settle/PayoutTable"
 /**
  * Default payout table.
  */
-const defaultPayoutTable:PayoutTable = {
+const defaultPayoutTable: PayoutTable = {
 	banco: {
 		nocommission: {
 			normal: 1,
-			six: .5,
+			six: 0.5,
 		},
-		traditional: .95,
+		traditional: 0.95,
 	},
 	punto: 1,
 	tie: 8,
@@ -26,7 +26,7 @@ const defaultPayoutTable:PayoutTable = {
 			both: 250,
 		},
 	},
-	big: .54,
+	big: 0.54,
 	small: 1.5,
 }
 

@@ -5,7 +5,6 @@ import HandResult from "../result/HandResult"
 import Punto from "../mun/Punto"
 import EngineError from "../../error/EngineError"
 
-
 /**
  * Bet class. Currently not in use
  * @todo Add index, otherwise only can set outcome once(disposable).
@@ -32,7 +31,7 @@ class Bet {
 		return this._mun
 	}
 
-	getOutcome(): HandOutcome |undefined {
+	getOutcome(): HandOutcome | undefined {
 		return this._outcome
 	}
 
@@ -40,10 +39,10 @@ class Bet {
 	 * Get string representation of this bet. Inner use only.
 	 * @return {string} string representation of this bet
 	 */
-	getStr():string {
+	getStr(): string {
 		const mun: Mun = this.getMun()
 		const houtcome: HandOutcome = this.getOutcome() as HandOutcome
-		let result = ''
+		let result = ""
 		let sign = 0
 		if (mun instanceof Banco) {
 			result = "B"
@@ -63,20 +62,20 @@ class Bet {
 		if (sign === 0) {
 			result += "0"
 		} else {
-			result += `${ sign < 0 ? '-' : '+'}${this.getWager()}`
+			result += `${sign < 0 ? "-" : "+"}${this.getWager()}`
 		}
 		return result
 	}
 
-	setOutcome(value: HandOutcome):void {
+	setOutcome(value: HandOutcome): void {
 		this._outcome = value
 	}
 
-	getPreviousBet() : Bet | undefined {
+	getPreviousBet(): Bet | undefined {
 		return this._prev
 	}
 
-	setPreviousBet(prev: Bet):void {
+	setPreviousBet(prev: Bet): void {
 		this._prev = prev
 	}
 

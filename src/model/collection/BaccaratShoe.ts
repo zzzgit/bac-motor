@@ -2,7 +2,6 @@ import {BlackMarkerCard, Card, Shoe} from "cardation"
 import IBaccaratShoe from "./IBaccaratShoe"
 import EngineError from "../../error/EngineError"
 
-
 /**
  * Baccarat shoe.
  * @todo single thread
@@ -32,7 +31,9 @@ class BaccaratShoe extends Shoe implements IBaccaratShoe {
 	 */
 	burn(): Card[] {
 		if (this._isBurnt) {
-			throw new EngineError(`[BaccaratShoe][burn]: a shoe could not burn more than once!`)
+			throw new EngineError(
+				`[BaccaratShoe][burn]: a shoe could not burn more than once!`
+			)
 		}
 		this._isBurnt = true
 		const [firstCard] = this.deal()
@@ -54,7 +55,7 @@ class BaccaratShoe extends Shoe implements IBaccaratShoe {
 	 * Insert a black card to the shoe.
 	 * @param {number} place the index from where to insert the black card.
 	 */
-	insertBlackCard(place:number):void {
+	insertBlackCard(place: number): void {
 		this.insertCard(place, blackCard)
 	}
 
@@ -65,18 +66,18 @@ class BaccaratShoe extends Shoe implements IBaccaratShoe {
 	/**
 	 * Reset the shoe index to -1. Currently there's no need to reset the shoe index.
 	 */
-	resetShoeIndex():void {
+	resetShoeIndex(): void {
 		this._index = -1
 	}
 
-	shuffle():void {
+	shuffle(): void {
 		super.shuffle()
 	}
 
 	/**
 	 * increase GameIndex and reset state
 	 */
-	reBorn():void {
+	reBorn(): void {
 		this.increaseShoeIndex()
 		this._isBurnt = false
 	}

@@ -30,7 +30,9 @@ class HandOutcome {
 	static getPayout(bet: Bet, outcome: HandOutcome, config: Config): number {
 		const {gameRules, payoutTable} = config
 		if (!gameRules || !payoutTable) {
-			throw new EngineError(`[HandOutcome][getPayout]: gameRules and payoutTable must be configured!`)
+			throw new EngineError(
+				`[HandOutcome][getPayout]: gameRules and payoutTable must be configured!`
+			)
 		}
 		const mun: Mun = bet.getMun()
 		const wager = bet.getWager()
@@ -64,7 +66,10 @@ class HandOutcome {
 				return 0
 			}
 		} else if (mun instanceof SuperSix) {
-			if (outcome.result === HandResult.BancoWins && outcome.bancoHand.getPoint() === 6) {
+			if (
+				outcome.result === HandResult.BancoWins &&
+				outcome.bancoHand.getPoint() === 6
+			) {
 				return wager + wager * payoutTable.superSix.two
 			}
 			return 0
@@ -92,8 +97,15 @@ class HandOutcome {
 
 	bancoHand: Hand
 
-
-	constructor(result: HandResult, wager: number, payout: number, bCardArray: Card[], pCardArray: Card[], shoeIndex: number, hindex:number) {
+	constructor(
+		result: HandResult,
+		wager: number,
+		payout: number,
+		bCardArray: Card[],
+		pCardArray: Card[],
+		shoeIndex: number,
+		hindex: number
+	) {
 		this.result = result
 		this._wager = wager
 		this._payout = payout
@@ -104,16 +116,20 @@ class HandOutcome {
 		this._addTags()
 	}
 
-	private _addTags():void {
+	private _addTags(): void {
 		const {bancoHand, puntoHand} = this
 		const bancoArray = bancoHand.getDuplicatedCardArray()
 		const puntoArray = puntoHand.getDuplicatedCardArray()
 		// pair
 		if (bancoArray[0].getRank() == bancoArray[1].getRank()) {
-			this._addTag(new BancoPair_tag(bancoArray[0].getPoint(), bancoArray[0].getCardId()))
+			this._addTag(
+				new BancoPair_tag(bancoArray[0].getPoint(), bancoArray[0].getCardId())
+			)
 		}
 		if (puntoArray[0].getRank() == puntoArray[1].getRank()) {
-			this._addTag(new PuntoPair_tag(puntoArray[0].getPoint(), puntoArray[0].getCardId()))
+			this._addTag(
+				new PuntoPair_tag(puntoArray[0].getPoint(), puntoArray[0].getCardId())
+			)
 		}
 		// natural
 		if (bancoArray.length === 2 && bancoHand.getPoint() > 7) {
@@ -130,7 +146,7 @@ class HandOutcome {
 		}
 	}
 
-	setPreviousHandOutcome(handcomeout: HandOutcome):void {
+	setPreviousHandOutcome(handcomeout: HandOutcome): void {
 		this._prevHandOutcome = handcomeout
 		handcomeout.setNextHandOutcome(this)
 	}
@@ -139,15 +155,15 @@ class HandOutcome {
 		return this._prevHandOutcome
 	}
 
-	setWager(wager: number):void {
+	setWager(wager: number): void {
 		this._wager = wager
 	}
 
-	setPayout(payout: number):void {
+	setPayout(payout: number): void {
 		this._payout = payout
 	}
 
-	setNextHandOutcome(handcomeout: HandOutcome):void {
+	setNextHandOutcome(handcomeout: HandOutcome): void {
 		this._nextHandOutcome = handcomeout
 	}
 
@@ -155,19 +171,19 @@ class HandOutcome {
 		return this._nextHandOutcome
 	}
 
-	getPayout():number {
+	getPayout(): number {
 		return this._payout
 	}
 
-	getWager():number {
+	getWager(): number {
 		return this._wager
 	}
 
-	private _addTag(tag: Tag):void {
+	private _addTag(tag: Tag): void {
 		this.tagArray.push(tag)
 	}
 
-	getShoeIndex():number {
+	getShoeIndex(): number {
 		return this._shoeIndex
 	}
 }

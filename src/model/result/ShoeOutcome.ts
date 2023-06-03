@@ -1,4 +1,3 @@
-
 import {BeadRoad, BigRoad} from "marga"
 import HandOutcome from "./HandOutcome"
 
@@ -26,8 +25,10 @@ class ShoeOutcome {
 
 	private _bigRoad: BigRoad
 
-	private _gameComeoutMap: Map<string | number, HandOutcome> = new Map < string | number, HandOutcome>()
-
+	private _gameComeoutMap: Map<string | number, HandOutcome> = new Map<
+		string | number,
+		HandOutcome
+	>()
 
 	private _statistics: StatisticInfo = {
 		banco: 0,
@@ -55,15 +56,15 @@ class ShoeOutcome {
 		return this._shoeIndex
 	}
 
-	getLastHandOutcome():HandOutcome {
+	getLastHandOutcome(): HandOutcome {
 		return this._lastHandOutcome
 	}
 
-	getStatisticInfo() : StatisticInfo {
+	getStatisticInfo(): StatisticInfo {
 		return this._statistics
 	}
 
-	setOutcomeMap(hcomeoutMap: Map<string | number, HandOutcome>):void {
+	setOutcomeMap(hcomeoutMap: Map<string | number, HandOutcome>): void {
 		this._gameComeoutMap = hcomeoutMap
 	}
 
@@ -71,7 +72,7 @@ class ShoeOutcome {
 		return this._gameComeoutMap
 	}
 
-	setStatisticInfo(banco:number, punto: number, tie: number) : void {
+	setStatisticInfo(banco: number, punto: number, tie: number): void {
 		this._statistics = {
 			banco: banco,
 			punto: punto,
@@ -80,7 +81,7 @@ class ShoeOutcome {
 		}
 	}
 
-	setFirstHandOutcome(firstcomeout: HandOutcome) :void {
+	setFirstHandOutcome(firstcomeout: HandOutcome): void {
 		this._firstHandOutcome = firstcomeout
 	}
 
@@ -88,19 +89,19 @@ class ShoeOutcome {
 		return this._firstHandOutcome
 	}
 
-	setBeadRoad(beadRoad: BeadRoad):void {
+	setBeadRoad(beadRoad: BeadRoad): void {
 		this._beadRoad = beadRoad
 	}
 
-	getBeadRoad():BeadRoad {
+	getBeadRoad(): BeadRoad {
 		return this._beadRoad
 	}
 
-	setBigRoad(road: BigRoad):void {
+	setBigRoad(road: BigRoad): void {
 		this._bigRoad = road
 	}
 
-	getBigRoad():BigRoad {
+	getBigRoad(): BigRoad {
 		return this._bigRoad
 	}
 }

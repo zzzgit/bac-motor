@@ -5,7 +5,7 @@ import defaultPayoutTable from "./defaultPayoutTable"
 /**
  * Default config.
  */
-const defaultConfig:Config = {
+const defaultConfig: Config = {
 	gameRules: defaultGameRules,
 	payoutTable: defaultPayoutTable,
 	shouldDetectShoe: false,
