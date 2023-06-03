@@ -1,67 +1,69 @@
 {
-  "name": "bac-motor",
-  "version": "0.0.41",
-  "type": "commonjs",
-  "description": "a baccarat simulator.",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/zzzgit/bac-motor.git"
-  },
-  "main": "built/lib/index.js",
-  "types": "built/t/index.d.ts",
-  "scripts": {
-    "test": "npm run lint && jest",
-    "build": "npm run test && npm run clean && npm run tsc",
-    "clean": "rimraf coverage .nyc_output .rts2_cache built",
-    "tsc": "tsc --sourceMap false",
-    "lint": "eslint './src/**' '-c=.eslintrc.yml'",
-    "jest": "jest 'test/*'"
-  },
-  "bugs": {
-    "url": "https://github.com/zzzgit/bac-motor/issues"
-  },
-  "keywords": [
-    "card",
-    "poker",
-    "baccarat",
-    "blackjack",
-    "game",
-    "casino"
-  ],
-  "license": "LGPL-3.0-or-later",
-  "engines": {
-    "npm": ">=9.5.0",
-    "node": ">=20.0"
-  },
-  "author": "jonkee",
-  "dependencies": {
-    "cardation": "^0.1.55",
-    "marga": "^0.2.28",
-    "samael": "^3.0.4",
-    "ts-custom-error": "^3.3.1"
-  },
-  "devDependencies": {
-    "@commitlint/cli": "^17.6.3",
-    "@commitlint/config-conventional": "^17.6.3",
-    "@types/jest": "^29.5.1",
-    "@types/node": "^18.16.3",
-    "@typescript-eslint/eslint-plugin": "^5.59.2",
-    "@typescript-eslint/parser": "^5.59.2",
-    "cross-env": "^7.0.3",
-    "eslint": "^8.39.0",
-    "eslint-config-google": "^0.14.0",
-    "eslint-config-janus": "^1.1.27",
-    "eslint-plugin-array-func": "^3.1.8",
-    "eslint-plugin-jest": "^27.2.1",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^6.1.1",
-    "eslint-plugin-security": "^1.7.1",
-    "eslint-plugin-unicorn": "^46.0.0",
-    "husky": "^8.0.3",
-    "jest": "^29.5.0",
-    "jest-progress-bar-reporter": "^1.0.25",
-    "ts-jest": "^29.1.0",
-    "typescript": "^5.0.4"
-  },
-  "homepage": "https://github.com/zzzgit/bac-motor#readme"
+	"name": "bac-motor",
+	"version": "0.0.41",
+	"type": "commonjs",
+	"description": "a baccarat simulator.",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/zzzgit/bac-motor.git"
+	},
+	"main": "built/lib/index.js",
+	"types": "built/t/index.d.ts",
+	"scripts": {
+		"test": "npm run lint && jest",
+		"build": "npm run test && npm run clean && npm run tsc",
+		"clean": "rimraf coverage .nyc_output .rts2_cache built",
+		"tsc": "tsc --sourceMap false",
+		"lint": "eslint './src/**' '-c=.eslintrc.yml'",
+		"jest": "jest 'test/*'"
+	},
+	"bugs": {
+		"url": "https://github.com/zzzgit/bac-motor/issues"
+	},
+	"keywords": [
+		"card",
+		"poker",
+		"baccarat",
+		"blackjack",
+		"game",
+		"casino"
+	],
+	"license": "LGPL-3.0-or-later",
+	"engines": {
+		"npm": ">=9.5.0",
+		"node": ">=20.0"
+	},
+	"author": "jonkee",
+	"dependencies": {
+		"cardation": "^0.1.56",
+		"marga": "^0.2.29",
+		"samael": "^3.0.4",
+		"ts-custom-error": "^3.3.1"
+	},
+	"devDependencies": {
+		"@commitlint/cli": "^17.6.5",
+		"@commitlint/config-conventional": "^17.6.5",
+		"@types/jest": "^29.5.2",
+		"@types/node": "^20.2.5",
+		"@typescript-eslint/eslint-plugin": "^5.59.8",
+		"@typescript-eslint/parser": "^5.59.8",
+		"cross-env": "^7.0.3",
+		"eslint": "^8.42.0",
+		"eslint-config-janus": "^1.1.34",
+		"eslint-config-prettier": "^8.8.0",
+		"eslint-plugin-array-func": "^3.1.8",
+		"eslint-plugin-jest": "^27.2.1",
+		"eslint-plugin-node": "^11.1.0",
+		"eslint-plugin-prettier": "^4.2.1",
+		"eslint-plugin-promise": "^6.1.1",
+		"eslint-plugin-security": "^1.7.1",
+		"eslint-plugin-unicorn": "^47.0.0",
+		"husky": "^8.0.3",
+		"jest": "^29.5.0",
+		"jest-progress-bar-reporter": "^1.0.25",
+		"prettier": "^2.8.8",
+		"ts-jest": "^29.1.0",
+		"typescript": "^5.1.3"
+	},
+	"homepage": "https://github.com/zzzgit/bac-motor#readme"
 }
