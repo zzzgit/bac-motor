@@ -94,3 +94,15 @@ describe("engine.ts", () => {
 		expect(shoeOutcome.getStatisticInfo().total).toBeGreaterThan(50)
 	})
 })
+
+describe("shoeoutcome.ts", () => {
+	test("setStatisticInfo", () => {
+		engine.shutdown()
+		if (!engine.isWorking) {
+			engine.powerOn(config)
+		}
+		const func = (): Bet => new Bet(new BancoMun(), 20)
+		const shoeOutcome = engine.playOneShoe(func)
+		expect(shoeOutcome.getStatisticInfo().pair.total).toBeGreaterThan(2)
+	})
+})

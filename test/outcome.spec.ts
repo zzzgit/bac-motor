@@ -1,4 +1,4 @@
-import {FaceCard, Heart, NumberCard} from "cardation"
+import {CardFactory, Diamond, FaceCard, Heart, NumberCard} from "cardation"
 import {
 	Bet,
 	BancoMun,
@@ -12,7 +12,17 @@ import {
 } from "../src"
 
 const bet = new Bet(new BancoMun(), 100)
-const outcome = new HandOutcome(HandResult.BancoWins, 20, 30, [], [], 0, 3)
+const ace = CardFactory.createAceCard(new Diamond(), 1)
+const two = CardFactory.createNumberCard(new Diamond(), 2, 2)
+const outcome = new HandOutcome(
+	HandResult.BancoWins,
+	20,
+	30,
+	[ace, two],
+	[ace, two],
+	0,
+	3
+)
 const config = defaultConfig
 const heart = new Heart()
 
@@ -28,13 +38,29 @@ describe("handoutcome.ts", () => {
 	})
 	test("getPayout.banker.lose", () => {
 		const bet = new Bet(new BancoMun(), 100)
-		const outcome = new HandOutcome(HandResult.PuntoWins, 20, 30, [], [], 0, 3)
+		const outcome = new HandOutcome(
+			HandResult.PuntoWins,
+			20,
+			30,
+			[ace, two],
+			[ace, two],
+			0,
+			3
+		)
 		const payout = HandOutcome.getPayout(bet, outcome, config)
 		expect(payout).toBe(0)
 	})
 	test("getPayout.banker.nocommision", () => {
 		const bet = new Bet(new BancoMun(), 1000)
-		const outcome = new HandOutcome(HandResult.BancoWins, 20, 30, [], [], 0, 3)
+		const outcome = new HandOutcome(
+			HandResult.BancoWins,
+			20,
+			30,
+			[ace, two],
+			[ace, two],
+			0,
+			3
+		)
 		const config = Object.assign({}, defaultConfig)
 		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		config.gameRules!.isNoCommision = true
@@ -48,7 +74,7 @@ describe("handoutcome.ts", () => {
 			20,
 			30,
 			bhand,
-			[],
+			[ace, two],
 			0,
 			3
 		)
@@ -57,31 +83,71 @@ describe("handoutcome.ts", () => {
 	})
 	test("getPayout.player", () => {
 		const bet = new Bet(new PuntoMun(), 100)
-		const outcome = new HandOutcome(HandResult.PuntoWins, 20, 30, [], [], 0, 3)
+		const outcome = new HandOutcome(
+			HandResult.PuntoWins,
+			20,
+			30,
+			[ace, two],
+			[ace, two],
+			0,
+			3
+		)
 		const payout = HandOutcome.getPayout(bet, outcome, config)
 		expect(payout).toBe(200)
 	})
 	test("getPayout.player.tie", () => {
 		const bet = new Bet(new PuntoMun(), 100)
-		const outcome = new HandOutcome(HandResult.Tie, 20, 30, [], [], 0, 3)
+		const outcome = new HandOutcome(
+			HandResult.Tie,
+			20,
+			30,
+			[ace, two],
+			[ace, two],
+			0,
+			3
+		)
 		const payout = HandOutcome.getPayout(bet, outcome, config)
 		expect(payout).toBe(100)
 	})
 	test("getPayout.player.lose", () => {
 		const bet = new Bet(new PuntoMun(), 100)
-		const outcome = new HandOutcome(HandResult.BancoWins, 20, 30, [], [], 0, 3)
+		const outcome = new HandOutcome(
+			HandResult.BancoWins,
+			20,
+			30,
+			[ace, two],
+			[ace, two],
+			0,
+			3
+		)
 		const payout = HandOutcome.getPayout(bet, outcome, config)
 		expect(payout).toBe(0)
 	})
 	test("getPayout.tie", () => {
 		const bet = new Bet(new TieMun(), 100)
-		const outcome = new HandOutcome(HandResult.Tie, 20, 30, [], [], 0, 3)
+		const outcome = new HandOutcome(
+			HandResult.Tie,
+			20,
+			30,
+			[ace, two],
+			[ace, two],
+			0,
+			3
+		)
 		const payout = HandOutcome.getPayout(bet, outcome, config)
 		expect(payout).toBe(900)
 	})
 	test("getPayout.tie.lose", () => {
 		const bet = new Bet(new TieMun(), 100)
-		const outcome = new HandOutcome(HandResult.PuntoWins, 20, 30, [], [], 0, 3)
+		const outcome = new HandOutcome(
+			HandResult.PuntoWins,
+			20,
+			30,
+			[ace, two],
+			[ace, two],
+			0,
+			3
+		)
 		const payout = HandOutcome.getPayout(bet, outcome, config)
 		expect(payout).toBe(0)
 	})
@@ -93,7 +159,7 @@ describe("handoutcome.ts", () => {
 			20,
 			30,
 			bhand,
-			[],
+			[ace, two],
 			0,
 			3
 		)
@@ -108,7 +174,7 @@ describe("handoutcome.ts", () => {
 			20,
 			30,
 			bhand,
-			[],
+			[ace, two],
 			0,
 			3
 		)

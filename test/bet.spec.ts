@@ -1,3 +1,4 @@
+import {CardFactory, Diamond} from "cardation"
 import {Bet, HandOutcome, HandResult} from "../src"
 import Banco from "../src/model/mun/Banco"
 import Free from "../src/model/mun/Free"
@@ -5,18 +6,28 @@ import Tie from "../src/model/mun/Tie"
 
 const freeBet = new Bet(new Free(), 100)
 const bankerBet = new Bet(new Banco(), 100)
+const ace = CardFactory.createAceCard(new Diamond(), 1)
+const two = CardFactory.createNumberCard(new Diamond(), 2, 2)
 const handOutcome_b = new HandOutcome(
 	HandResult.BancoWins,
 	20,
 	100,
-	[],
-	[],
+	[ace, two],
+	[ace, two],
 	20,
 	0
 )
 bankerBet.setOutcome(handOutcome_b)
 const tieBet = new Bet(new Tie(), 100)
-const handOutcome_tie = new HandOutcome(HandResult.Tie, 20, 100, [], [], 20, 0)
+const handOutcome_tie = new HandOutcome(
+	HandResult.Tie,
+	20,
+	100,
+	[ace, two],
+	[ace, two],
+	20,
+	0
+)
 tieBet.setOutcome(handOutcome_tie)
 
 describe("bet.ts", () => {
