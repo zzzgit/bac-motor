@@ -6,7 +6,7 @@ import {
 	BeadRoad,
 	BigRoad,
 } from "marga"
-import {Card, Hand, BlackMarkerCard} from "cardation"
+import {Card, Hand, BlackMarkerCard, Pair} from "cardation"
 import BaccaratDeck from "./model/collection/BaccaratDeck"
 import BaccaratShoe from "./model/collection/BaccaratShoe"
 import RecycleShoe from "./model/collection/RecycleShoe"
@@ -161,6 +161,12 @@ class Engine {
 		let totalBanco = 0
 		let totalPunto = 0
 		let totalTie = 0
+		// both and any, not showed here, retrieve it from BeadRoad instead
+		const pair = {
+			banco: 0,
+			punto: 0,
+			total: 0,
+		}
 		const shoeIndex = this.getShoe().getShoeIndex()
 		const beadRoad = new BeadRoad(shoeIndex)
 		do {
@@ -198,6 +204,14 @@ class Engine {
 			} else {
 				totalTie++
 			}
+			if (Pair.isPair(houtcome.puntoHand.getDuplicatedCardArray())) {
+				pair.punto++
+				pair.total++
+			}
+			if (Pair.isPair(houtcome.bancoHand.getDuplicatedCardArray())) {
+				pair.banco++
+				pair.total++
+			}
 			if (this._config.shouldGenerateRoad) {
 				const beadEntity = this._parseOutcome2BeadEntity(houtcome)
 				beadRoad.addEntity(beadEntity)
@@ -205,7 +219,7 @@ class Engine {
 			afterBet?.(houtcome)
 		} while (!this.isShoeExhausted)
 		const result: ShoeOutcome = new ShoeOutcome(shoeIndex, houtcome)
-		result.setStatisticInfo(totalBanco, totalPunto, totalTie)
+		result.setStatisticInfo(totalBanco, totalPunto, totalTie, pair)
 		result.setFirstHandOutcome(firstcomeout)
 		if (this._config.shouldGenerateRoad) {
 			result.setBeadRoad(beadRoad)

@@ -7,6 +7,11 @@ type StatisticInfo = {
 	punto: number
 	tie: number
 	total: number
+	pair: {
+		punto: number
+		banco: number
+		total: number
+	}
 }
 
 /**
@@ -35,6 +40,11 @@ class ShoeOutcome {
 		punto: 0,
 		tie: 0,
 		total: 0,
+		pair: {
+			punto: 0,
+			banco: 0,
+			total: 0,
+		},
 	}
 
 	constructor(shoeIndex: number, lastHandComeout: HandOutcome) {
@@ -72,11 +82,17 @@ class ShoeOutcome {
 		return this._gameComeoutMap
 	}
 
-	setStatisticInfo(banco: number, punto: number, tie: number): void {
+	setStatisticInfo(
+		banco: number,
+		punto: number,
+		tie: number,
+		pair: {punto: number; banco: number; total: number}
+	): void {
 		this._statistics = {
 			banco: banco,
 			punto: punto,
 			tie: tie,
+			pair: pair,
 			total: banco + punto + tie,
 		}
 	}
