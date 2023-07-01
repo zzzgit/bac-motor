@@ -204,11 +204,15 @@ class Engine {
 			} else {
 				totalTie++
 			}
-			if (Pair.isPair(houtcome.puntoHand.getDuplicatedCardArray())) {
+			const phand = houtcome.puntoHand.getDuplicatedCardArray()
+			const bhand = houtcome.bancoHand.getDuplicatedCardArray()
+			phand.length = 2
+			bhand.length = 2
+			if (Pair.isPair(phand)) {
 				pair.punto++
 				pair.total++
 			}
-			if (Pair.isPair(houtcome.bancoHand.getDuplicatedCardArray())) {
+			if (Pair.isPair(bhand)) {
 				pair.banco++
 				pair.total++
 			}
