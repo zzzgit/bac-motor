@@ -1,4 +1,4 @@
-import GameRule from "../model/config/GameRule"
+import GameRule from '../model/config/GameRule'
 
 /**
  * Default game rule.

@@ -1,6 +1,6 @@
-import {Card} from "cardation"
-import PayoutTable from "../settle/PayoutTable"
-import GameRule from "./GameRule"
+import { Card } from 'cardation'
+import PayoutTable from '../settle/PayoutTable'
+import GameRule from './GameRule'
 
 /**
  * Config for BaccaratEngine

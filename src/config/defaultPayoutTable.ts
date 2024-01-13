@@ -1,4 +1,4 @@
-import PayoutTable from "../model/settle/PayoutTable"
+import PayoutTable from '../model/settle/PayoutTable'
 
 /**
  * Default payout table.

@@ -1,5 +1,5 @@
-import Mun from "./Mun"
+import Mun from './Mun'
 
-class Punto extends Mun {}
+class Punto extends Mun{}
 
 export default Punto

@@ -1,5 +1,5 @@
-import {BeadRoad, BigRoad} from "marga"
-import HandOutcome from "./HandOutcome"
+import { BeadRoad, BigRoad } from 'marga'
+import HandOutcome from './HandOutcome'
 
 // eslint-disable-next-line @typescript-eslint/no-type-alias
 type StatisticInfo = {
@@ -17,7 +17,7 @@ type StatisticInfo = {
 /**
  * ShoeOutcome is the outcome of a shoe.
  */
-class ShoeOutcome {
+class ShoeOutcome{
 	private _shoeIndex: number
 
 	private _prevShoeOutcome: ShoeOutcome | undefined
@@ -47,38 +47,38 @@ class ShoeOutcome {
 		},
 	}
 
-	constructor(shoeIndex: number, lastHandComeout: HandOutcome) {
+	constructor(shoeIndex: number, lastHandComeout: HandOutcome){
 		this._shoeIndex = shoeIndex
 		this._lastHandOutcome = lastHandComeout
 		this._beadRoad = new BeadRoad(shoeIndex)
 		this._bigRoad = new BigRoad(shoeIndex)
 	}
 
-	setPreviousShoeOutcome(handcomeout: ShoeOutcome): void {
+	setPreviousShoeOutcome(handcomeout: ShoeOutcome): void{
 		this._prevShoeOutcome = handcomeout
 	}
 
-	getPreviousShoeOutcome(): ShoeOutcome | undefined {
+	getPreviousShoeOutcome(): ShoeOutcome | undefined{
 		return this._prevShoeOutcome
 	}
 
-	getShoeIndex(): number {
+	getShoeIndex(): number{
 		return this._shoeIndex
 	}
 
-	getLastHandOutcome(): HandOutcome {
+	getLastHandOutcome(): HandOutcome{
 		return this._lastHandOutcome
 	}
 
-	getStatisticInfo(): StatisticInfo {
+	getStatisticInfo(): StatisticInfo{
 		return this._statistics
 	}
 
-	setOutcomeMap(hcomeoutMap: Map<string | number, HandOutcome>): void {
+	setOutcomeMap(hcomeoutMap: Map<string | number, HandOutcome>): void{
 		this._gameComeoutMap = hcomeoutMap
 	}
 
-	getOutcomeMap(): Map<string | number, HandOutcome> {
+	getOutcomeMap(): Map<string | number, HandOutcome>{
 		return this._gameComeoutMap
 	}
 
@@ -87,7 +87,7 @@ class ShoeOutcome {
 		punto: number,
 		tie: number,
 		pair: {punto: number; banco: number; total: number}
-	): void {
+	): void{
 		this._statistics = {
 			banco: banco,
 			punto: punto,
@@ -97,27 +97,27 @@ class ShoeOutcome {
 		}
 	}
 
-	setFirstHandOutcome(firstcomeout: HandOutcome): void {
+	setFirstHandOutcome(firstcomeout: HandOutcome): void{
 		this._firstHandOutcome = firstcomeout
 	}
 
-	getFirstHandOutcome(): HandOutcome | undefined {
+	getFirstHandOutcome(): HandOutcome | undefined{
 		return this._firstHandOutcome
 	}
 
-	setBeadRoad(beadRoad: BeadRoad): void {
+	setBeadRoad(beadRoad: BeadRoad): void{
 		this._beadRoad = beadRoad
 	}
 
-	getBeadRoad(): BeadRoad {
+	getBeadRoad(): BeadRoad{
 		return this._beadRoad
 	}
 
-	setBigRoad(road: BigRoad): void {
+	setBigRoad(road: BigRoad): void{
 		this._bigRoad = road
 	}
 
-	getBigRoad(): BigRoad {
+	getBigRoad(): BigRoad{
 		return this._bigRoad
 	}
 }

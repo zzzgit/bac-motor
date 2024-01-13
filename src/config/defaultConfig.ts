@@ -1,6 +1,6 @@
-import Config from "../model/config/Config"
-import defaultGameRules from "./defaultGameRules"
-import defaultPayoutTable from "./defaultPayoutTable"
+import Config from '../model/config/Config'
+import defaultGameRules from './defaultGameRules'
+import defaultPayoutTable from './defaultPayoutTable'
 
 /**
  * Default config.

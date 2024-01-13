@@ -1,7 +1,7 @@
-import Settler from "./Settler"
+import Settler from './Settler'
 
-class PuntoSettler extends Settler {
-	getPayout(wager: number): number {
+class PuntoSettler extends Settler{
+	getPayout(wager: number): number{
 		return wager
 	}
 }

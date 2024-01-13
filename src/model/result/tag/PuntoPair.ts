@@ -1,5 +1,5 @@
-import Pair from "./Pair"
+import Pair from './Pair'
 
-class PuntoPair extends Pair {}
+class PuntoPair extends Pair{}
 
 export default PuntoPair

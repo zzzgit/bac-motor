@@ -1,4 +1,4 @@
-import Participant from "./Participant"
+import Participant from './Participant'
 
-class Dealer extends Participant {}
+class Dealer extends Participant{}
 export default Dealer

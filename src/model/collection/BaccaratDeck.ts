@@ -1,4 +1,6 @@
-import {Card, Deck, CardFactory, Heart, Diamond, Spade, Club} from "cardation"
+import {
+	Card, Deck, CardFactory, Heart, Diamond, Spade, Club
+} from 'cardation'
 
 const heart = new Heart()
 const diamond = new Diamond()
@@ -10,7 +12,7 @@ const protectModel = Object.freeze || Object.seal // 前者不能修改，後者
 /**
  * Baccarat Deck. I will be initialised, right after construction, with 52 cards, no joker.
  */
-class BaccaratDeck extends Deck {
+class BaccaratDeck extends Deck{
 	private _isInitialized = false
 
 	/**
@@ -18,11 +20,11 @@ class BaccaratDeck extends Deck {
 	 * @todo confider add this method in Deck class
 	 * @param {Card} card
 	 */
-	private _addCard(card: Card): void {
+	private _addCard(card: Card): void{
 		this.pushCard(protectModel(card))
 	}
 
-	constructor() {
+	constructor(){
 		super()
 		this.getOrCreatArray()
 	}
@@ -32,18 +34,18 @@ class BaccaratDeck extends Deck {
 	 * @todo confider shuffle here
 	 * @return {Card[]} The Array of cards in the deck.
 	 */
-	getOrCreatArray(): Card[] {
-		if (this._isInitialized) {
+	getOrCreatArray(): Card[]{
+		if (this._isInitialized){
 			return this.getDuplicatedCardArray()
 		}
 		this._isInitialized = true
-		for (const suit of [heart, diamond, spade, club]) {
+		for (const suit of [heart, diamond, spade, club]){
 			this._addCard(CardFactory.createAceCard(suit, 1))
-			for (let i = 2; i < 10; i++) {
+			for (let i = 2; i < 10; i++){
 				this._addCard(CardFactory.createNumberCard(suit, i, i))
 			}
 			this._addCard(CardFactory.createNumberCard(suit, 10, 0))
-			for (let i = 11; i < 14; i++) {
+			for (let i = 11; i < 14; i++){
 				this._addCard(CardFactory.createFaceCard(suit, i, 0))
 			}
 		}
@@ -56,7 +58,7 @@ class BaccaratDeck extends Deck {
 	 * @todo confider throw error here if the test is failed
 	 * @return {boolean} true if the deck is a Baccarat deck
 	 */
-	detect(): boolean {
+	detect(): boolean{
 		let result = this.getLength() === 52
 		result =
 			result &&
@@ -64,10 +66,10 @@ class BaccaratDeck extends Deck {
 			this.includes(CardFactory.createAceCard(diamond, 1)) &&
 			this.includes(CardFactory.createAceCard(spade, 1)) &&
 			this.includes(CardFactory.createAceCard(club, 1))
-		if (!result) {
+		if (!result){
 			return result
 		}
-		for (let i = 11; i < 14; i++) {
+		for (let i = 11; i < 14; i++){
 			result =
 				result &&
 				this.includes(CardFactory.createFaceCard(heart, i, 0)) &&
@@ -75,10 +77,10 @@ class BaccaratDeck extends Deck {
 				this.includes(CardFactory.createFaceCard(spade, i, 0)) &&
 				this.includes(CardFactory.createFaceCard(club, i, 0))
 		}
-		if (!result) {
+		if (!result){
 			return result
 		}
-		for (let i = 11; i < 14; i++) {
+		for (let i = 11; i < 14; i++){
 			result =
 				result &&
 				this.includes(CardFactory.createFaceCard(heart, i, 0)) &&

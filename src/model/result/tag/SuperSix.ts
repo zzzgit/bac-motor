@@ -1,12 +1,12 @@
-import Tag from "./Tag"
+import Tag from './Tag'
 
 /**
  * SuperSix constains two conditions: 2 cards and 3 cards.
  */
-class SuperSix extends Tag {
+class SuperSix extends Tag{
 	withCards: number = 2
 
-	constructor(cardAmount: number) {
+	constructor(cardAmount: number){
 		super()
 		this.withCards = cardAmount
 	}

@@ -1,7 +1,7 @@
-import Settler from "./Settler"
+import Settler from './Settler'
 
-class FreeSettler extends Settler {
-	getPayout(): number {
+class FreeSettler extends Settler{
+	getPayout(): number{
 		return 0
 	}
 }

@@ -1,5 +1,5 @@
-import Mun from "./Mun"
+import Mun from './Mun'
 
-class Free extends Mun {}
+class Free extends Mun{}
 
 export default Free

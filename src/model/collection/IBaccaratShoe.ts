@@ -1,4 +1,4 @@
-import {BlackMarkerCard, IShoe} from "cardation"
+import { BlackMarkerCard, IShoe } from 'cardation'
 
 interface IBaccaratShoe extends IShoe {
 	burn(): void

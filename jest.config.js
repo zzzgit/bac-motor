@@ -26,15 +26,15 @@ export default {
 	// collectCoverageFrom: [""],
 
 	// The directory where Jest should output its coverage files
-	coverageDirectory: "coverage",
+	coverageDirectory: 'coverage',
 	// A list of reporter names that Jest uses when writing coverage reports
 	coverageReporters: [
-		"text",
+		'text',
 		// "json",
 		// "lcov",
 		// "clover"
 	],
-	reporters: ["default"], //  'default'   'jest-dot-reporter'
+	reporters: ['default'], //  'default'   'jest-dot-reporter'
 	// An object that configures minimum threshold enforcement for coverage results
 	// coverageThreshold: null,
 
@@ -52,7 +52,7 @@ export default {
 
 	// A set of global variables that need to be available in all test environments
 	globals: {
-		"ts-jest": {
+		'ts-jest': {
 			diagnostics: {
 				ignoreCodes: [151001],
 			},
@@ -66,8 +66,8 @@ export default {
 
 	// An array of file extensions your modules use
 	moduleFileExtensions: [
-		"js",
-		"ts",
+		'js',
+		'ts',
 		// "cjs"
 		// "json",
 		// "jsx",
@@ -88,7 +88,7 @@ export default {
 	// notifyMode: "failure-change",
 
 	// A preset that is used as a base for Jest's configuration
-	preset: "ts-jest",
+	preset: 'ts-jest',
 
 	// Run tests from one or more projects
 	// projects: null,
@@ -109,10 +109,10 @@ export default {
 	// rootDir: null,
 
 	// A list of paths to directories that Jest should use to search for files in
-	roots: ["<rootDir>/test/"],
+	roots: ['<rootDir>/test/'],
 	maxConcurrency: 20,
 	// The test environment that will be used for testing
-	testEnvironment: "node",
+	testEnvironment: 'node',
 
 	// Options that will be passed to the testEnvironment
 	// testEnvironmentOptions: {},
@@ -127,10 +127,10 @@ export default {
 	// ],
 
 	// An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
-	testPathIgnorePatterns: ["\\\\node_modules\\\\"],
+	testPathIgnorePatterns: ['\\\\node_modules\\\\'],
 
 	// The regexp pattern or array of patterns that Jest uses to detect test files
-	testRegex: ["/test/.*\\.spec\\.ts$"],
+	testRegex: ['/test/.*\\.spec\\.ts$'],
 
 	// This option allows the use of a custom results processor
 	// testResultsProcessor: null,
@@ -157,4 +157,4 @@ export default {
 
 	// Whether to use watchman for file crawling
 	// watchman: true,
-};
+}

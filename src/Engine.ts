@@ -7,22 +7,22 @@ import {
 	BigRoad,
 	BancoPairBadge,
 	PuntoPairBadge,
-} from "marga"
-import {Card, Hand, BlackMarkerCard, Pair} from "cardation"
-import BaccaratDeck from "./model/collection/BaccaratDeck"
-import BaccaratShoe from "./model/collection/BaccaratShoe"
-import RecycleShoe from "./model/collection/RecycleShoe"
-import HandOutcome from "./model/result/HandOutcome"
-import ShoeOutcome from "./model/result/ShoeOutcome"
-import PuntoGamer from "./model/gamer/PuntoGamer"
-import BancoGamer from "./model/gamer/BancoGamer"
-import defaultConfig from "./config/defaultConfig"
-import HandResult from "./model/result/HandResult"
-import EngineError from "./error/EngineError"
-import Config from "./model/config/Config"
-import Free from "./model/mun/Free"
-import Bet from "./model/bet/Bet"
-import * as samael from "samael"
+} from 'marga'
+import { Card, Hand, BlackMarkerCard, Pair } from 'cardation'
+import BaccaratDeck from './model/collection/BaccaratDeck'
+import BaccaratShoe from './model/collection/BaccaratShoe'
+import RecycleShoe from './model/collection/RecycleShoe'
+import HandOutcome from './model/result/HandOutcome'
+import ShoeOutcome from './model/result/ShoeOutcome'
+import PuntoGamer from './model/gamer/PuntoGamer'
+import BancoGamer from './model/gamer/BancoGamer'
+import defaultConfig from './config/defaultConfig'
+import HandResult from './model/result/HandResult'
+import EngineError from './error/EngineError'
+import Config from './model/config/Config'
+import Free from './model/mun/Free'
+import Bet from './model/bet/Bet'
+import * as samael from 'samael'
 
 type BetPretreat = (
 	prevBet: Bet | undefined,
@@ -34,7 +34,7 @@ type ShoePretreat = (card: Card | undefined) => void
 /**
  * Synchronous engine.
  */
-class Engine {
+class Engine{
 	private _punto: PuntoGamer = new PuntoGamer()
 
 	private _banco: BancoGamer = new BancoGamer()
@@ -59,22 +59,22 @@ class Engine {
 
 	private _hasShoeCustomised: boolean = false
 
-	get isShoeExhausted(): boolean {
+	get isShoeExhausted(): boolean{
 		return this._isExhausted
 	}
 
-	set isShoeExhausted(value: boolean) {
+	set isShoeExhausted(value: boolean){
 		this._isExhausted = value
 	}
 
-	get isWorking(): boolean {
+	get isWorking(): boolean{
 		return !this._hasShutdown
 	}
 
 	/**
 	 * Shut down the engine.
 	 */
-	shutdown(): void {
+	shutdown(): void{
 		console.log(
 			`[baccarat-engine]: ${this._totalGames} games within ${
 				this.getShoe().getShoeIndex() + 1
@@ -88,10 +88,10 @@ class Engine {
 	 * Power on the engine with a config, or use the default config.
 	 * @param {Config} config
 	 */
-	powerOn(config: Config = defaultConfig): void {
-		if (!this._hasShutdown) {
+	powerOn(config: Config = defaultConfig): void{
+		if (!this._hasShutdown){
 			throw new EngineError(
-				`[Engine][powerOn]: the engine has already been powered on!`
+				'[Engine][powerOn]: the engine has already been powered on!'
 			)
 		}
 		this._configEngine(config)
@@ -100,7 +100,7 @@ class Engine {
 		this.initializeDecks()
 	}
 
-	private _configEngine(config: Config): void {
+	private _configEngine(config: Config): void{
 		const mixin = Object.assign({}, this._config, config)
 		this._config = mixin
 	}
@@ -108,18 +108,18 @@ class Engine {
 	/**
 	 * Initialize the shoe with 8 decks, or with a customized shoe. This method only be invoked once in the engine's life cycle.
 	 */
-	private initializeDecks(): void {
+	private initializeDecks(): void{
 		this._shoe.clear()
-		if (this._config.customizedShoe) {
-			if (this._hasShoeCustomised) {
+		if (this._config.customizedShoe){
+			if (this._hasShoeCustomised){
 				throw new EngineError(
-					`[Engine][_initializeDecks]: the shoe has been customized before!`
+					'[Engine][_initializeDecks]: the shoe has been customized before!'
 				)
 			}
 			this.getShoe().pushCustomised(...this._config.customizedShoe)
 			this._hasShoeCustomised = true
 		} else {
-			for (let i = 0; i < 8; i++) {
+			for (let i = 0; i < 8; i++){
 				// 沒有重複利用同一個deck,但是initialise也只是用一次
 				this.getShoe().pushDeck(new BaccaratDeck())
 			}
@@ -141,18 +141,18 @@ class Engine {
 		afterBet: BetAftertreat = () => {},
 		// eslint-disable-next-line @typescript-eslint/no-empty-function
 		beforeShoe: ShoePretreat = () => {}
-	): ShoeOutcome {
-		if (this._hasShutdown) {
+	): ShoeOutcome{
+		if (this._hasShutdown){
 			throw new EngineError(
-				`[Engine][playOneShoe]: the engine has been shutdown before some further invoking!`
+				'[Engine][playOneShoe]: the engine has been shutdown before some further invoking!'
 			)
 		}
-		if (this._shoe.getLength() < 6) {
+		if (this._shoe.getLength() < 6){
 			throw new EngineError(
-				`[Engine][playOneShoe]: card left in the shoe should not be less than 6!`
+				'[Engine][playOneShoe]: card left in the shoe should not be less than 6!'
 			)
 		}
-		if (this._config.isTryrun) {
+		if (this._config.isTryrun){
 			// ////
 		}
 		const firstCard = this.prepareShoe()
@@ -177,8 +177,8 @@ class Engine {
 				this.getPreviousHandOutcome()
 			)
 			const mun = bet.getMun()
-			if (!(mun instanceof Free)) {
-				if (this._prevBet) {
+			if (!(mun instanceof Free)){
+				if (this._prevBet){
 					bet.setPreviousBet(this._prevBet)
 				}
 				this._prevBet = bet
@@ -186,22 +186,22 @@ class Engine {
 				// this._prevBet = bet
 			}
 			houtcome = this.playOneHand()
-			if (this.getShoe().getLength() < 6) {
+			if (this.getShoe().getLength() < 6){
 				this.isShoeExhausted = true
 			}
 			hcomeoutMap.set(houtcome.handIndex, houtcome)
-			if (!firstcomeout) {
+			if (!firstcomeout){
 				firstcomeout = houtcome
 			}
-			if (!(mun instanceof Free)) {
+			if (!(mun instanceof Free)){
 				bet.setOutcome(houtcome)
 			}
 			const payout = HandOutcome.getPayout(bet, houtcome, this._config)
 			houtcome.setWager(bet.getWager())
 			houtcome.setPayout(payout)
-			if (houtcome.result === HandResult.BancoWins) {
+			if (houtcome.result === HandResult.BancoWins){
 				totalBanco++
-			} else if (houtcome.result === HandResult.PuntoWins) {
+			} else if (houtcome.result === HandResult.PuntoWins){
 				totalPunto++
 			} else {
 				totalTie++
@@ -210,15 +210,15 @@ class Engine {
 			const bhand = houtcome.bancoHand.getDuplicatedCardArray()
 			phand.length = 2
 			bhand.length = 2
-			if (Pair.isPair(phand)) {
+			if (Pair.isPair(phand)){
 				pair.punto++
 				pair.total++
 			}
-			if (Pair.isPair(bhand)) {
+			if (Pair.isPair(bhand)){
 				pair.banco++
 				pair.total++
 			}
-			if (this._config.shouldGenerateRoad) {
+			if (this._config.shouldGenerateRoad){
 				const beadEntity = this._parseOutcome2BeadEntity(houtcome)
 				beadRoad.addEntity(beadEntity)
 			}
@@ -227,7 +227,7 @@ class Engine {
 		const result: ShoeOutcome = new ShoeOutcome(shoeIndex, houtcome)
 		result.setStatisticInfo(totalBanco, totalPunto, totalTie, pair)
 		result.setFirstHandOutcome(firstcomeout)
-		if (this._config.shouldGenerateRoad) {
+		if (this._config.shouldGenerateRoad){
 			result.setBeadRoad(beadRoad)
 			result.setBigRoad(BigRoad.from(beadRoad))
 		}
@@ -236,21 +236,21 @@ class Engine {
 		return result
 	}
 
-	private _parseOutcome2BeadEntity(hcomeout: HandOutcome): BeadEntity {
+	private _parseOutcome2BeadEntity(hcomeout: HandOutcome): BeadEntity{
 		let bead: BeadEntity
-		if (hcomeout.result === HandResult.BancoWins) {
+		if (hcomeout.result === HandResult.BancoWins){
 			bead = new RedBeadEntity(hcomeout.handIndex)
-		} else if (hcomeout.result === HandResult.PuntoWins) {
+		} else if (hcomeout.result === HandResult.PuntoWins){
 			bead = new BlueBeadEntity(hcomeout.handIndex)
 		} else {
 			bead = new GreenBeadEntity(hcomeout.handIndex)
 		}
 		const bhand = hcomeout.bancoHand.getDuplicatedCardArray()
 		const phand = hcomeout.puntoHand.getDuplicatedCardArray()
-		if (Pair.isPair(bhand)) {
+		if (Pair.isPair(bhand)){
 			bead.addTag(new BancoPairBadge())
 		}
-		if (Pair.isPair(phand)) {
+		if (Pair.isPair(phand)){
 			bead.addTag(new PuntoPairBadge())
 		}
 		return bead
@@ -259,7 +259,7 @@ class Engine {
 	/**
 	 * 由收集箱放入 baccarat shoe
 	 */
-	private recycleCardToShoe(): void {
+	private recycleCardToShoe(): void{
 		this.getShoe().pushCard(...this.getRecycleShoe().getDuplicatedCardArray())
 		this.getRecycleShoe().clear()
 	}
@@ -268,25 +268,25 @@ class Engine {
 	 * Reset, shuffle, cut, detect, burn, insert black card. These actions must be done to start a new shoe.
 	 * @return {Card} The first card of the shoe.
 	 */
-	private prepareShoe(): Card | undefined {
+	private prepareShoe(): Card | undefined{
 		const shoe = this.getShoe()
 		this.resetGameIndex()
 		shoe.reBorn()
 		this._prevHandOutcome = undefined
-		if (this._config.shouldShuffle) {
+		if (this._config.shouldShuffle){
 			shoe.shuffle()
 		}
-		if (this._config.shouldDetectShoe) {
+		if (this._config.shouldDetectShoe){
 			shoe.detect()
 		}
-		if (this._config.shouldCutShoe) {
+		if (this._config.shouldCutShoe){
 			shoe.cut(samael.range(280, 410))
 		}
-		if (this._config.shouldUseBlackCard) {
+		if (this._config.shouldUseBlackCard){
 			this.insertBlackCard()
 		}
 		let burntCards: Card[] = []
-		if (this._config.shouldBurnCard) {
+		if (this._config.shouldBurnCard){
 			burntCards = shoe.burn()
 		}
 		this.getRecycleShoe().collect(new Hand(burntCards), false)
@@ -294,31 +294,31 @@ class Engine {
 		return burntCards[0]
 	}
 
-	private resetGameIndex(): void {
+	private resetGameIndex(): void{
 		this._handIndex = -1
 	}
 
 	/**
 	 * Insert a black card into the shoe by dealer.
 	 */
-	private insertBlackCard(): void {
+	private insertBlackCard(): void{
 		const shoe = this.getShoe()
 		const blackPlace: number = samael.range(32, 50)
 		shoe.insertBlackCard(blackPlace)
 	}
 
-	playOneHand(): HandOutcome {
+	playOneHand(): HandOutcome{
 		const banco = this.getBanco()
 		const punto = this.getPunto()
 		const shoe = this.getShoe()
-		if (this._hasShutdown) {
+		if (this._hasShutdown){
 			throw new EngineError(
-				`[Engine][playOneHand]: the engine has been shutdown before some further invoking!`
+				'[Engine][playOneHand]: the engine has been shutdown before some further invoking!'
 			)
 		}
-		if (this.isShoeExhausted) {
+		if (this.isShoeExhausted){
 			throw new EngineError(
-				`[Engine][playOneHand]: method playOneHand could not be avoked when shoe is exhausted!`
+				'[Engine][playOneHand]: method playOneHand could not be avoked when shoe is exhausted!'
 			)
 		}
 		this.increaseGameIndex()
@@ -328,9 +328,9 @@ class Engine {
 		this.bancoDraw()
 		let bancoScore_num = banco.getPoint()
 		let puntoScore_num = punto.getPoint()
-		if (puntoScore_num < 8 && bancoScore_num < 8) {
+		if (puntoScore_num < 8 && bancoScore_num < 8){
 			// 無天牌
-			if (this.shouldPuntoDraw(puntoScore_num)) {
+			if (this.shouldPuntoDraw(puntoScore_num)){
 				this.puntoDraw()
 			}
 			const hasPuntoHit = punto.getHand().getLength() > 2
@@ -340,7 +340,7 @@ class Engine {
 					bancoScore_num,
 					punto.getLastCard().getPoint()
 				)
-			) {
+			){
 				this.bancoDraw()
 			}
 		}
@@ -349,9 +349,9 @@ class Engine {
 		bancoScore_num = banco.getPoint()
 		puntoScore_num = punto.getPoint()
 		let winning
-		if (bancoScore_num - puntoScore_num > 0) {
+		if (bancoScore_num - puntoScore_num > 0){
 			winning = HandResult.BancoWins
-		} else if (bancoScore_num - puntoScore_num === 0) {
+		} else if (bancoScore_num - puntoScore_num === 0){
 			winning = HandResult.Tie
 		} else {
 			winning = HandResult.PuntoWins
@@ -375,23 +375,23 @@ class Engine {
 		if (
 			this._prevHandOutcome &&
 			outcome.getShoeIndex() === this._prevHandOutcome.getShoeIndex()
-		) {
+		){
 			outcome.setPreviousHandOutcome(this._prevHandOutcome)
 		}
 		this._prevHandOutcome = outcome
 		return outcome
 	}
 
-	private getRecycleShoe(): RecycleShoe {
+	private getRecycleShoe(): RecycleShoe{
 		return this._recycleShoe
 	}
 
 	/**
 	 * Draw a card for punto.
 	 */
-	private puntoDraw(): void {
+	private puntoDraw(): void{
 		let [card] = this.getShoe().deal()
-		if (card instanceof BlackMarkerCard) {
+		if (card instanceof BlackMarkerCard){
 			this.isShoeExhausted = true
 			;[card] = this.getShoe().deal()
 		}
@@ -401,28 +401,28 @@ class Engine {
 	/**
 	 * Draw a card for banco.
 	 */
-	private bancoDraw(): void {
+	private bancoDraw(): void{
 		let [card] = this.getShoe().deal()
-		if (card instanceof BlackMarkerCard) {
+		if (card instanceof BlackMarkerCard){
 			this.isShoeExhausted = true
 			;[card] = this.getShoe().deal()
 		}
 		this.getBanco().acceptCard(card)
 	}
 
-	private getShoe(): BaccaratShoe {
+	private getShoe(): BaccaratShoe{
 		return this._shoe
 	}
 
-	private getPreviousHandOutcome(): HandOutcome | undefined {
+	private getPreviousHandOutcome(): HandOutcome | undefined{
 		return this._prevHandOutcome
 	}
 
-	private getPunto(): PuntoGamer {
+	private getPunto(): PuntoGamer{
 		return this._punto
 	}
 
-	private getBanco(): BancoGamer {
+	private getBanco(): BancoGamer{
 		return this._banco
 	}
 
@@ -431,8 +431,8 @@ class Engine {
 	 * @param {number} currentScore the current points of the punto hand
 	 * @return {boolean} whether punto should draw a card
 	 */
-	private shouldPuntoDraw(currentScore: number): boolean {
-		if (currentScore < 6) {
+	private shouldPuntoDraw(currentScore: number): boolean{
+		if (currentScore < 6){
 			return true
 		}
 		return false
@@ -449,39 +449,39 @@ class Engine {
 		puntoHit: boolean,
 		bancoPoint: number,
 		puntoLastScore: number
-	): boolean {
-		if (!puntoHit) {
-			if (bancoPoint < 6) {
+	): boolean{
+		if (!puntoHit){
+			if (bancoPoint < 6){
 				return true
 			}
 			return false
 		}
-		if (bancoPoint > 6) {
+		if (bancoPoint > 6){
 			return false
 		}
-		if (bancoPoint < 3) {
+		if (bancoPoint < 3){
 			return true
 		}
-		if (bancoPoint === 3) {
-			if (puntoLastScore === 8) {
+		if (bancoPoint === 3){
+			if (puntoLastScore === 8){
 				return false
 			}
 			return true
 		}
-		if (bancoPoint === 4) {
-			if (puntoLastScore < 2 || puntoLastScore > 7) {
+		if (bancoPoint === 4){
+			if (puntoLastScore < 2 || puntoLastScore > 7){
 				return false
 			}
 			return true
 		}
-		if (bancoPoint === 5) {
-			if (puntoLastScore < 4 || puntoLastScore > 7) {
+		if (bancoPoint === 5){
+			if (puntoLastScore < 4 || puntoLastScore > 7){
 				return false
 			}
 			return true
 		}
-		if (bancoPoint === 6) {
-			if (puntoLastScore < 6 || puntoLastScore > 7) {
+		if (bancoPoint === 6){
+			if (puntoLastScore < 6 || puntoLastScore > 7){
 				return false
 			}
 			return true
@@ -493,7 +493,7 @@ class Engine {
 	 * The game ID inside the shoe.
 	 * @return {number} the game index
 	 */
-	getGameIndex(): number {
+	getGameIndex(): number{
 		return this._handIndex
 	}
 
@@ -501,7 +501,7 @@ class Engine {
 	 * Increase the game index by 1, and return the new game index.
 	 * @return {number} the new game index
 	 */
-	private increaseGameIndex(): number {
+	private increaseGameIndex(): number{
 		this._handIndex++
 		this._totalGames++
 		return this._handIndex
@@ -511,7 +511,7 @@ class Engine {
 	 * The previous bet.
 	 * @return {Bet} the previous bet
 	 */
-	private getPreviousBet(): Bet | undefined {
+	private getPreviousBet(): Bet | undefined{
 		return this._prevBet
 	}
 }

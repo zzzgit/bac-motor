@@ -1,5 +1,5 @@
-import Mun from "./Mun"
+import Mun from './Mun'
 
-class SuperSix extends Mun {}
+class SuperSix extends Mun{}
 
 export default SuperSix

@@ -1,15 +1,15 @@
-import HandOutcome from "../result/HandOutcome"
-import Mun from "../mun/Mun"
-import Banco from "../mun/Banco"
-import HandResult from "../result/HandResult"
-import Punto from "../mun/Punto"
-import EngineError from "../../error/EngineError"
+import HandOutcome from '../result/HandOutcome'
+import Mun from '../mun/Mun'
+import Banco from '../mun/Banco'
+import HandResult from '../result/HandResult'
+import Punto from '../mun/Punto'
+import EngineError from '../../error/EngineError'
 
 /**
  * Bet class. Currently not in use
  * @todo Add index, otherwise only can set outcome once(disposable).
  */
-class Bet {
+class Bet{
 	private readonly _amount: number
 
 	private _mun: Mun
@@ -18,20 +18,20 @@ class Bet {
 
 	private _prev: Bet | undefined = undefined
 
-	constructor(mun: Mun, wager: number) {
+	constructor(mun: Mun, wager: number){
 		this._mun = mun
 		this._amount = wager
 	}
 
-	getWager(): number {
+	getWager(): number{
 		return this._amount
 	}
 
-	getMun(): Mun {
+	getMun(): Mun{
 		return this._mun
 	}
 
-	getOutcome(): HandOutcome | undefined {
+	getOutcome(): HandOutcome | undefined{
 		return this._outcome
 	}
 
@@ -39,43 +39,43 @@ class Bet {
 	 * Get string representation of this bet. Inner use only.
 	 * @return {string} string representation of this bet
 	 */
-	getStr(): string {
+	getStr(): string{
 		const mun: Mun = this.getMun()
 		const houtcome: HandOutcome = this.getOutcome() as HandOutcome
-		let result = ""
+		let result = ''
 		let sign = 0
-		if (mun instanceof Banco) {
-			result = "B"
-			if (houtcome.result === HandResult.BancoWins) {
+		if (mun instanceof Banco){
+			result = 'B'
+			if (houtcome.result === HandResult.BancoWins){
 				sign = 1
-			} else if (houtcome.result === HandResult.PuntoWins) {
+			} else if (houtcome.result === HandResult.PuntoWins){
 				sign = -1
 			}
-		} else if (mun instanceof Punto) {
-			result = "P"
-			if (houtcome.result === HandResult.PuntoWins) {
+		} else if (mun instanceof Punto){
+			result = 'P'
+			if (houtcome.result === HandResult.PuntoWins){
 				sign = 1
-			} else if (houtcome.result === HandResult.BancoWins) {
+			} else if (houtcome.result === HandResult.BancoWins){
 				sign = -1
 			}
 		}
-		if (sign === 0) {
-			result += "0"
+		if (sign === 0){
+			result += '0'
 		} else {
-			result += `${sign < 0 ? "-" : "+"}${this.getWager()}`
+			result += `${sign < 0 ? '-' : '+'}${this.getWager()}`
 		}
 		return result
 	}
 
-	setOutcome(value: HandOutcome): void {
+	setOutcome(value: HandOutcome): void{
 		this._outcome = value
 	}
 
-	getPreviousBet(): Bet | undefined {
+	getPreviousBet(): Bet | undefined{
 		return this._prev
 	}
 
-	setPreviousBet(prev: Bet): void {
+	setPreviousBet(prev: Bet): void{
 		this._prev = prev
 	}
 
@@ -84,23 +84,23 @@ class Bet {
 	 * Whether got won. Inner use only.
 	 * @return {boolean} true if got won, otherwise false
 	 */
-	gotWon(): boolean {
+	gotWon(): boolean{
 		const hcomeout: HandOutcome = this.getOutcome() as HandOutcome
-		if (!hcomeout) {
-			throw new EngineError(`[Bet][gotWon]: hcomeout could not be undefined!`)
+		if (!hcomeout){
+			throw new EngineError('[Bet][gotWon]: hcomeout could not be undefined!')
 		}
 		let result = false
 		const mun: Mun = this.getMun()
-		if (mun instanceof Banco) {
-			if (hcomeout.result === HandResult.BancoWins) {
+		if (mun instanceof Banco){
+			if (hcomeout.result === HandResult.BancoWins){
 				result = true
-			} else if (hcomeout.result === HandResult.PuntoWins) {
+			} else if (hcomeout.result === HandResult.PuntoWins){
 				result = false
 			}
-		} else if (mun instanceof Punto) {
-			if (hcomeout.result === HandResult.PuntoWins) {
+		} else if (mun instanceof Punto){
+			if (hcomeout.result === HandResult.PuntoWins){
 				result = true
-			} else if (hcomeout.result === HandResult.BancoWins) {
+			} else if (hcomeout.result === HandResult.BancoWins){
 				result = false
 			}
 		}
@@ -111,8 +111,8 @@ class Bet {
 	 * Whether got tie. Inner use only.
 	 * @return {boolean} true if got tie, otherwise false
 	 */
-	gotTie(): boolean {
-		if (this.getOutcome()?.result === HandResult.Tie) {
+	gotTie(): boolean{
+		if (this.getOutcome()?.result === HandResult.Tie){
 			return true
 		}
 		return false

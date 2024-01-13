@@ -1,5 +1,5 @@
-import Natural from "./Natural"
+import Natural from './Natural'
 
-class BancoNatural extends Natural {}
+class BancoNatural extends Natural{}
 
 export default BancoNatural
