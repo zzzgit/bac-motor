@@ -5,6 +5,8 @@ import {
 	BeadEntity,
 	BeadRoad,
 	BigRoad,
+	BancoPairBadge,
+	PuntoPairBadge,
 } from "marga"
 import {Card, Hand, BlackMarkerCard, Pair} from "cardation"
 import BaccaratDeck from "./model/collection/BaccaratDeck"
@@ -242,6 +244,14 @@ class Engine {
 			bead = new BlueBeadEntity(hcomeout.handIndex)
 		} else {
 			bead = new GreenBeadEntity(hcomeout.handIndex)
+		}
+		const bhand = hcomeout.bancoHand.getDuplicatedCardArray()
+		const phand = hcomeout.puntoHand.getDuplicatedCardArray()
+		if (Pair.isPair(bhand)) {
+			bead.addTag(new BancoPairBadge())
+		}
+		if (Pair.isPair(phand)) {
+			bead.addTag(new PuntoPairBadge())
 		}
 		return bead
 	}
