@@ -1,7 +1,7 @@
 {
 	"name": "bac-motor",
 	"version": "0.0.46",
-	"type": "commonjs",
+	"type": "module",
 	"description": "a baccarat simulator.",
 	"repository": {
 		"type": "git",
