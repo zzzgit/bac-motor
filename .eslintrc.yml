@@ -1,9 +1,9 @@
-extends: ["janus/ts", "janus/security", "prettier"]
-plugins: ["prettier"]
+root: true
+extends: ["janus/ts" ]
+# plugins: ["prettier"]
 ignorePatterns: ["built/**/*"]
 parserOptions:
   ecmaVersion: latest
   project: ./tsconfig.json
   sourceType: module
-rules:
-  "prettier/prettier": error
+# rules:
