@@ -1,4 +1,4 @@
-import { Hand, Card } from 'cardation'
+import { Card, Hand } from 'cardation'
 import EngineError from '../../error/EngineError'
 import SuperSix from '../mun/SuperSix'
 import HandResult from './HandResult'
@@ -10,11 +10,6 @@ import Bet from '../bet/Bet'
 import Mun from '../mun/Mun'
 import Tie from '../mun/Tie'
 import Tag from './tag/Tag'
-import BancoPair_tag from './tag/BancoPair'
-import PuntoPair_tag from './tag/PuntoPair'
-import BancoNatural_tag from './tag/BancoNatural'
-import PuntoNatural_tag from './tag/PuntoNatural'
-import SuperSix_tag from './tag/SuperSix'
 
 /**
  * HandOutcome is the result of a hand.
@@ -89,6 +84,20 @@ class HandOutcome{
 
 	private _wager: number
 
+	private _pair: boolean = false
+
+	private _natural: boolean = false
+
+	private _superSix: boolean = false
+
+	private _puntoPair: boolean = false
+
+	private _bancoPair: boolean = false
+
+	private _puntoNatural: boolean = false
+
+	private _bancoNatural: boolean = false
+
 	result: HandResult
 
 	tagArray: Tag[] = []
@@ -116,32 +125,60 @@ class HandOutcome{
 		this._addTags()
 	}
 
+	isPair(): boolean{
+		return this._pair
+	}
+
+	isNatural(): boolean{
+		return this._natural
+	}
+
+	isSuperSix(): boolean{
+		return this._superSix
+	}
+
+	isPuntoPair(): boolean{
+		return this._puntoPair
+	}
+
+	isBancoPair(): boolean{
+		return this._bancoPair
+	}
+
+	isPuntoNatural(): boolean{
+		return this._puntoNatural
+	}
+
+	isBancoNatural(): boolean{
+		return this._bancoNatural
+	}
+
 	private _addTags(): void{
 		const { bancoHand, puntoHand } = this
 		const bancoArray = bancoHand.getDuplicatedCardArray()
 		const puntoArray = puntoHand.getDuplicatedCardArray()
 		// pair
 		if (bancoArray[0].getRank() == bancoArray[1].getRank()){
-			this._addTag(
-				new BancoPair_tag(bancoArray[0].getPoint(), bancoArray[0].getCardId())
-			)
+			this._pair = true
+			this._bancoPair = true
 		}
 		if (puntoArray[0].getRank() == puntoArray[1].getRank()){
-			this._addTag(
-				new PuntoPair_tag(puntoArray[0].getPoint(), puntoArray[0].getCardId())
-			)
+			this._pair = true
+			this._puntoPair = true
 		}
 		// natural
 		if (bancoArray.length === 2 && bancoHand.getPoint() > 7){
-			this._addTag(new BancoNatural_tag(bancoHand.getPoint()))
+			this._natural = true
+			this._bancoNatural = true
 		}
 		if (puntoArray.length === 2 && puntoHand.getPoint() > 7){
-			this._addTag(new PuntoNatural_tag(puntoHand.getPoint()))
+			this._natural = true
+			this._puntoNatural = true
 		}
 		// super six
 		if (this.result == HandResult.BancoWins){
 			if (bancoHand.getPoint() === 6){
-				this._addTag(new SuperSix_tag(bancoArray.length))
+				this._superSix = true
 			}
 		}
 	}
