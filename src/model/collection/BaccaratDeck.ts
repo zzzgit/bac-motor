@@ -1,5 +1,5 @@
 import {
-	Card, Deck, CardFactory, Heart, Diamond, Spade, Club
+	Card, CardFactory, Club, Deck, Diamond, Heart, Spade
 } from 'cardation'
 
 const heart = new Heart()
