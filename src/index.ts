@@ -59,6 +59,7 @@ export {
 export {
 	Dealer, Gambler, Participant
 }
+// not in use
 export {
 	BancoNatural as BancoNatural,
 	BancoPair as BancoPair,
