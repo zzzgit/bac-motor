@@ -1,4 +1,4 @@
-import { Hand, Card } from 'cardation'
+import { Card, Hand } from 'cardation'
 import EngineError from '../../error/EngineError'
 
 /**

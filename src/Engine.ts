@@ -1,14 +1,14 @@
 import {
-	GreenBeadEntity,
-	BlueBeadEntity,
-	RedBeadEntity,
+	BancoPairBadge,
 	BeadEntity,
 	BeadRoad,
 	BigRoad,
-	BancoPairBadge,
+	BlueBeadEntity,
+	GreenBeadEntity,
 	PuntoPairBadge,
+	RedBeadEntity,
 } from 'marga'
-import { Card, Hand, BlackMarkerCard, Pair } from 'cardation'
+import { BlackMarkerCard, Card, Hand, Pair } from 'cardation'
 import BaccaratDeck from './model/collection/BaccaratDeck'
 import BaccaratShoe from './model/collection/BaccaratShoe'
 import RecycleShoe from './model/collection/RecycleShoe'
