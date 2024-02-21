@@ -125,31 +125,31 @@ class HandOutcome{
 		this._addTags()
 	}
 
-	isPair(): boolean{
+	get hasPair(): boolean{
 		return this._pair
 	}
 
-	isNatural(): boolean{
+	get hasNatural(): boolean{
 		return this._natural
 	}
 
-	isSuperSix(): boolean{
+	get hasSuperSix(): boolean{
 		return this._superSix
 	}
 
-	isPuntoPair(): boolean{
+	get hasPuntoPair(): boolean{
 		return this._puntoPair
 	}
 
-	isBancoPair(): boolean{
+	get hasBancoPair(): boolean{
 		return this._bancoPair
 	}
 
-	isPuntoNatural(): boolean{
+	get hasPuntoNatural(): boolean{
 		return this._puntoNatural
 	}
 
-	isBancoNatural(): boolean{
+	get hasBancoNatural(): boolean{
 		return this._bancoNatural
 	}
 
