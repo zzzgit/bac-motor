@@ -216,9 +216,9 @@ class HandOutcome{
 		return this._wager
 	}
 
-	private _addTag(tag: Tag): void{
-		this.tagArray.push(tag)
-	}
+	// private _addTag(tag: Tag): void{
+	// 	this.tagArray.push(tag)
+	// }
 
 	getShoeIndex(): number{
 		return this._shoeIndex
