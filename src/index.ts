@@ -36,16 +36,16 @@ import SuperSix from './model/result/tag/SuperSix'
 import Tag from './model/result/tag/Tag'
 
 export {
-	defaultConfig, defaultGameRules, defaultPayoutTable
+	defaultConfig, defaultGameRules, defaultPayoutTable,
 }
 export { EngineError }
 export { Bet }
 export {
-	BaccaratDeck, BaccaratShoe, IBaccaratShoe, RecycleShoe
+	BaccaratDeck, BaccaratShoe, IBaccaratShoe, RecycleShoe,
 }
 export { Config, GameRule }
 export {
-	BancoGamer as BancoGamer, Gamer, PuntoGamer as PuntoGamer
+	BancoGamer as BancoGamer, Gamer, PuntoGamer as PuntoGamer,
 }
 export {
 	BancoMun as BancoMun,
@@ -57,7 +57,7 @@ export {
 	TieMun,
 }
 export {
-	Dealer, Gambler, Participant
+	Dealer, Gambler, Participant,
 }
 // not in use
 export {
@@ -71,7 +71,7 @@ export {
 	Tag,
 }
 export {
-	HandOutcome, HandResult, ShoeOutcome
+	HandOutcome, HandResult, ShoeOutcome,
 }
 // export {} settler    // not in use
 export { Engine }

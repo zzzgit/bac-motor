@@ -8,6 +8,7 @@ enum Result {
  * Static class to represent the result of a hand
  */
 class HandResult{
+
 	static BancoWins = new HandResult(1)
 
 	static PuntoWins = new HandResult(-1)
@@ -53,6 +54,7 @@ class HandResult{
 			this._result = Result.PuntoWins
 		}
 	}
+
 }
 
 export default HandResult

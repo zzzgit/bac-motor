@@ -13,8 +13,10 @@ import Tag from './tag/Tag'
 
 /**
  * HandOutcome is the result of a hand.
+ * @todo the wager and payout should be a class, implementing the logic of multi-mun and multi-bet.
  */
 class HandOutcome{
+
 	/**
 	 * Figure out the payout of the game. This static method is invoked by the engine to calculate the payout of a bet, and then assign the result to the outcome object.
 	 * @param {Bet} bet
@@ -25,9 +27,7 @@ class HandOutcome{
 	static getPayout(bet: Bet, outcome: HandOutcome, config: Config): number{
 		const { gameRules, payoutTable } = config
 		if (!gameRules || !payoutTable){
-			throw new EngineError(
-				'[HandOutcome][getPayout]: gameRules and payoutTable must be configured!'
-			)
+			throw new EngineError('[HandOutcome][getPayout]: gameRules and payoutTable must be configured!')
 		}
 		const mun: Mun = bet.getMun()
 		const wager = bet.getWager()
@@ -42,7 +42,6 @@ class HandOutcome{
 					return wager + wager * payoutTable.banco.nocommission.six
 				}
 				return wager + wager * payoutTable.banco.nocommission.normal
-
 			} else if (outcome.result === HandResult.PuntoWins){
 				return 0
 			}
@@ -59,11 +58,9 @@ class HandOutcome{
 				return wager + wager * payoutTable.tie
 			}
 			return 0
-
 		} else if (mun instanceof SuperSix){
 			if (
-				outcome.result === HandResult.BancoWins &&
-				outcome.bancoHand.getPoint() === 6
+				outcome.result === HandResult.BancoWins && outcome.bancoHand.getPoint() === 6
 			){
 				return wager + wager * payoutTable.superSix.two
 			}
@@ -106,15 +103,13 @@ class HandOutcome{
 
 	bancoHand: Hand
 
-	constructor(
-		result: HandResult,
+	constructor(result: HandResult,
 		wager: number,
 		payout: number,
 		bCardArray: Card[],
 		pCardArray: Card[],
 		shoeIndex: number,
-		hindex: number
-	){
+		hindex: number){
 		this.result = result
 		this._wager = wager
 		this._payout = payout
@@ -223,6 +218,7 @@ class HandOutcome{
 	getShoeIndex(): number{
 		return this._shoeIndex
 	}
+
 }
 
 export default HandOutcome

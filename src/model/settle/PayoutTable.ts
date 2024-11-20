@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-type-alias
 type PayoutTable = {
 	banco: {
 		nocommission: {

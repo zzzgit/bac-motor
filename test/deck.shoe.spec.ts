@@ -1,5 +1,5 @@
 import {
-	CardFactory, Club, Diamond, Hand, Heart, Spade
+	CardFactory, Club, Diamond, Hand, Heart, Spade,
 } from 'cardation'
 import { BaccaratDeck, BaccaratShoe, RecycleShoe } from '../src'
 
@@ -7,8 +7,8 @@ const deck = new BaccaratDeck()
 const shoe = new BaccaratShoe()
 shoe.pushDeck(deck)
 
-describe('baccaratDeck.ts', () => {
-	test('detect', () => {
+describe('baccaratDeck.ts', ()=> {
+	test('detect', ()=> {
 		const deck = new BaccaratDeck()
 		// it will initialise itselt in the constructor
 		// deck.getOrCreatArray()
@@ -16,40 +16,40 @@ describe('baccaratDeck.ts', () => {
 		const result = deck.detect()
 		expect(result).toBe(true)
 	})
-	test('getOrCreatArray.content', () => {
+	test('getOrCreatArray.content', ()=> {
 		const result = deck.getOrCreatArray()
 		expect(result[1].getCardId()).toBe('h2.2')
 	})
-	test('getOrCreatArray.length', () => {
+	test('getOrCreatArray.length', ()=> {
 		const result = deck.getOrCreatArray()
 		expect(result).toHaveLength(52)
 	})
-	test('freeze.card', () => {
+	test('freeze.card', ()=> {
 		const result = deck.getOrCreatArray()
-		// eslint-disable-next-line prefer-destructuring
+
 		const jack = result[10]
 		// const id = jack.getCardId() // heart 11 jack
-		const func = (): void => {
+		const func = (): void=> {
 			Object.assign(jack, { rank: 9, value: 9 })
 		}
 		expect(func).toThrow()
 	})
-	test('freeze.array', () => {
+	test('freeze.array', ()=> {
 		// deck.getOrCreatArray()
 		const result = deck.getCardArray()
-		const func = (): void => {
+		const func = (): void=> {
 			result.pop()
 		}
 		expect(func).toThrow()
 	})
 })
 
-describe('baccaratShow.ts', () => {
-	test('detect', () => {
+describe('baccaratShow.ts', ()=> {
+	test('detect', ()=> {
 		const result = shoe.detect()
 		expect(result).toBe(true)
 	})
-	test('burn.total', () => {
+	test('burn.total', ()=> {
 		const shoe = new BaccaratShoe()
 		shoe.pushDeck(deck)
 		shoe.shuffle()
@@ -57,7 +57,7 @@ describe('baccaratShow.ts', () => {
 		const { length } = result
 		expect(length + shoe.getLength()).toBe(52)
 	})
-	test('burn.firstcard', () => {
+	test('burn.firstcard', ()=> {
 		const shoe = new BaccaratShoe()
 		shoe.pushDeck(deck)
 		shoe.shuffle()
@@ -67,7 +67,7 @@ describe('baccaratShow.ts', () => {
 		const score = firstCard.getPoint() || 10
 		expect(score + 1).toBe(length)
 	})
-	test('burn.twice', () => {
+	test('burn.twice', ()=> {
 		const shoe = new BaccaratShoe()
 		shoe.pushDeck(deck)
 		shoe.shuffle()
@@ -75,7 +75,7 @@ describe('baccaratShow.ts', () => {
 		const burnAgain = shoe.burn.bind(shoe)
 		expect(burnAgain).toThrow()
 	})
-	test('pushCustomised', () => {
+	test('pushCustomised', ()=> {
 		const shoe = new BaccaratShoe()
 		const array = deck.getDuplicatedCardArray()
 		array.pop()
@@ -84,7 +84,7 @@ describe('baccaratShow.ts', () => {
 		const result = shoe.getDuplicatedCardArray()
 		expect(result).toHaveLength(50)
 	})
-	test('insertBlackCard', () => {
+	test('insertBlackCard', ()=> {
 		const shoe = new BaccaratShoe()
 		shoe.pushDeck(deck)
 		// shoe.shuffle()
@@ -92,7 +92,7 @@ describe('baccaratShow.ts', () => {
 		const result = shoe.getDuplicatedCardArray()
 		expect(result[22].getCardId()).toBe('b0.0')
 	})
-	test('reBorn', () => {
+	test('reBorn', ()=> {
 		const shoe = new BaccaratShoe()
 		shoe.pushDeck(deck)
 		shoe.shuffle()
@@ -105,8 +105,8 @@ describe('baccaratShow.ts', () => {
 	})
 })
 
-describe('recycleShoe.ts', () => {
-	test('collect.length', () => {
+describe('recycleShoe.ts', ()=> {
+	test('collect.length', ()=> {
 		const shoe = new RecycleShoe()
 		const heart = new Heart()
 		const cards = [
@@ -118,7 +118,7 @@ describe('recycleShoe.ts', () => {
 		shoe.collect(hand)
 		expect(shoe.getDuplicatedCardArray()).toHaveLength(3)
 	})
-	test('collect.shouldShuffle', () => {
+	test('collect.shouldShuffle', ()=> {
 		const shoe = new RecycleShoe()
 		const heart = new Heart()
 		const club = new Club()
@@ -137,16 +137,18 @@ describe('recycleShoe.ts', () => {
 		shoe.collect(hand)
 		const diamond = new Diamond()
 		const newHand = new Hand([
-			CardFactory.createNumberCard(diamond, 5), // 必須是5
+			// 必須是5
+			CardFactory.createNumberCard(diamond, 5),
 			CardFactory.createFaceCard(club, 11),
-			CardFactory.createFaceCard(spade, 12), // s12.12, 這是最後一張，驗證他可以知道是否有排序
+			// s12.12, 這是最後一張，驗證他可以知道是否有排序
+			CardFactory.createFaceCard(spade, 12),
 		])
 		shoe.collect(newHand, true)
 		const result = shoe.getDuplicatedCardArray()
 		const lastCard = result[result.length - 1]
 		expect(lastCard.getCardId()).not.toBe('s12.12')
 	})
-	test('collect.clear', () => {
+	test('collect.clear', ()=> {
 		const shoe = new RecycleShoe()
 		const heart = new Heart()
 		const cards = []

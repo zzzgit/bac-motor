@@ -2,6 +2,7 @@ import HandOutcome from '../result/HandOutcome'
 import Settler from './Settler'
 
 class BancoSettler extends Settler{
+
 	getPayout(wager: number, outcome: HandOutcome): number{
 		// if (!this.getConfig().isHalfCommission) {
 		// 	return wager * 0.95
@@ -11,6 +12,7 @@ class BancoSettler extends Settler{
 		}
 		return wager
 	}
+
 }
 
 export default BancoSettler

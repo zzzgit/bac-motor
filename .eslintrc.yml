@@ -1,9 +1,0 @@
-root: true
-extends: ["janus/ts" ]
-# plugins: ["prettier"]
-ignorePatterns: ["built/**/*"]
-parserOptions:
-  ecmaVersion: latest
-  project: ./tsconfig.json
-  sourceType: module
-# rules:

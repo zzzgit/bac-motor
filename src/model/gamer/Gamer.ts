@@ -6,6 +6,7 @@ import EngineError from '../../error/EngineError'
  * It is the base class for PuntoGamer and BancoGamer.
  */
 class Gamer{
+
 	private _hand: Hand = new Hand()
 
 	getPoint(): number{
@@ -18,9 +19,7 @@ class Gamer{
 
 	getLastCard(): Card{
 		if (!this.getHand().getLength()){
-			throw new EngineError(
-				'[Role][getLastCard]: there\'s no last card because the hand is empty!'
-			)
+			throw new EngineError('[Role][getLastCard]: there\'s no last card because the hand is empty!')
 		}
 		return this.getHand().getLastCard() as Card
 	}
@@ -28,6 +27,7 @@ class Gamer{
 	acceptCard(card: Card): void{
 		this._hand.pushCard(card)
 	}
+
 }
 
 export default Gamer

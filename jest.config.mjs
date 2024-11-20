@@ -1,8 +1,7 @@
 // For a detailed explanation regarding each configuration property, visit:
 // https://jestjs.io/docs/en/configuration.html
 
-/* eslint-env node */
-module.exports = {
+export default {
 
 	// All imported modules in your tests should be mocked automatically
 	// automock: false,
@@ -36,7 +35,8 @@ module.exports = {
 		// "lcov",
 		// "clover"
 	],
-	reporters: ['default'], //  'default'   'jest-dot-reporter'
+	//  'default'   'jest-dot-reporter'
+	reporters: ['default'],
 	// An object that configures minimum threshold enforcement for coverage results
 	// coverageThreshold: null,
 

@@ -8,6 +8,7 @@ import EngineError from '../../error/EngineError'
  * @todo initialization of the shoe currently is not in this class
  */
 class BaccaratShoe extends Shoe implements IBaccaratShoe{
+
 	private _isBurnt: boolean = false
 
 	private _index: number = -1
@@ -31,9 +32,7 @@ class BaccaratShoe extends Shoe implements IBaccaratShoe{
 	 */
 	burn(): Card[]{
 		if (this._isBurnt){
-			throw new EngineError(
-				'[BaccaratShoe][burn]: a shoe could not burn more than once!'
-			)
+			throw new EngineError('[BaccaratShoe][burn]: a shoe could not burn more than once!')
 		}
 		this._isBurnt = true
 		const [firstCard] = this.deal()
@@ -81,6 +80,7 @@ class BaccaratShoe extends Shoe implements IBaccaratShoe{
 		this.increaseShoeIndex()
 		this._isBurnt = false
 	}
+
 }
 
 const blackCard = new BlackMarkerCard()

@@ -5,6 +5,7 @@ import * as samael from 'samael'
  * A recycable shoe is a shoe that can be recycled.
  */
 class RecycleShoe extends Shoe{
+
 	/**
 	 * Collect the cards from the dealt hand and put them back to the shoe.
 	 * @param {Hand} hand the hand to collect
@@ -26,6 +27,7 @@ class RecycleShoe extends Shoe{
 		}
 		hand.clear()
 	}
+
 }
 
 export default RecycleShoe

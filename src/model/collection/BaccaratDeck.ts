@@ -1,18 +1,19 @@
 import {
-	Card, CardFactory, Club, Deck, Diamond, Heart, Spade
+	Card, CardFactory, Club, Deck, Diamond, Heart, Spade,
 } from 'cardation'
 
 const heart = new Heart()
 const diamond = new Diamond()
 const spade = new Spade()
 const club = new Club()
-
-const protectModel = Object.freeze || Object.seal // 前者不能修改，後者可以
+// 前者不能修改，後者可以
+const protectModel = Object.freeze || Object.seal
 
 /**
  * Baccarat Deck. I will be initialised, right after construction, with 52 cards, no joker.
  */
 class BaccaratDeck extends Deck{
+
 	private _isInitialized = false
 
 	/**
@@ -60,36 +61,22 @@ class BaccaratDeck extends Deck{
 	 */
 	detect(): boolean{
 		let result = this.getLength() === 52
-		result =
-			result &&
-			this.includes(CardFactory.createAceCard(heart, 1)) &&
-			this.includes(CardFactory.createAceCard(diamond, 1)) &&
-			this.includes(CardFactory.createAceCard(spade, 1)) &&
-			this.includes(CardFactory.createAceCard(club, 1))
+		result = result && this.includes(CardFactory.createAceCard(heart, 1)) && this.includes(CardFactory.createAceCard(diamond, 1)) && this.includes(CardFactory.createAceCard(spade, 1)) && this.includes(CardFactory.createAceCard(club, 1))
 		if (!result){
 			return result
 		}
 		for (let i = 11; i < 14; i++){
-			result =
-				result &&
-				this.includes(CardFactory.createFaceCard(heart, i, 0)) &&
-				this.includes(CardFactory.createFaceCard(diamond, i, 0)) &&
-				this.includes(CardFactory.createFaceCard(spade, i, 0)) &&
-				this.includes(CardFactory.createFaceCard(club, i, 0))
+			result = result && this.includes(CardFactory.createFaceCard(heart, i, 0)) && this.includes(CardFactory.createFaceCard(diamond, i, 0)) && this.includes(CardFactory.createFaceCard(spade, i, 0)) && this.includes(CardFactory.createFaceCard(club, i, 0))
 		}
 		if (!result){
 			return result
 		}
 		for (let i = 11; i < 14; i++){
-			result =
-				result &&
-				this.includes(CardFactory.createFaceCard(heart, i, 0)) &&
-				this.includes(CardFactory.createFaceCard(diamond, i, 0)) &&
-				this.includes(CardFactory.createFaceCard(spade, i, 0)) &&
-				this.includes(CardFactory.createFaceCard(club, i, 0))
+			result = result && this.includes(CardFactory.createFaceCard(heart, i, 0)) && this.includes(CardFactory.createFaceCard(diamond, i, 0)) && this.includes(CardFactory.createFaceCard(spade, i, 0)) && this.includes(CardFactory.createFaceCard(club, i, 0))
 		}
 		return result
 	}
+
 }
 
 export default BaccaratDeck

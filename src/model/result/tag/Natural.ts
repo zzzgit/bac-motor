@@ -4,6 +4,7 @@ import Tag from './Tag'
  * Natural constains two conditions: 8 or 9.
  */
 class Natural extends Tag{
+
 	score: number
 
 	combinaiton: number[] = []
@@ -12,6 +13,7 @@ class Natural extends Tag{
 		super()
 		this.score = score
 	}
+
 }
 
 export default Natural

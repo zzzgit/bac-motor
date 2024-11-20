@@ -10,6 +10,7 @@ import EngineError from '../../error/EngineError'
  * @todo Add index, otherwise only can set outcome once(disposable).
  */
 class Bet{
+
 	private readonly _amount: number
 
 	private _mun: Mun
@@ -117,6 +118,7 @@ class Bet{
 		}
 		return false
 	}
+
 }
 
 export default Bet

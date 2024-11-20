@@ -1,7 +1,6 @@
 import { BeadRoad, BigRoad } from 'marga'
 import HandOutcome from './HandOutcome'
 
-// eslint-disable-next-line @typescript-eslint/no-type-alias
 type StatisticInfo = {
 	banco: number
 	punto: number
@@ -18,6 +17,7 @@ type StatisticInfo = {
  * ShoeOutcome is the outcome of a shoe.
  */
 class ShoeOutcome{
+
 	private _shoeIndex: number
 
 	private _prevShoeOutcome: ShoeOutcome | undefined
@@ -82,12 +82,10 @@ class ShoeOutcome{
 		return this._gameComeoutMap
 	}
 
-	setStatisticInfo(
-		banco: number,
+	setStatisticInfo(banco: number,
 		punto: number,
 		tie: number,
-		pair: {punto: number; banco: number; total: number}
-	): void{
+		pair: {punto: number; banco: number; total: number}): void{
 		this._statistics = {
 			banco: banco,
 			punto: punto,
@@ -120,6 +118,7 @@ class ShoeOutcome{
 	getBigRoad(): BigRoad{
 		return this._bigRoad
 	}
+
 }
 
 export default ShoeOutcome
