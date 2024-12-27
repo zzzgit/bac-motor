@@ -18,7 +18,7 @@ class BaccaratDeck extends Deck{
 
 	/**
 	 * Add card to the deck. The card will be frozen.
-	 * @todo confider add this method in Deck class
+	 * @todo consider add this method in Deck class
 	 * @param {Card} card
 	 */
 	private _addCard(card: Card): void{
@@ -32,7 +32,7 @@ class BaccaratDeck extends Deck{
 
 	/**
 	 * The Array of cards in the deck. If the deck is not initialized, it will be initialized.
-	 * @todo confider shuffle here
+	 * @todo consider shuffle here
 	 * @return {Card[]} The Array of cards in the deck.
 	 */
 	getOrCreatArray(): Card[]{
@@ -56,7 +56,7 @@ class BaccaratDeck extends Deck{
 
 	/**
 	 * Detect if the deck is a Baccarat deck(52 cards, no joker). Currently not in use.
-	 * @todo confider throw error here if the test is failed
+	 * @todo consider throw error here if the test is failed
 	 * @return {boolean} true if the deck is a Baccarat deck
 	 */
 	detect(): boolean{
